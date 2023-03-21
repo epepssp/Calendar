@@ -49,6 +49,7 @@ public class CalendarController {
            
         List<Integer> dList =new ArrayList<>();
         int length = dto.getLengthOfMonth();  
+        log.info("monthLengh먼스렝={}",length);
       
         if(original-1 >0) {
              for (int i = 0; i < original-1; i++) {
@@ -56,11 +57,11 @@ public class CalendarController {
                }
            }
                 
-       for (int j = 0;j <  length; j++) {
+       for (int j = 0; j <  length+1; j++) {
               dList.add(j);
              }
        
-         int sub =  length + original -1;
+         int sub =  length + original;
              
          if(35-sub >0) {
             for (int i = 0; i <35- sub; i++) {
@@ -68,13 +69,14 @@ public class CalendarController {
                  }
              }
              
-         
+         log.info("dList 31일={}",dList);
 
          List<Integer> w1 = new ArrayList<>();
          List<Integer> w2 = new ArrayList<>();
          List<Integer> w3 = new ArrayList<>();
          List<Integer> w4 = new ArrayList<>();
          List<Integer> w5 = new ArrayList<>();
+        
 
          
          for (int i = 0; i < dList.size(); i++) {
@@ -90,10 +92,23 @@ public class CalendarController {
              if( 20 < i && i< 28) {
                  w4.add(dList.get(i));
              }
-             if( 27 < i && i< dList.size()) {
+             if( 27 < i && i< 35) {
                  w5.add(dList.get(i));
              }
          }   
+      
+         if(dList.size() >= 35) {
+             List<Integer> w6 = new ArrayList<>();
+             for (int n = 35; n < 42; n++) {
+                 if( 34 < n && n< dList.size()) {
+                     w6.add(dList.get(n));
+                 }
+                 if(dList.size()-1< n && n< 42) {
+                     w6.add(0);
+                 }
+          }
+             model.addAttribute("w6", w6);
+         }
       
          model.addAttribute("w1", w1);
          model.addAttribute("w2", w2);
@@ -124,11 +139,15 @@ public class CalendarController {
         dto = calendarService.calendarCreate(date);
         List<Integer> dList = dto.fromEntity(dto);
             
+//        log.info("dList 31일={}",dList);
+//        log.info("dList 31일={}",dList.size());
+        
        List<Integer> w1 = new ArrayList<>();
        List<Integer> w2 = new ArrayList<>();
        List<Integer> w3 = new ArrayList<>();
        List<Integer> w4 = new ArrayList<>();
        List<Integer> w5 = new ArrayList<>();
+      
    
        for (int i = 0; i < dList.size(); i++) {
            if(i < 7) {
@@ -143,11 +162,24 @@ public class CalendarController {
            if( 20 < i && i< 28) {
                w4.add(dList.get(i));
            }
-           if( 27 < i && i< dList.size()) {
+           if( 27 < i && i< 35) {
                w5.add(dList.get(i));
            }
        }   
     
+       if(dList.size() >= 35) {
+           List<Integer> w6 = new ArrayList<>();
+           for (int n = 35; n < 42; n++) {
+               if( 34 < n && n< dList.size()) {
+                   w6.add(dList.get(n));
+               }
+               if(dList.size()-1< n && n< 42) {
+                   w6.add(0);
+               }
+        }
+           model.addAttribute("w6", w6);
+       }
+       
        model.addAttribute("w1", w1);
        model.addAttribute("w2", w2);
        model.addAttribute("w3", w3);
@@ -179,6 +211,7 @@ public class CalendarController {
        List<Integer> w3 = new ArrayList<>();
        List<Integer> w4 = new ArrayList<>();
        List<Integer> w5 = new ArrayList<>();
+      
      
 //       
 //      int n= 0; 
@@ -209,10 +242,23 @@ public class CalendarController {
            if( 20 < i && i< 28) {
                w4.add(dList.get(i));
            }
-           if( 27 < i && i<dList.size()) {
+           if( 27 < i && i< 35) {
                w5.add(dList.get(i));
            }
        }   
+    
+       if(dList.size() >= 35) {
+           List<Integer> w6 = new ArrayList<>();
+           for (int n = 35; n < 42; n++) {
+               if( 34 < n && n< dList.size()) {
+                   w6.add(dList.get(n));
+               }
+               if(dList.size()-1< n && n< 42) {
+                   w6.add(0);
+               }
+        }
+           model.addAttribute("w6", w6);
+       }
     
        model.addAttribute("w1", w1);
        model.addAttribute("w2", w2);

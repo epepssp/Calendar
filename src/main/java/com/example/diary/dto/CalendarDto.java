@@ -72,11 +72,11 @@ public class CalendarDto {
              }
          }
               
-     for (int j = 0;j <  lengthOfMonth; j++) {
+     for (int j = 0;j <  lengthOfMonth +1; j++) {
             dList.add(j);
            }
      
-       int sub =  lengthOfMonth + original -1;
+       int sub =  lengthOfMonth + original;
            
        if(35-sub >0) {
           for (int i = 0; i <35- sub; i++) {
