@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.diary.domain.Week;
 import com.example.diary.dto.CalendarDto;
@@ -100,11 +101,10 @@ public class CalendarController {
          model.addAttribute("w4", w4);
          model.addAttribute("w5", w5);
          model.addAttribute("dto", dto); // CalendarDto
-         
-         log.info("WWWWWW1={}",w1);
-         log.info("WWWWWW2={}",w2);
-         log.info("WWWWWW5={}",w5);
-    
+     
+         LocalDate now = LocalDate.now();
+         int today = now.getDayOfMonth();
+         log.info("ㅌㅌㅌ투데이!!={}", today);
         
         return "/calendar/main";
 
@@ -225,6 +225,7 @@ public class CalendarController {
      }
 
 
+  
 
     }
     
