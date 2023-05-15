@@ -2,16 +2,21 @@ package com.example.diary.web;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.diary.domain.Schedule;
 import com.example.diary.domain.Week;
 import com.example.diary.dto.CalendarDto;
 import com.example.diary.service.CalendarService;
+import com.example.diary.service.ScheduleService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CalendarController {
     
     private final CalendarService calendarService;
+    private final ScheduleService scheduleService;
     
 
     @GetMapping("/calendar")  // 오늘 날짜 
@@ -68,9 +74,56 @@ public class CalendarController {
                 dList.add(0);
                  }
              }
+         
+         
+         // 여기부터 시작
+         List<Schedule> monthList = new ArrayList<>();
+         monthList = scheduleService.findByMonth(date.getMonthValue()); // 해당 월의 스케줄 
+         
+         Set<Integer> daysHaveSchedule = new HashSet<>(); 
+         
+         for (Schedule m : monthList) {
+             daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
+         }
+         
+         log.info("5월에 스케쥴 있는 날짜?={}",daysHaveSchedule);
+         
+         List<List<Schedule>> daysScheduleList = new ArrayList<>();
+         List<Schedule> eachOfDaySchedule = new ArrayList<>();
+         List<Schedule> noSchedule = null;
+         
+//         for (int i = 0; i < dList.size(); i++) {
+//             for (Integer s : daysHaveSchedule) {
+//                 if(dList.get(i) == s) {
+//                     eachOfDaySchedule = scheduleService.findByDay(s);
+//                     daysScheduleList.add(eachOfDaySchedule);
+//                  } else if(dList.get(i) != s) {
+//                      daysScheduleList.add(noSchedule);
+//                  }
+//             }
+//        }
+        
+         
+         for (Integer d : dList) {
+           for (Integer s : daysHaveSchedule) {
+             if(d == s) {
+                eachOfDaySchedule = scheduleService.findByDay(d);
+                daysScheduleList.add(eachOfDaySchedule);
+                break;
+             } else if(d != s) {
+                 daysScheduleList.add(noSchedule);
+                 break;
+             }
+        }
              
+        }
+         
+         log.info("daysScheduleList={}",daysScheduleList);
+         
+         // 끝
+         
          log.info("dList 31일={}",dList);
-
+        
          List<Integer> w1 = new ArrayList<>();
          List<Integer> w2 = new ArrayList<>();
          List<Integer> w3 = new ArrayList<>();

@@ -219,7 +219,28 @@
         
     <script th:src="@{ /js/calendar.js }"></script>
     
-   <script >
+   <script>
+   
+   showMonthSchedule();
+   
+    function showMonthSchedule() {
+    	 
+    	 const year = document.querySelector('#y').value;
+    	 const monthValue = document.querySelector('#m').value;
+    	
+         axios
+         .get('/monthSchedule/' + monthValue) 
+         .then(response => {
+        	 showScheduleOfMonth();
+              })
+         .catch(err => { console.log(err) });
+          	
+    }
+    
+    function showScheduleOfMonth() {
+    	
+    }
+   
   
     function dayPop(day){
     	document.getElementById('id01').style.display='block';
@@ -244,6 +265,7 @@
            const full= document.querySelector('#fullDate');
            fullDate = year+monthValue+day; 
            full.value= fullDate;
+           
          }
          
       function showInput(){
@@ -357,6 +379,9 @@
     	function w3_close() {
     	    document.getElementById("mySidebar").style.display = "none";
     	}
+    	
+    	
+    	
       
      </script>
            

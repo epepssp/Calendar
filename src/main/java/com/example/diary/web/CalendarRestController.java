@@ -3,7 +3,9 @@ package com.example.diary.web;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,24 @@ public class CalendarRestController {
     
     private final CalendarService calendarService;
     private final ScheduleService scheduleService;
+    
+    
+    @GetMapping("/monthSchedule/{monthValue}")
+    public ResponseEntity<Integer> nomthSchedule(@PathVariable int monthValue) {
+        
+      
+//        List<Schedule> monthList = new ArrayList<>();
+//        monthList = scheduleService.findByMonth(monthValue);
+//        
+//        Set<Integer> daysHaveSchedule = new HashSet<>(); 
+//        
+//        for (Schedule m : monthList) {
+//            daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
+//        }
+        
+        
+        return ResponseEntity.ok(monthValue);
+    }
     
     @GetMapping("/day/{day}")
     public ResponseEntity<Integer> getReply(@PathVariable Integer day) {

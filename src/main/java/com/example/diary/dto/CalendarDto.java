@@ -6,12 +6,14 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.diary.domain.Schedule;
 import com.example.diary.domain.Week;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -38,6 +40,7 @@ public class CalendarDto {
    private Integer id; 
    private  LocalDate date; 
    
+ 
    private  int day;
    private  int monthValue;
    private  int year;
@@ -50,6 +53,11 @@ public class CalendarDto {
      
    private  String monthString;
    private  int original;
+   
+   
+   private List<Schedule> schedulesOfTheDay;
+   
+ 
    
    
    public  List<Integer> fromEntity(CalendarDto dto) {

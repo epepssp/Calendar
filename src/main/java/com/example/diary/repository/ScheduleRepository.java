@@ -13,6 +13,10 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
 
     List<Schedule> findByDay(int day);
 
+    Schedule findByScheduleId(int scheduleId);
+
+    List<Schedule> findByMonthValue(int monthValue);
+
    
 
 }

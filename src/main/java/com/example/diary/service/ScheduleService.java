@@ -46,6 +46,17 @@ public class ScheduleService {
         return s;
     }
 
+    public Schedule read(int scheduleId) {
+          Schedule schedule = scheduleRepository.findByScheduleId(scheduleId);
+        return schedule;
+    }
+
+    public List<Schedule> findByMonth(int monthValue) {
+        List<Schedule> s = scheduleRepository.findByMonthValue(monthValue);
+        
+        return s;
+    }
+
 //    public Schedule readById(int scheduleId) {
 //        Schedule s = scheduleRepository.findById(scheduleId).get();
 //        
