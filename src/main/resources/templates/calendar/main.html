@@ -75,7 +75,7 @@
     <div class="w3-container w3-cell" align="right" style="font-size:25px;  font-weight:bold;  width: 400px;"><span style="margin-bottom: 20px;" th:text="${dto.monthValue +'월'}"></span><p></p></div>
  </div>
   
-    <!-- 달력 테이블 -->
+    <!-- 달력 시작 -->
     <div class="w3-cell-row w3-center border-bottom border-dark pt-1" style="border-bottom: 2px; height:40px;">
         <div class="w3-container w3-cell" style="width:14%; color:red;">SUN</div>
         <div class="w3-container w3-cell" style="width:14%;">MON</div>
@@ -87,66 +87,99 @@
     </div>
     
   
-    <div class="w3-cell-row w3-center mt-3" style=" height:90px; border-bottom: 1px solid #DCDCDC;"> 
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%;" th:each="w : ${w1}">
-        <span th:if="${w} == 0"><span style="color: white;" id="w" th:text="${ w }"></span></span>
-        <span th:if="${w} != 0"><span id="w" th:text="${ w }"></span></span>
-         
+    <div class="w3-cell-row mt-2" style=" height:20px;"> 
+      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" align="left" style="width:14%;" th:each="w : ${w1}">
+          <span th:if="${w} == 0"><span style="color: white;" id="w" th:text="${ w }"></span></span>
+          <span th:if="${w} != 0"><span id="w" th:text="${ w }"></span></span>
       </div>
+    </div> 
+    <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+       <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s1}">
+          <div th:if="${s} == null" style="color: white;">없음</div>
+          <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+        </div>
     </div>
     
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%; height: 8px;" th:each="w : ${w2}"><span id="w" th:text="${ w }"></span>
-      </div>
-       
-    </div>
-    
-   <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell"  style="width:14%; "th:each="w : ${w3}"><span id="w"  th:text="${ w }"></span></div>
       
+    <div class="w3-cell-row mt-2" style=" height:20px;">
+      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" align="left" style="width:14%; height: 8px;" th:each="w : ${w2}">
+        <span id="w" th:text="${ w }"></span>
+      </div>
+    </div>
+    <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+       <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s2}">
+          <div th:if="${s} == null" style="color: white;">없음</div>
+          <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+        </div>
     </div>
     
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%; " th:each="w : ${w4}"><span id="w"  th:text="${ w }"></span></div>
-    
+   <div class="w3-cell-row mt-2" style=" height:20px;">
+      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" align="left" style="width:14%; "th:each="w : ${w3}">
+        <span id="w" th:text="${ w }"></span>
+      </div>
+   </div>
+   <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+       <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s3}">
+          <div th:if="${s} == null" style="color: white;">없음</div>
+          <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+        </div>
     </div>
     
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%;" th:each="w : ${w5}">
+    <div class="w3-cell-row mt-2" style=" height:20px;">
+      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" align="left" style="width:14%; " th:each="w : ${w4}">
+        <span id="w" th:text="${ w }"></span>
+      </div>
+    </div>
+    <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+       <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s4}">
+          <div th:if="${s} == null" style="color: white;">없음</div>
+          <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+        </div>
+    </div>
+    
+    <div class="w3-cell-row mt-2" style=" height:20px;">
+      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" align="left" style="width:14%;" th:each="w : ${w5}">
         <span th:if="${w} == 0"><span style="color: white;" th:text="${ w }"></span></span>
         <span th:if="${w} != 0"><span th:text="${ w }"></span></span>
       </div>
     </div>
+    <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+       <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s5}">
+          <div th:if="${s} == null" style="color: white;">없음</div>
+          <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+        </div>
+    </div>
     
     <div th:if="${w6}">
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%; " th:each="w : ${w6}">
-      <span th:if="${w} == 0"><span style="color: white;" th:text="${ w }"></span></span>
-      <span th:if="${w} != 0"><span th:text="${ w }"></span></span>
+      <div class="w3-cell-row w3-center mt-2" style=" height:20px;">
+         <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%; " th:each="w : ${w6}">
+           <span th:if="${w} == 0"><span style="color: white;" th:text="${ w }"></span></span>
+           <span th:if="${w} != 0"><span th:text="${ w }"></span></span>
+         </div>
+      </div>
+      <div class="w3-cell-row m-1" style="height:80px; border-bottom: 1px solid #DCDCDC;"> 
+          <div class="mb-2 w3-container w3-cell" style="height:70px; width:14%;" th:each="s : ${s6}">
+            <div th:if="${s} == null" style="color: white;">없음</div>
+            <div th:if="${s}"><div class="effectT" style="width: 100px;" th:each="ss : ${s}"><small>⦁ <span th:text="${ ss.content }"></span></small></div></div>
+          </div>
+      </div>
     </div>
-    </div>
-   
-    <!-- 달력 끝 -->
-    
-   
+<!-- 달력 끝 -->
 
-
- <!-- 달력 페이징 버튼 -->
+<!-- 달력 페이징 버튼 -->
  <div class="w3-container mt-3" style="display: inline-block;">
- 
   <button class="w3-button" style="margin-left:370px;" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|" >
      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
      </svg>
   </button>
-
- <button class="w3-button" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|">
+  <button class="w3-button" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
     </svg>
-</button>
+  </button>
 </div>
-
+<!-- 달력 페이징 버튼 끝 -->
 
 </div><!-- 메인 왼쪽 끝 -->
 
@@ -156,35 +189,36 @@
   </div><!--메인 오른쪽 끝 -->
   
   
-  
-  <div id="id01" class="w3-modal"><!-- day 클릭 모달 -->
-    <div class="w3-modal-content" style="width: 280px; height: 400px;">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-         <input type="hidden"  id="y" th:value="${dto.year}"/><input type="hidden" style="border:none; font-size:25px; width: 45px;" id="m" th:value="${dto.monthValue}"/><input type="hidden" id="fullDate" />
+<!-- day 클릭 모달 -->
+<div id="id01" class="w3-modal">
+   <div class="w3-modal-content" style="width: 280px; height: 400px;">
+     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+     <input type="hidden"  id="y" th:value="${dto.year}"/><input type="hidden" style="border:none; font-size:25px; width: 45px;" id="m" th:value="${dto.monthValue}"/><input type="hidden" id="fullDate" />
       
-        <div class="w3-cell-row p-2"> 
+     <div class="w3-cell-row p-2"> 
           <div  class="w3-container w3-cell"> 
             <div class="mt-4" th:text="${dto.year}" style="font-size: 13px; margin-left: 8px;" ></div>
             <div align="right" style="display: inline-block; font-size: 25px;">
-            <span style="margin-left: 147px;" id="m2" th:text="${ dto.monthValue }"></span> /
-            <input style="border:none; font-size:25px; width: 45px;" id="modalDay" type="text"/>
+               <span style="margin-left: 147px;" id="m2" th:text="${ dto.monthValue }"></span> /
+               <input style="border:none; font-size:25px; width: 45px;" id="modalDay" type="text"/>
             </div>
             <span style="font-size: 8px; margin-left: 155px;" th:text="${dto.dayOfWeek}"></span> 
             
             <div class="w3-sidebar w3-center w3-bar-block" style="background-color:#F5F5F5; display:none ;  width:110px; height:150px;" id="mySidebar">
                 <button class="w3-bar-item w3-button" onclick="w3_close()"><span style="margin-right: 50px;"></span>&times;</button>
-                 <a href="#" class="w3-bar-item w3-button w3-small">D-DAY ♥</a>
+                <a href="#" class="w3-bar-item w3-button w3-small">D-DAY ♥</a>
                 <span onclick="showInput()" style="font-size: 12px; margin-right: 10px;"><span onclick="w3_close()">일정 추가</span></span>
-                 <a href="#" class="w3-bar-item w3-button  w3-small">내 일기장</a>
+                <a href="#" class="w3-bar-item w3-button  w3-small">내 일기장</a>
             </div>
             
-             <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button>
-             <br>  
+            <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button><br>  
+            
             <div><small>&nbsp;&nbsp;오늘의 일정</small></div>
-            <div class="border rounded mt-1 mb-1" style="padding-left:15px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> 
-               <span id=inputDiv></span>
+               <div class="border rounded mt-1 mb-1" style="padding-left:15px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
+               <span id=inputDiv></span><!-- 일정 추가 입력창 -->
                
-              <div class="w3-container mt-2" style="display: inline-block;">
+               <!-- 날짜 앞/뒤 버튼 -->
+               <div class="w3-container mt-2" style="display: inline-block;">
                  <button class="w3-button" style="margin-left:50px;" onclick="frontDay();">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
@@ -197,9 +231,10 @@
                 </button>
               </div>
            </div>
-         </div>
+      </div>
    </div>
-  </div><!-- 모달 끌 -->
+</div>
+<!-- 모달 끌 -->
   
  
  
@@ -333,10 +368,8 @@
     		 
          	 str += '<div class="effectT"><small>⦁ '+x.content+'</small></div>';
     			 } 
-    	    
-              
-             sListDiv.innerHTML = str;
-    			 } 
+          sListDiv.innerHTML = str;
+     } 
     
      
      function frontDay() {

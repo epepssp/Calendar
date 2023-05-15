@@ -74,9 +74,8 @@ public class CalendarController {
                 dList.add(0);
                  }
              }
-         
-         
-         // 여기부터 시작
+                  
+ // 여기부터 시작
          List<Schedule> monthList = new ArrayList<>();
          monthList = scheduleService.findByMonth(date.getMonthValue()); // 해당 월의 스케줄 
          
@@ -90,39 +89,22 @@ public class CalendarController {
          
          List<List<Schedule>> daysScheduleList = new ArrayList<>();
          List<Schedule> eachOfDaySchedule = new ArrayList<>();
-         List<Schedule> noSchedule = null;
          
-//         for (int i = 0; i < dList.size(); i++) {
-//             for (Integer s : daysHaveSchedule) {
-//                 if(dList.get(i) == s) {
-//                     eachOfDaySchedule = scheduleService.findByDay(s);
-//                     daysScheduleList.add(eachOfDaySchedule);
-//                  } else if(dList.get(i) != s) {
-//                      daysScheduleList.add(noSchedule);
-//                  }
-//             }
-//        }
-        
-         
+
          for (Integer d : dList) {
-           for (Integer s : daysHaveSchedule) {
-             if(d == s) {
-                eachOfDaySchedule = scheduleService.findByDay(d);
-                daysScheduleList.add(eachOfDaySchedule);
-                break;
-             } else if(d != s) {
-                 daysScheduleList.add(noSchedule);
-                 break;
-             }
-        }
-             
-        }
+             if(daysHaveSchedule.contains(d)){
+                  eachOfDaySchedule = scheduleService.findByDay(d);
+                  daysScheduleList.add(eachOfDaySchedule);
+             } else {
+                   daysScheduleList.add(null);
+              }
+          }
          
-         log.info("daysScheduleList={}",daysScheduleList);
+        // log.info("daysScheduleList={}",daysScheduleList);
          
-         // 끝
+// 끝
          
-         log.info("dList 31일={}",dList);
+         // log.info("dList 31일={}",dList);
         
          List<Integer> w1 = new ArrayList<>();
          List<Integer> w2 = new ArrayList<>();
@@ -130,37 +112,52 @@ public class CalendarController {
          List<Integer> w4 = new ArrayList<>();
          List<Integer> w5 = new ArrayList<>();
         
+         List<List<Schedule>> s1 = new ArrayList<>();
+         List<List<Schedule>> s2 = new ArrayList<>();
+         List<List<Schedule>> s3 = new ArrayList<>();
+         List<List<Schedule>> s4 = new ArrayList<>();
+         List<List<Schedule>> s5 = new ArrayList<>();
+         
 
          
          for (int i = 0; i < dList.size(); i++) {
              if(i < 7) {
                  w1.add(dList.get(i));
+                 s1.add(daysScheduleList.get(i));
              } 
              if( 6 < i && i< 14) {
                  w2.add(dList.get(i));
+                 s2.add(daysScheduleList.get(i));
              }
              if( 13 < i && i< 21) {
                  w3.add(dList.get(i));
+                 s3.add(daysScheduleList.get(i));
              }
              if( 20 < i && i< 28) {
                  w4.add(dList.get(i));
+                 s4.add(daysScheduleList.get(i));
              }
              if( 27 < i && i< 35) {
                  w5.add(dList.get(i));
+                 s5.add(daysScheduleList.get(i));
              }
          }   
       
          if(dList.size() >= 35) {
              List<Integer> w6 = new ArrayList<>();
+             List<List<Schedule>> s6 = new ArrayList<>();
              for (int n = 35; n < 42; n++) {
                  if( 34 < n && n< dList.size()) {
                      w6.add(dList.get(n));
+                     s6.add(daysScheduleList.get(n));
                  }
                  if(dList.size()-1< n && n< 42) {
                      w6.add(0);
+                     s6.add(null);
                  }
           }
              model.addAttribute("w6", w6);
+             model.addAttribute("s6", s6);
          }
       
          model.addAttribute("w1", w1);
@@ -168,6 +165,14 @@ public class CalendarController {
          model.addAttribute("w3", w3);
          model.addAttribute("w4", w4);
          model.addAttribute("w5", w5);
+         
+
+         model.addAttribute("s1", s1);
+         model.addAttribute("s2", s2);
+         model.addAttribute("s3", s3);
+         model.addAttribute("s4", s4);
+         model.addAttribute("s5", s5);
+         
          model.addAttribute("dto", dto); // CalendarDto
      
          LocalDate now = LocalDate.now();
