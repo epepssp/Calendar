@@ -12,6 +12,7 @@
        
        <title>d앙</title><!-- 안 넣어도 될 듯 -->
        
+       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -31,18 +32,19 @@
              font-family: 'NanumBarunGothic';
          }
          
-        
-         .pagination a {
-            width: 30px;
-            height: 30px;
-            color: black;
-       
-            padding: 4px 8px;
-            text-decoration: none;
-            transition: background-color .3s;
-           
+         
+         div.effectT{
+            white-space: nowrap; 
+            width: 250px; 
+            overflow: hidden;
+            text-overflow: ellipsis;
          }
          
+        div.effectT:hover {
+            overflow: visible;
+        }
+         
+
        </style>
        
     </head>
@@ -57,8 +59,8 @@
          <div class="w3-container w3-cell" >
            <p> </p>
            </div>
-         <div class="w3-container w3-cell">
-           <p></p>
+         <div class="w3-container w3-cell" align="right">
+           <p class="m-3 fw-bold" style="font-style:italic; font-size: 25px;">차오꿀 님의 다이어리</p>
          </div>
      </div><!-- cell row end -->
   </div><!-- 바 end -->
@@ -70,11 +72,11 @@
 
   <div class="w3-cell-row pt-2" style=" height:100px;"><!-- 년/월 부분 -->
     <div class="w3-container w3-cell" style="font-size: 20px; font-weight: 600;"><span th:text="${dto.month +'&nbsp;&nbsp;' + dto.year}"></span></div>
-    <div class="w3-container w3-cell" style="width: 400px;"></div>
+    <div class="w3-container w3-cell" align="right" style="font-size:25px;  font-weight:bold;  width: 400px;"><span style="margin-bottom: 20px;" th:text="${dto.monthValue +'월'}"></span><p></p></div>
  </div>
   
-    <!-- 달력 테이블 -->
-    <div class="w3-cell-row w3-center border-bottom border-dark pt-1" style="border-bottom: 2px; height:40px;">
+    <!-- 달력 시작 -->
+    <div class="w3-cell-row w3-center border-bottom border-dark pt-2 mb-2" style="border-bottom: 2px; height:40px;">
         <div class="w3-container w3-cell" style="width:14%; color:red;">SUN</div>
         <div class="w3-container w3-cell" style="width:14%;">MON</div>
         <div class="w3-container w3-cell" style="width:14%;">TUE</div>
@@ -85,66 +87,217 @@
     </div>
     
   
-    <div class="w3-cell-row w3-center mt-3" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div class="w3-container w3-cell" style="width:14%;" th:each="w : ${w1}">
-        <span th:if="${w} == 0"><span style="color: white;" th:text="${ w }"></span></span>
-        <span th:if="${w} != 0"><span th:text="${ w }"></span></span>
+<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 1 -->
+  <div class="w3-container w3-cell" th:each="d : ${d1}">
+       <span th:if="${d.day} == 0" style="color: white;" id="d" th:text="${ d.day }"></span>
+       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         
+       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img style="width: 14px;" src="/icons/heart.svg">
+         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
+   
+       <div class="m-2" style="width:80px; height: 70px;">
+         <div th:if="${d.sList} == null" style="color: white;"></div>
+         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
       </div>
-    </div>
-    
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div th:day="${w}" onclick="dayPop(this.getAttribute('day'));" class="w3-container w3-cell" style="width:14%;" th:each="w : ${w2}"><span th:text="${ w }"></span></div>
-    </div>
-    
-   <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div class="w3-container w3-cell" style="width:14%; " th:each="w : ${w3}"><span th:text="${ w }"></span></div>
-    </div>
-    
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div  class="w3-container w3-cell" style="width:14%; " th:each="w : ${w4}"><span th:text="${ w }"></span></div>
-    </div>
-    
-    <div class="w3-cell-row w3-center mt-2" style=" height:90px; border-bottom: 1px solid #DCDCDC;">
-      <div class="w3-container w3-cell" style="width:14%;" th:each="w : ${w5}">
-        <span th:if="${w} == 0"><span style="color: white;" th:text="${ w }"></span></span>
-        <span th:if="${w} != 0"><span th:text="${ w }"></span></span>
-      </div>
-    </div><!-- 달력 끝 -->
-    
+ </div>
+</div> 
 
- <!-- 달력 페이징 버튼 -->
+
+<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 2 -->
+   <div class="w3-container w3-cell" th:each="d : ${d2}">
+       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         
+       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img style="width: 14px;" src="/icons/heart.svg">
+         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
+   
+      <div class="m-2" style="width:80px; height: 70px;">
+         <div th:if="${d.sList} == null" style="color: white;"></div>
+         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+      </div>
+ </div>
+</div> 
+
+<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 3 -->
+  <div class="w3-container w3-cell" th:each="d : ${d3}">
+       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         
+       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img style="width: 14px;" src="/icons/heart.svg">
+         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
+   
+      <div class="m-2" style="width:80px; height: 70px;">
+         <div th:if="${d.sList} == null" style="color: white;"></div>
+         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+      </div>
+ </div>
+</div> 
+
+<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 4 -->
+  <div class="w3-container w3-cell" th:each="d : ${d4}">
+       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         
+       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img style="width: 14px;" src="/icons/heart.svg">
+         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
+   
+      <div class="m-2" style="width:80px; height: 70px;">
+         <div th:if="${d.sList} == null" style="color: white;"></div>
+         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+      </div>
+ </div>
+</div> 
+
+<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 5 -->
+  <div class="w3-container w3-cell" th:each="d : ${d5}">
+       <span th:if="${d.day} == 0" style="color: white;" id="d" th:text="${ d.day }"></span>
+       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         
+       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img style="width: 14px;" src="/icons/heart.svg">
+         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
+   
+      <div class="m-2" style="width:80px; height: 70px;">
+         <div th:if="${d.sList} == null" style="color: white;"></div>
+         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+      </div>
+ </div>
+</div> 
+<!-- 달력 끝 -->
+
+<!-- 달력 페이징 버튼 -->
  <div class="w3-container mt-3" style="display: inline-block;">
- 
-  <button class="w3-button" style="margin-left:370px; display: inline-block;" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|" >
+  <button class="w3-button" style="margin-left:370px;" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|" >
      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
      </svg>
   </button>
-
- <button class="w3-button" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|">
+  <button class="w3-button" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue }, year = ${ dto.year})}'|">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
     </svg>
-</button>
+  </button>
 </div>
-
-
+<!-- 달력 페이징 버튼 끝 -->
 
 </div><!-- 메인 왼쪽 끝 -->
+
+   
   
   <div class="col-3"><!-- 메인 오른쪽 영역 -->
+  </div><!--메인 오른쪽 끝 -->
   
   
+<!-- day 클릭 모달 -->
+<div id="id01" class="w3-modal">
+   <div class="w3-modal-content" style="width: 280px; height: 400px;">
+     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+     <input type="hidden"  id="y" th:value="${dto.year}"/><input type="hidden" style="border:none; font-size:25px; width: 45px;" id="m" th:value="${dto.monthValue}"/><input type="hidden" id="fullDate" />
+      
+     <div class="w3-cell-row p-2"> 
+          <div  class="w3-container w3-cell"> 
+            <div class="mt-4" th:text="${dto.year}" style="font-size: 13px; margin-left: 8px;" ></div>
+            <div align="right" style="display: inline-block; font-size: 25px;">
+               <span style="margin-left: 147px;" id="m2" th:text="${ dto.monthValue }"></span> /
+               <input style="border:none; font-size:25px; width: 45px;" id="modalDay" type="text"/>
+            </div>
+            <span style="font-size: 8px; margin-left: 155px;" id="dow" th:text="${dto.dayOfWeek}"></span> 
+            
+            <div class="w3-sidebar w3-center w3-bar-block" style="background-color:#F5F5F5; display:none ;  width:110px; height:150px;" id="mySidebar">
+                <button class="w3-bar-item w3-button" onclick="w3_close()"><span style="margin-right: 50px;"></span>&times;</button>
+                <span onclick="showDDayInput()" class="w3-bar-item w3-button w3-small">D-DAY ♥</span>
+                <span onclick="showInput()" class="w3-bar-item w3-button w3-small"><span onclick="w3_close()">일정 추가</span></span>
+                <span onclick="showDiaryFoam()" class="w3-bar-item w3-button  w3-small">내 일기장</span>
+            </div>
+            
+            <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button><br>  
+            
+            <div><small>&nbsp;&nbsp;오늘의 일정</small></div>
+               <div class="border rounded mt-1 mb-1" style="padding-left:15px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
+               <span id=inputDiv></span><!-- 일정 추가 입력창 -->
+               
+               <!-- 날짜 앞/뒤 버튼 -->
+               <div class="w3-container mt-2" style="display: inline-block;">
+                 <button class="w3-button" style="margin-left:50px;" onclick="frontDay();">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                  </svg>
+                </button>
+                <button class="w3-button" onclick="backDay();">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                 </svg>
+                </button>
+              </div>
+           </div>
+      </div>
+   </div>
+</div>
+<!-- 모달 끌 -->
+
+
+<!-- Diary Create Form 모달 -->
+<div id="diaryModal" class="w3-modal">
+   <div class="w3-modal-content" style="width: 480px; height: 580px;">
+    <span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br><br>
+     <form id="diaryFoam" class="w3-container m-3" method="post"><!-- 다이어리 모달 컨텐츠 전체 -->
+       <div class="w3-cell-row mb-3">
+          <span class="w3-container w3-cell" id="diaryDayDiv"></span><!-- 날짜 -->
+          <div class="w3-container w3-cell" align="right"><!-- 날씨 -->
+             <img width="22px;" src="/icons/sun-fill.svg">&nbsp;&nbsp;<img width="22px;" src="/icons/umbrella.svg">&nbsp;&nbsp;
+             <img width="22px;" src="/icons/wind.svg">&nbsp;&nbsp;<img width="22px;" src="/icons/snow2.svg">
+          </div>
+        </div> 
+        <input class="form-control mt-5" type="text" id ="title" placeholder="제목을 입력하세요">
+        <textarea class="form-control mt-2" style="height: 350px;" id="diaryContent" required></textarea>
+        <div align="right" style="border-color: 1px solid gray;" id="diaryBtn" class="m-2">저장하기</div>
+     </form> 
+   </div>
+</div><!-- Diary Create For 끝 -->
   
-  </div>
+ <!-- Diary Detail 모달 -->
+<div id="diaryDetailModal" class="w3-modal">
+   <div class="w3-modal-content" style="width: 480px; height: 580px;">
+    <span onclick="document.getElementById('diaryDetailModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br><br>
+     <form id="diaryFoam" class="w3-container m-3" method="post"><!-- 다이어리 모달 컨텐츠 전체 -->
+       <div class="w3-cell-row pb-3 border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">
+          <span class="w3-container w3-cell" id="detailDayDiv"></span><!-- 날짜 -->
+          <div class="w3-container w3-cell" align="right"><!-- 날씨 -->
+             <img width="22px;" src="/icons/sun-fill.svg">&nbsp;&nbsp;<img width="22px;" src="/icons/umbrella.svg">&nbsp;&nbsp;
+             <img width="22px;" src="/icons/wind.svg">&nbsp;&nbsp;<img width="22px;" src="/icons/snow2.svg">
+          </div>
+        </div> 
+        <div id="detailDiv"></div>
+     </form> <!-- Diary Detail 끝 -->
+   </div>
+</div>
    
+<!-- DDay 모달 -->
+<div id="dDayModal" class="w3-modal">
+   <div class="w3-modal-content" style="width: 300px; height: 360px;">
+      <span onclick="document.getElementById('dDayModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br>
+      <div class="mx-3 my-3"><!-- 컨텐츠부분 -->
+       <div class="mb-3"><!-- 상단 -->
+         <div id="todayDiv"></div>
+         <input class="form-control" type="date" style="display: inline-block; width: 145px;" id="untilDate"><span style="margin-left: 7px; margin-right: 30px;">까지?</span>
+         <small><span class="rounded border p-1 mt-1" onclick="subtract(event);">선택</span></small>
+       </div>
+       <div id="subDiv" class="border-top border-bottom mt-3 mb-2" style="height:100px; border-bottom-color: 1px solid #DCDCDC;"></div><!-- 게산해서 보여주는 영역 -->
+       
+       <div class="mb-3">
+          <div style="margin-left: 7px; margin-bottom: 6px;"><small>새로운 D-DAY로 추가하시겠어요?</small></div>
+         
+          <span style="margin-left: 13px; width:15px; font-size: 7px;"><small>D-DAY'S NAME</small><input type="text" id="dDayName" style="font-size: 15px; width:170px; margin-left: 7px;display: inline-block;"></span>
+        </div>
+        <small><span id="dDayBtn" style="margin-left:200px; font-size: 10px;" class="rounded border p-1 mt-1">D-DAY추가</span></small>
+      </div>
+   </div>
+</div><!-- DDay모달 끝 -->
    
     <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   
-    <!-- 모달 부트스트랩 -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -154,17 +307,345 @@ integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
         
-         <script th:src="@{ /js/calendar.js }"></script>
-  <script >
+    <script th:src="@{ /js/calendar.js }"></script>
     
-    function dayPop(day){
-        alert(day);
+   <script>
+ 
+   
+   const dDayBtn = document.querySelector('#dDayBtn'); 
+   dDayBtn.addEventListener('click', e => {
+       const untilDate = document.querySelector('#untilDate').value;
+       const dDayName = document.querySelector('#dDayName').value;
+       const day = document.querySelector('#modalDay').value;
+       const year= document.querySelector('#y').value;
+       const monthValue= document.querySelector('#m').value;
+       
+       const data ={ 
+               year:year,
+               monthValue: monthValue,
+               day:day,
+               untilDate:untilDate,
+               dDayName:dDayName
+        } 
+      console.log('여기왔냐')
+      console.log(data);
+         
+         axios
+         .post('/dday/add',data) 
+         .then(response => {
+               modalClose();
+               location.reload();
+               alert('D-DAY 등록되었습니다!');
+              })
+              
+         .catch(err => { console.log(err) });
+   })
+   
+   function modalClose(){
+	   document.getElementById("dDayModal").style.display = "none";
+	   document.getElementById('id01').style.display = "none";
+	   document.getElementById('dDayName').value = "";
+  }
+   
+   
+   function showDDayInput(){
+       document.getElementById("dDayModal").style.display = "block";
+    
+       const modalDay = document.querySelector('#modalDay').value;
+       const year= document.querySelector('#y').value;
+       const monthValue= document.querySelector('#m').value;
+       const todayDiv = document.querySelector('#todayDiv');
 
-        sendDay();
+       
+       let str ='';
+       str = '<span style="margin-left: 5px;">'+year+'년 '+monthValue+'월 '+modalDay+'일<span>부터';
+       todayDiv.innerHTML = str;
+       
+   }
+   
+   function subtract(event){
+       const untilDate = document.querySelector('#untilDate').value;
+       
+       const day = document.querySelector('#modalDay').value;
+       const year= document.querySelector('#y').value;
+       const monthValue= document.querySelector('#m').value;
+       
+       const data ={ 
+             year:year,
+             monthValue: monthValue,
+             day:day,
+             untilDate:untilDate
+      } 
+       
+       axios
+       .post('/dday/subtract',data) 
+       .then(response => {
+             showSubtract(response.data);
+            })
+       .catch(err => { console.log(err) });
+      
+   }
+   
+   
+   function showSubtract(subtract) {
+       const subDiv = document.querySelector('#subDiv');
+       str='';
+       str='<small><span>기준일로부터</span></small>'
+           +'<h3> D '+subtract+'</h3>';
+           
+      subDiv.innerHTML = str;   
+   }
+   
+   
+   function diaryPop(diaryId){
+       
+       axios
+       .get('/day/diary/' + diaryId) 
+       .then(response => {
+               showDiary(response.data);
+            
+            })
+       .catch(err => { console.log(err) });
+    };
+    
+    function showDiary(diary) {
+         document.getElementById("diaryDetailModal").style.display = "block";
+        
+         let str = '<span>'+diary.year+'년 '+diary.monthValue+'월 '+diary.day+'일<span>';
+         detailDayDiv.innerHTML = str;
+         
+         let str1 = '<h4 class="mt-5 border-bottom" style="border-bottom-color: 1px solid #DCDCDC; height: 20px;" name ="title" readonly>'+diary.title+'</h4>'
+                  +'<div class="mt-2" style="border-color:white; height: 350px;" name="content" readonly>'+diary.content+'</div>'
+                  +'<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;"></div>';
+             
+         detailDiv.innerHTML = str1;          
+                  
+    }
+
+   
+   const diaryBtn = document.querySelector('#diaryBtn');
+   
+   diaryBtn.addEventListener('click', e => {
+    
+       const year= document.querySelector('#y').value;
+       const monthValue= document.querySelector('#m').value;
+       const title= document.querySelector('#title').value;
+       const diaryContent= document.querySelector('#diaryContent').value;
+       const day = document.querySelector('#modalDay').value;
+       
+       const data ={
+               year:year,
+               monthValue:monthValue,
+               day:day,
+               title:title,
+               diaryContent: diaryContent
+       }
+      
+       axios.post('/add/diary', data)
+       .then(response => {
+             document.getElementById("diaryModal").style.display = "none";
+             alert('저장 완료!');
+             updateDiaryIcon(response.data);
+             location.reload();
+       })
+       .catch(err => { console.log(err) });
+       
+   });
+   
+   
+   function updateDiaryIcon(diaryId){
+       
+       axios
+       .get('/monthDiary/' + diaryId) 
+       .then(response => {
+               console.log('다이어리먼스성공');
+            })
+       .catch(err => { console.log(err) });
+          
+  }
+       
+   
+   
+   function showDiaryFoam() {
+       document.getElementById("diaryModal").style.display = "block";
+       document.getElementById("id01").style.display = "none";
+
+       const modalDay = document.querySelector('#modalDay').value;
+       const year= document.querySelector('#y').value;
+       const monthValue= document.querySelector('#m').value;
+       const dow= document.querySelector('#dow').value;
+       const diaryDayDiv = document.querySelector('#diaryDayDiv');
+       
+       let str ='';
+       str += '<span>'+year+'년 '+monthValue+'월 '+modalDay+'일<span>';
+           +'';
+       diaryDayDiv.innerHTML = str;
+    }
+   
+
+   
+   showMonthSchedule();
+   
+    function showMonthSchedule() {
+         
+         const year = document.querySelector('#y').value;
+         const monthValue = document.querySelector('#m').value;
+        
+         axios
+         .get('/monthSchedule/' + monthValue) 
+         .then(response => {
+             showScheduleOfMonth();
+              })
+         .catch(err => { console.log(err) });
+            
+    }
+    
+    function showScheduleOfMonth() {
         
     }
+   
+  
+    function dayPop(day){
+        document.getElementById('id01').style.display='block';
+     
+        const modalDay = document.querySelector('#modalDay');
+    
+        axios
+        .get('/day/' + day) 
+        .then(response => {
+             modalDay.value = response.data;
+             showFullDate();
+             showScheduleOfDay();
+             })
+        .catch(err => { console.log(err) });
+         };
+         
+         
+       function  showFullDate() {
+           const year= document.querySelector('#y').value;
+           const monthValue= document.querySelector('#m').value;
+           const day= document.querySelector('#modalDay').value;
+           const full= document.querySelector('#fullDate');
+           fullDate = year+monthValue+day; 
+           full.value= fullDate;
+           
+         }
+         
+      function showInput(){
+          const inputDiv  = document.querySelector('#inputDiv');
+          let str ='<input style="border:none;" autofocus="autofocus" id="addP" type="text" /><span id=addBtn style="margin-left: 10px;"><small>추가</small></span>';
+          
+          inputDiv.innerHTML = str;
+          
+          const addBtn  = document.querySelector('#addBtn');
+          console.log(addBtn);
+          
+          addBtn.addEventListener('click', e => {
+                    
+              const content= document.querySelector('#addP').value;
+              const year= document.querySelector('#y').value;
+              const monthValue= document.querySelector('#m').value;
+              const day= document.querySelector('#modalDay').value;
+              const full= document.querySelector('#fullDate').value;
         
-    </script>
+              
+              const data ={
+                      year:year,
+                      monthValue:monthValue,
+                      day:day,
+                      content:content,
+                      fullDate:fullDate 
+              }
+            
+              console.log(content);
+              console.log(data);  
+              
+              axios.post('/add/schedule', data)
+                   .then(response => {
+                          console.log('성공')
+                          str ='';
+                          inputDiv.innerHTML = str;
+                          showScheduleOfDay();
+                          location.reload();
+              })
+                  .catch(err => { console.log(err) });
+         });
+         
+      };
+      
+      function  showScheduleOfDay(){
+          const inputDiv  = document.querySelector('#inputDiv');
+        
+          
+           const fullDate= document.querySelector('#fullDate').value; 
+           
+          axios
+          .get('/show/schedule/day/' + fullDate) 
+          .then(response => {
+              console.log('쇼스케쥴 성공');
+              showList(response.data);
+               })
+          .catch(err => { console.log(err) });
+          
+      }
+      
+     function showList(data){
+         
+           const sListDiv= document.querySelector('#sListDiv');
+           str ='';
+          for (let x of data){ 
+             
+             str += '<div class="effectT"><small>⦁ '+x.content+'</small></div>';
+                 } 
+          sListDiv.innerHTML = str;
+     } 
+    
+     
+     function frontDay() {
+         const day= document.querySelector('#modalDay').value;
+         const fullDate= document.querySelector('#fullDate').value; 
+         const m= document.querySelector('#m').value;
+         console.log(m);
+         console.log(m-1);
+          
+          axios.get('/front/day/'+fullDate)
+         .then(response => {
+             
+             modalDay.value =day-1;
+             showFullDate();
+             showScheduleOfDay();
+            
+          
+              })
+         .catch(err => { console.log(err) });
+     }
+
+     
+     function backDay() {
+         const day= document.querySelector('#modalDay').value;
+         
+         axios
+         .get('/back/day/' + day) 
+         .then(response => {
+             modalDay.value =response.data;
+             showFullDate();
+             showScheduleOfDay();
+              })
+         .catch(err => { console.log(err) });
+     }
+     
+     
+     function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+        
+        
+        
+      
+     </script>
            
 </div><!-- 메인 전체 끝 --> 
     
