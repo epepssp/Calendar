@@ -133,101 +133,48 @@ public class CalendarRestController {
      return ResponseEntity.ok(sList);
      }
     
-//     @GetMapping("/show/schedule/all/{day}")
-//     public ResponseEntity<List<Schedule>> showDayAll(@PathVariable int day){
-//     log.info("데이별스케쥴(풀={})", day);
-//     
-//    List<Schedule> list = scheduleService.findByDay(day);
-//    log.info("데이스케쥬리스우={}", list); 
+
+ 
+     
+
+
+     
+@GetMapping("/front/day/{monthValue}")
+public ResponseEntity<Integer> showFrontDay(@PathVariable int monthValue){
+    log.info("frontttt데이(데이={})", monthValue);
+   
+    
+    LocalDate date = LocalDate.of(2023, monthValue, 1);
+    int lastDay = date.getMonth().maxLength();
+   
+
+     
+//    List<Schedule> sList = new ArrayList<>();
 //    
-//     return ResponseEntity.ok(list);
-//     }
+//    Integer date =  Integer.parseInt(fullDate.substring(fullDate.length()-1, fullDate.length())) -1;
 //     
-//     
-//     @GetMapping("/show/schedule/month")
-//     public ResponseEntity<List<Schedule>> showAllMonth(int year, int monthValue){
-//         log.info("스케쥴먼트(풀={}:{})", year, monthValue);
-//          List<Schedule> alls = scheduleService.readAll();
-//          List<Schedule> monthS = new ArrayList<>();
-//          
-//        for (Schedule s : alls) {
-//            if(s.getYear() == year && s.getMonthValue() == monthValue) {
-//              monthS.add(s);
-//            }
+//    if(date == 0) { 
+//        Integer year = Integer.parseInt(fullDate.substring(0, 4));
+//        Integer m = 0;
+//        Integer da = 0;
+//        
+//        if(fullDate.length() == 6) {
+//          m= Integer.parseInt(fullDate.substring(4, 5)) -1;
+//        } else {
+//          m= Integer.parseInt(fullDate.substring(4, 6)) -1;
 //        }
-//        
-//        List<Integer> days = new ArrayList<>();
-//       days.add(monthS.get(0).getDay());
-//       
-//       for (int i = 1; i < monthS.size(); i++) {
-//           if(monthS.get(i).getDay() !=monthS.get(0).getDay()) {
-//               days.add(monthS.get(i).getDay());
-//           }
-//       }
-//        
-////       for (int i = 1; i < monthS.size(); i++) {
-////         List<Integer> ee = days.stream().filter(x -> x == monthS.get(i).getDay()).collect(Collectors.toList());
-////           
-////         
-////    }
-//       log.info("DDDAYs리슽(풀={})", days);
-//        
-//         return ResponseEntity.ok(monthS);
-//     }
-//  
-//     @GetMapping("/front/day")
-//   public ResponseEntity<Integer> showFrontDay(int day,String fullDate){
-//       log.info("frontttt데이(데이={}:{})", day, fullDate);
-//       
-//      
-//       if(day == 1) {
-//           Integer year = Integer.parseInt(fullDate.substring(0, 4));
-//           Integer m =Integer.parseInt(fullDate.substring(4, fullDate.length()-1));
+//            LocalDate d = LocalDate.of(year, m, 1);
+//            da= d.getMonth().maxLength();
+//          //  fullDate = year.toString()+m.toString()+da.toString();
+//            sList = scheduleService.findByDate(year.toString()+m.toString()+da.toString());
+//    } 
 //    
-//          LocalDate d = LocalDate.of(year, m-1, 1); 
-//          day =d.getMonth().maxLength();
-//      } else {
-//          day = day-1;
-//      }
-//        
-//    log.info("frontttt데이잘 담ㄷ겻나(데이={})", day);
-//     return ResponseEntity.ok(day);
+//    if(date != 0) {
+//        date = Integer.parseInt(fullDate)-1;
+//        sList = scheduleService.findByDate(date.toString());
 //   }
-     
-     
-     
-
-
-     
-@GetMapping("/front/day/{fullDate}")
-public ResponseEntity<List<Schedule>> showFrontDay(@PathVariable String fullDate){
-    log.info("frontttt데이(데이={})", fullDate);
-    List<Schedule> sList = new ArrayList<>();
-    
-    Integer date =  Integer.parseInt(fullDate.substring(fullDate.length()-1, fullDate.length())) -1;
-     
-    if(date == 0) { 
-        Integer year = Integer.parseInt(fullDate.substring(0, 4));
-        Integer m = 0;
-        Integer da = 0;
-        
-        if(fullDate.length() == 6) {
-          m= Integer.parseInt(fullDate.substring(4, 5)) -1;
-        } else {
-          m= Integer.parseInt(fullDate.substring(4, 6)) -1;
-        }
-            LocalDate d = LocalDate.of(year, m, 1);
-            da= d.getMonth().maxLength();
-          //  fullDate = year.toString()+m.toString()+da.toString();
-            sList = scheduleService.findByDate(year.toString()+m.toString()+da.toString());
-    } 
-    
-    if(date != 0) {
-        date = Integer.parseInt(fullDate)-1;
-        sList = scheduleService.findByDate(date.toString());
-   }
-    
-    return ResponseEntity.ok(sList);
+//    
+    return ResponseEntity.ok(lastDay);
 }
      
 //@GetMapping("/back/day/{fullDate}")
