@@ -24,6 +24,8 @@ public class DayDiaryDto {
     private Integer diaryId;
     private List<Schedule> sList;
     private Integer dDayId;
+    private int today;
+    private String dayOfWeek; // 0:일요일 ~ 6툐요일
     
   //  private String dDayName;
     

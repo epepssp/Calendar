@@ -63,6 +63,10 @@
              font-size: 15px;
              background-color: #F0F8FF; 
         }
+        
+        .mirror-image {
+             transform: scaleX(-1);
+        }
        </style>
        
     </head>
@@ -86,15 +90,17 @@
 
 <div class="w-80 container"><!-- 메인 전체 -->
 
-<div class="col-9 p-5"><!-- 메인 왼쪽: 다이어리 캘린더 영역-->
+<div class="row"><!-- 메인 block 스타트 -->
+
+<div class="col-9 p-5" style="border-right: 1px solid  #DCDCDC;"><!-- 메인 왼쪽: 다이어리 캘린더 영역--> <input id="last" type="hidden">
 
   <div class="w3-cell-row pt-2" style=" height:100px;"><!-- 년/월 부분 -->
     <div class="w3-container w3-cell" style="font-size: 20px; font-weight: 600;"><span th:text="${dto.month +'&nbsp;&nbsp;' + dto.year}"></span></div>
     <div class="w3-container w3-cell" align="right" style="font-size:25px;  font-weight:bold;  width: 400px;"><span style="margin-bottom: 20px;" th:text="${dto.monthValue +'월'}"></span><p></p></div>
  </div>
-  
+
     <!-- 달력 시작 -->
-    <div class="w3-cell-row w3-center border-bottom border-dark pt-2 mb-2" style="border-bottom: 2px; height:40px;">
+    <div class="w3-cell-row pt-2" align="center" style="height:35px;">
         <div class="w3-container w3-cell" style="width:14%; color:red;">SUN</div>
         <div class="w3-container w3-cell" style="width:14%;">MON</div>
         <div class="w3-container w3-cell" style="width:14%;">TUE</div>
@@ -105,82 +111,80 @@
     </div>
     
   
-<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 1 -->
-  <div class="w3-container w3-cell text" th:each="d : ${d1}">
-       <span th:if="${d.day} == 0" style="color: white;" id="d" th:text="${ d.day }"></span>
-       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" th:text="${ d.day }"></span>
-         
-       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
-       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img class="icon" style="width: 14px;" src="/icons/heart.svg">
-         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
-   
-       <div class="m-2" style="width:80px; height: 70px;">
-         <div th:if="${d.sList} == null" style="color: white;"></div>
-         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+<div class="w3-cell-row" style="border-top: 1px solid black; border-bottom: 1px solid #DCDCDC;">  <!-- 1 -->
+  <div class="w3-container w3-cell text pt-1" th:each="d : ${d1}">
+      <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
       </div>
- </div>
+      <div th:if="${ d.today == 0 }">
+        <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+      </div>
+      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+  </div>
 </div> 
 
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 2 -->
-   <div class="w3-container w3-cell" th:each="d : ${d2}">
-       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-         
-       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
-       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img class="icon" style="width: 14px;" src="/icons/heart.svg">
-         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
-   
-      <div class="m-2" style="width:80px; height: 70px;">
-         <div th:if="${d.sList} == null" style="color: white;"></div>
-         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+   <div class="w3-container w3-cell text" th:each="d : ${d2}">
+      <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
       </div>
- </div>
+      <div th:if="${ d.today == 0 }">
+        <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+      </div>
+      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+   </div>
 </div> 
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 3 -->
-  <div class="w3-container w3-cell" th:each="d : ${d3}">
-       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-         
-       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
-       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img class="icon" style="width: 14px;" src="/icons/heart.svg">
-         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
-   
-      <div class="m-2" style="width:80px; height: 70px;">
-         <div th:if="${d.sList} == null" style="color: white;"></div>
-         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+  <div class="w3-container w3-cell text" th:each="d : ${d3}">
+      <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
       </div>
- </div>
+      <div th:if="${ d.today == 0 }">
+        <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+      </div>
+      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+   </div>
 </div> 
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 4 -->
-  <div class="w3-container w3-cell" th:each="d : ${d4}">
-       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-         
-       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
-       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img class="icon" style="width: 14px;" src="/icons/heart.svg">
-         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
-   
-      <div class="m-2" style="width:80px; height: 70px;">
-         <div th:if="${d.sList} == null" style="color: white;"></div>
-         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
-      </div>
- </div>
+  <div class="w3-container w3-cell text" th:each="d : ${d4}">
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+       <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+       <div class="col-7 fw-bold pt-1" align="right" style="color: #FF6347; font-size: 10px;"><small>TODAY</small></div>
+     </div>
+     <div th:if="${ d.today == 0 }">
+       <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+     </div>
+     <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+  </div>
 </div> 
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 5 -->
-  <div class="w3-container w3-cell" th:each="d : ${d5}">
-       <span th:if="${d.day} == 0" style="color: white;" id="d" th:text="${ d.day }"></span>
-       <span th:if="${d.day} != 0"  th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-         
-       <span th:if="${d.diaryId} == 0" style="color: white;" id="diaryId" th:text="${ d.diaryId }"></span>
-       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));"><img class="icon" style="width: 14px;" src="/icons/heart.svg">
-         <input type="hidden" id="diaryId" th:value="${ d.diaryId }"></span>
-   
-      <div class="m-2" style="width:80px; height: 70px;">
-         <div th:if="${d.sList} == null" style="color: white;"></div>
-         <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
-      </div>
- </div>
+  <div class="w3-container w3-cell text" th:each="d : ${d5}">
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+       <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+       <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
+     </div>
+     <div th:if="${ d.today == 0 }">
+       <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+       <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+     </div>
+     <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+  </div>
 </div> 
 <!-- 달력 끝 -->
 
@@ -208,9 +212,49 @@
 </div><!-- 메인 왼쪽 끝 -->
 
    
+<div class="col-3 p-4"><!-- 메인 오른쪽 영역 -->
+
+    <div style="border: 1px solid #708090; height: 325px; "><!-- 프로필영역 -->
+      <div class="m-2" align="center" style="height: 270px; border: 1px solid gray;">
+        <img src="/icons/ddn.jpeg" width="270px;">
+      </div>
+      <div class="mt-2 border-top pt-1" style="border-top-color: 2px solid #DCDCDC; margin-left: 5px; margin-right: 5px;" align="left">
+        <span class="fw-bold m-1">옥시시</span>(mega_ddn)
+        <span style="margin-left: 103px;" th:onclick="|location.href='@{ /diary/main?monthValue={monthValue} (monthValue = ${ dto.monthValue })}'|"><img src="/icons/book.svg" width="20px;"></span>
+      </div>
+    </div><!-- 프로필영역 끝-->
+
+    <div><!-- month/ today 합친 -->
+      <div class="mt-4 mb-4" style="border:1px solid gray; height: 195px;"><!--  Month's -->
+        <div class="m-1 pb-1">
+          <span style="margin-left:5px;"><img src="/icons/pin1.svg" width="15px;"></span><span class="fw-bold m-2" style="font-size: 14px;">Month's</span><span style="margin-left:146px;"><img src="/icons/pin1.svg" width="15px;"></span>
+        </div>
+        <div class="m-2">
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
+        </div>
+      </div>
+    
+      <div class="mb-1" align="right" id="hDiv"></div>
   
-  <div class="col-3"><!-- 메인 오른쪽 영역 -->
-  </div><!--메인 오른쪽 끝 -->
+      <div style="margin-left:100px; border: 1px solid gray;"><!-- Today's -->
+        <div class="m-1 pb-1"><!-- bottom 컬러? -->
+          <span style="margin-left:6px; margin-right: 26px;"><img src="/icons/pin.svg" class="mirror-image" width="15px;"></span> 
+          <span class="fw-bold" style="font-size: 15px;">⦁ Today's ⦁</span>
+          <span style="margin-left:23px;"><img src="/icons/pin.svg" width="15px;"></span>
+        </div>
+        <div class="m-1 pb-1 border-bottom" style=" border-bottom-color: 2px solid #DCDCDC;" id="dDayDiv"></div><!-- d-day 리스트 -->
+        <div class="rounded mb-2 mt-2" align="center" style="margin-left:75px; border: 1px solid gray; width: 100px;" onclick="showDDayInput()"><img style="padding-bottom: 3px;" width="15px;" src="/icons/hff.svg"><small> D-DAY 추가</small></div>
+      </div><!-- Today's 끝-->
+    </div><!-- month/ today 끝 -->
+
+</div><!--메인 오른쪽 끝 -->
+</div><!-- 메인 block 끝 -->
   
   
 <!-- day 클릭 모달 -->
@@ -223,7 +267,7 @@
           <div  class="w3-container w3-cell"> 
             <div class="mt-4" th:text="${dto.year}" style="font-size: 13px; margin-left: 8px;" ></div>
             <div align="right" style="display: inline-block; font-size: 25px;">
-               <span style="margin-left: 147px;" id="m2" th:text="${ dto.monthValue }"></span> /
+              <input style="margin-left: 140px; border:none; font-size:25px; width: 30px;" id="m2" type="text"/>/
                <input style="border:none; font-size:25px; width: 45px;" id="modalDay" type="text"/>
             </div>
             <span style="font-size: 8px; margin-left: 155px;" id="dow" th:text="${dto.dayOfWeek}"></span> 
@@ -238,8 +282,9 @@
             <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button><br>  
             
             <div><small>&nbsp;&nbsp;오늘의 일정</small></div>
-            <div class="border rounded mt-1 mb-1" style="padding-left:15px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
-            <span id=inputDiv></span><!-- 일정 추가 입력창 -->
+            <div class="border rounded mt-1 mb-1" style="padding-left:15px; width:230px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
+            <span id="inputDiv"></span><!-- 일정 추가 입력창 -->
+            <span id="modifyInputDiv"></span><!-- 일정 수정하기 입력창 -->
                
             <!-- 날짜 앞/뒤 버튼 -->
             <div class="w3-container mt-2" style="display: inline-block;">
@@ -304,7 +349,7 @@
        <div class="mb-3">
           <div style="margin-left: 7px; margin-bottom: 6px;"><small>새로운 D-DAY로 추가하시겠어요?</small></div>
          
-          <span style="margin-left: 13px; width:15px; font-size: 7px;"><small>D-DAY'S NAME</small><input type="text" id="dDayName" style="font-size: 15px; width:170px; margin-left: 7px;display: inline-block;"></span>
+          <span style="margin-left: 13px; width:15px; font-size: 7px;"><small>D-DAY'S NAME</small><input type="text" id="name" style="font-size: 15px; width:170px; margin-left: 7px;display: inline-block;"></span>
         </div>
         <small><span id="dDayBtn" style="margin-left:200px; font-size: 10px;" class="rounded border p-1 mt-1">D-DAY추가</span></small>
       </div>

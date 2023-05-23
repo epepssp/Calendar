@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{ layout/layout }">
+
+  <div>다이어리 메인!!!!!!!!!!</div>
+  
+  <input id="year" th:text="${ year }">
+  <input id="monthValue" th:text="${ monthValue }">
+  
+   <span style="margin-left: 103px;" 
+   th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ monthValue }, year = ${ year})}'|" >
+   <img src="/icons/cal.svg" width="20px;"></span>
+
+</html>

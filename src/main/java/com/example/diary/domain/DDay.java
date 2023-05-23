@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Getter
@@ -33,14 +34,16 @@ public class DDay {
     @Column(nullable = false)
     private LocalDate untilDate; // ~ 까지: D -DAY
     
+    @Setter
     private int subtract;   // 기준일과 D-Day 차이. 표시할때
     
     private int monthValue;
     private int year;
     private int day;
     
- 
-    private String dDayName;
+    private String name;
+    
+   
     
     
 //    public DDay fromEntity(DDay dDay) {

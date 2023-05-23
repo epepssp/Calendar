@@ -9,9 +9,11 @@ import java.util.List;
 import com.example.diary.domain.Schedule;
 import com.example.diary.domain.Week;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

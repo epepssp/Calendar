@@ -26,7 +26,7 @@ public class DDayService {
     }
 
     public List<DDay> readAll() {
-         List<DDay> dDayList = dDayRepository.findAll();
+         List<DDay> dDayList = dDayRepository.findByOrderBySubtractDesc();
         return dDayList;
     }
 

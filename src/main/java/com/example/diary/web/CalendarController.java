@@ -51,19 +51,39 @@ public class CalendarController {
         model.addAttribute("d4", integratedList.get(3));
         model.addAttribute("d5", integratedList.get(4));
 
-        if (!integratedList.get(6).isEmpty()) {
+        if (!integratedList.get(5).isEmpty()) {
             model.addAttribute("d6", integratedList.get(5));
         }
 
+   
+        
         CalendarDto dto = calendarService.calendarCreate(date);
         model.addAttribute("dto", dto); // CalendarDto
+        
+        int last = date.getMonth().maxLength();
+        model.addAttribute("last", last);
 
         LocalDate now = LocalDate.now();
-        int today = now.getDayOfMonth();
+        int nowMonth = now.getMonthValue();
+        int nowDay = now.getDayOfMonth();
+        
+        model.addAttribute("nowMonth", nowMonth);
+        model.addAttribute("nowDay", nowDay);
 
         return "/calendar/main";
 
     }
+    
+    
+//    public List<DDay> todayDDayLeft(){
+//        
+//        List<DDay> list =dDayService.readAll();
+//       log.info("d-daaayㄹ시틑?={}",list);
+//        
+//        
+//        
+//        return list;
+//    }
     
     
     public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) { 
@@ -111,20 +131,19 @@ public class CalendarController {
         
         List<List<Schedule>> daysScheduleList = new ArrayList<>();
         List<Schedule> eachOfDaySchedule = new ArrayList<>();
+    
         
         for (Integer d : dList) {
             if(daysHaveSchedule.contains(d)){
-                 eachOfDaySchedule = scheduleService.findByDay(d);
-               for (int i = 0; i < eachOfDaySchedule.size(); i++) {
-                   if(eachOfDaySchedule.get(i).getMonthValue() != date.getMonthValue()) {
-                       eachOfDaySchedule.remove(i);
-                   }
-               }
-                  daysScheduleList.add(eachOfDaySchedule);
-            } else {
+                 eachOfDaySchedule = scheduleService.findByDayOfMonth(date.getMonthValue(),d);
+                 daysScheduleList.add(eachOfDaySchedule);
+            }
+            else {
                   daysScheduleList.add(null);
              }
          } 
+        
+
         
         // 일기(다이어리) 리스트
         Set<Integer> daysHaveDiary= new HashSet<>(); 
@@ -142,26 +161,66 @@ public class CalendarController {
          } 
         
         // 디데이 리스트
-        Set<Integer> daysHaveDDay= new HashSet<>(); 
-        for (DDay i: dDayService.findByMonth(date.getMonthValue())) {
-            daysHaveDDay.add(i.getDay());
-         }
-        
-        List<Integer> dDayList = new ArrayList<>();
-        for (Integer d : dList) {
-            if (daysHaveDDay.contains(d)) {
-                   dDayList.add(dDayService.findByD(d).getDDayId());
-                 } else{
-                   dDayList.add(null);
-                 }
-         }   
+//        Set<Integer> daysHaveDDay= new HashSet<>(); 
+//        for (DDay i: dDayService.findByMonth(date.getMonthValue())) {
+//            daysHaveDDay.add(i.getDay());
+//         }
+//        
+//        List<Integer> dDayList = new ArrayList<>();
+//        for (Integer d : dList) {
+//            if (daysHaveDDay.contains(d)) {
+//                   dDayList.add(dDayService.findByD(d).getDDayId());
+//                 } else{
+//                   dDayList.add(null);
+//                 }
+//         }   
        
+        
+        // Today
+        List<Integer> to = new ArrayList<>();
+        if(LocalDate.now().getMonthValue() == date.getMonthValue()) {
+           for (Integer i : dList) {
+              if(i == LocalDate.now().getDayOfMonth()) {
+                  to.add(1);
+              } else {
+                  to.add(0);
+              }
+            }
+        }
+        
+        if(LocalDate.now().getMonthValue() != date.getMonthValue()) {
+            for (Integer i : dList) {
+                to.add(0);
+            }
+        }
+        
+        // dayOfWeek(요일)
+        List<String> dayOfWeek = new ArrayList<>();
+        for (int i = 0; i < dList.size(); i++) {
+            if(i == 0 || i % 7 == 0 ) {
+                dayOfWeek.add("SUNDAY");
+            } if(i == 1 || i / 7 == 1 ) {
+                dayOfWeek.add("MONDAY");
+            } if(i == 2 || i / 7 == 2 ) {
+                dayOfWeek.add("TUESDAY");
+            } if(i == 3 || i / 7 == 3 ) {
+                dayOfWeek.add("WEDNESDAY");
+            } if(i == 4 || i / 7 == 4 ) {
+                dayOfWeek.add("THURSDAY");
+            } if(i == 5 || i / 7 == 5 ) {
+                dayOfWeek.add("FRIDAY");
+            } if(i == 6 || i / 7 == 6 ) {
+                dayOfWeek.add("SATURDAY");
+            } 
+            
+        }
+      
        
         // 다 합친 하나의 리스트 + 앞뒤로 
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();
         for (int i = 0; i < dList.size(); i++) {
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
-                        .sList(daysScheduleList.get(i)).dDayId(dDayList.get(i)).build());
+                        .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
         }
        
         
@@ -213,6 +272,8 @@ public class CalendarController {
     }
     
     
+    
+    
     @GetMapping({ "/calendar/front", "/calendar/back" })
     public String frontCalendar(Integer year, Integer monthValue, Model model) {
         
@@ -225,7 +286,7 @@ public class CalendarController {
         model.addAttribute("d4", integratedList.get(3));
         model.addAttribute("d5", integratedList.get(4));
 
-        if (!integratedList.get(6).isEmpty()) {
+        if (!integratedList.get(5).isEmpty()) {
             model.addAttribute("d6", integratedList.get(5));
         }
 
@@ -235,6 +296,8 @@ public class CalendarController {
         
         return "/calendar/main";
      }
+    
+    
   
 }
     
