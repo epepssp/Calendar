@@ -16,5 +16,25 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <div><a th:href="@{ /layout }">레이아웃</a></div>
 
 <div><a th:href="@{ /test }">테스트레이아웃</a></div>
+<br><br>
+
+
+<input>
+
+
+<script>
+
+function now(){
+	
+	 axios
+     .get('/now')
+     .then(response => {
+         
+      
+     })
+     .catch(err => { console.log(err) });
+}
+
+</script>
 </html>
 

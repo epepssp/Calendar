@@ -2,6 +2,7 @@ package com.example.diary.web;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,21 @@ public class DDayRestController {
     
     private final DDayService dDayService;
 
+    @GetMapping("/allDDays")
+    public ResponseEntity<List<DDay>> allList(){
+    
+       for (DDay d : dDayService.readAll()) {
+           long daysSubtract = ChronoUnit.DAYS.between(d.getUntilDate(),LocalDate.now());
+           int subtract = (int) daysSubtract; 
+           d.setSubtract(subtract);
+       }
+ 
+       return ResponseEntity.ok(dDayService.readAll());
+    }
+    
     @PostMapping("/dday/subtract")
     public ResponseEntity<Integer> dDaySubtract(@RequestBody DDay entity){
-        log.info("잘받았냐 언틸 프롬날짜={}", entity);
+    log.info("잘받았냐 언틸 프롬날짜={}", entity);
         
         LocalDate utDate = entity.getUntilDate();
         LocalDate frDate = LocalDate.of(entity.getYear(), entity.getMonthValue(),entity.getDay());
@@ -40,22 +53,23 @@ public class DDayRestController {
     
     @PostMapping("/dday/add")
     public ResponseEntity<Integer> addNewDDay(@RequestBody DDay entity){
-        log.info("새ㅜㄷ데디프롬날짜={}", entity);
+        log.info("새ㅜㄷ데디프롬날짜12324왓냐?={}", entity);
+       
         
         LocalDate utDate = entity.getUntilDate();
-        LocalDate frDate = LocalDate.of(entity.getYear(), entity.getMonthValue(),entity.getDay());
+        LocalDate frDate = LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth());
+        
+        long daysSubtract = ChronoUnit.DAYS.between(utDate,frDate);
+        int subtract = (int) daysSubtract; 
     
         int year= Integer.parseInt((utDate.toString().substring(0, 4)));
         int monthValue= Integer.parseInt((utDate.toString().substring(5, 7)));
         int day =Integer.parseInt((utDate.toString().substring(8)));
-        
-        long daysSubtract = ChronoUnit.DAYS.between(utDate,frDate);
-        int subtract = (int) daysSubtract;       
-     
-        DDay dday = DDay.builder().untilDate(utDate).fromDate(frDate).subtract(subtract).dDayName(entity.getDDayName()).year(year).monthValue(monthValue).day(day).build();
+   
+        DDay dday = DDay.builder().untilDate(utDate).name(entity.getName()).subtract(subtract).year(year).monthValue(monthValue).day(day).build();
         Integer dDayId = dDayService.create(dday);
         
-        return ResponseEntity.ok(subtract);
+        return ResponseEntity.ok(dDayId);
     }
 }
 

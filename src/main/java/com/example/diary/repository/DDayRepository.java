@@ -10,6 +10,12 @@ public interface DDayRepository extends JpaRepository<DDay, Integer>{
 
     List<DDay> findByMonthValue(int monthValue);
 
+    
     DDay findByDay(int day);
+
+
+    List<DDay> findByOrderBySubtractDesc();
+
+
 
 }

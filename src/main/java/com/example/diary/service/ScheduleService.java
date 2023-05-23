@@ -1,5 +1,6 @@
 package com.example.diary.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -55,6 +56,18 @@ public class ScheduleService {
         List<Schedule> s = scheduleRepository.findByMonthValue(monthValue);
         
         return s;
+    }
+
+    public List<Schedule> findByDayOfMonth(int monthValue, Integer d) {
+      
+        List<Schedule> sList = new ArrayList<>();
+        for (Schedule s : scheduleRepository.findByMonthValue(monthValue)) {
+            if(s.getDay() == d) {
+                sList.add(s);
+            }
+        }
+        
+        return sList;
     }
 
 //    public Schedule readById(int scheduleId) {
