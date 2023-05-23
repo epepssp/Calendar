@@ -35,7 +35,7 @@ public class Diary {
     @Column(nullable = false)
     private int day;
     
-    private String wheater;
+    private int weather;
     
     private String title;
 

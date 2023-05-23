@@ -31,7 +31,7 @@ public class DiaryCreateDto {
    
     private int day;
     
-    private String wheater;
+    private int weather;
     
     private String title;
 

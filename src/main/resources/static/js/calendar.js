@@ -6,11 +6,43 @@ window.addEventListener('DOMContentLoaded', () => {
    lastDay();
 });
 
+const svgElement1 = document.getElementById("svg1");
+  svgElement1.addEventListener("click", function() {
+  svgElement1.classList.toggle("invert");
+  weather(1);
+});
+ 
+ const svgElement2 = document.getElementById("svg2");
+  svgElement2.addEventListener("click", function() {
+  svgElement2.classList.toggle("invert");
+  weather(2);
+});
+
+const svgElement3 = document.getElementById("svg3");
+  svgElement3.addEventListener("click", function() {
+  svgElement3.classList.toggle("invert");
+  weather(3);
+});
+
+const svgElement4 = document.getElementById("svg4");
+  svgElement4.addEventListener("click", function() {
+  svgElement4.classList.toggle("invert");
+  weather(4);
+});
+    
+
+
+function weather(i){
+    const weather = document.querySelector('#weather');
+    weather.value = i;
+    
+}
+
 
 function now(){
      const today = new Date();
  
-     const tYear= today.getFullYear();
+     const tYear= today.getFullYear()
      const tMonth= today.getMonth() + 1;
      const tDay= today.getDate();
      const hDiv = document.querySelector('#hDiv');
@@ -314,13 +346,15 @@ diaryBtn.addEventListener('click', e => {
     const title = document.querySelector('#title').value;
     const diaryContent = document.querySelector('#diaryContent').value;
     const day = document.querySelector('#modalDay').value;
+    const weather = document.querySelector('#weather').value;
 
     const data = {
         year: year,
         monthValue: monthValue,
         day: day,
         title: title,
-        diaryContent: diaryContent
+        diaryContent: diaryContent,
+        weather: weather
     }
 
     axios.post('/add/diary', data)
@@ -360,21 +394,47 @@ function diaryPop(diaryId) {
 
 // diaryDetailModal 
 function showDiary(diary) {
-    
+  
     // 일기 아이콘 클릭하면 diaryDetailModal 뜸 - 글 볼 수 있음
     document.getElementById("diaryDetailModal").style.display = "block";
+  
+    
+    const wDiv = document.querySelector('#wDiv');
+    let str2 =`<input id="weather" type="hidden" value="${diary.weather}">`;
+    wDiv.innerHTML = str2;
 
     let str = '<span>' + diary.year + '년 ' + diary.monthValue + '월 ' + diary.day + '일<span>';
     detailDayDiv.innerHTML = str;
     
-    let str1 = '<h4 class="mt-5 border-bottom" style="border-bottom-color: 1px solid #DCDCDC; height: 20px;" name ="title" readonly>' + diary.title + '</h4>'
-        + '<div class="mt-2" style="border-color:white; height: 350px;" name="content" readonly>' + diary.content + '</div>'
+    let str1 = '<div class="mt-2 mb-1 border-bottom fw-bold" style="border-bottom-color: 3px solid #DCDCDC; height: 25px;" name ="title" readonly><span>' + diary.title + '</span></div>'
+        + '<div class="mt-2" style="border-color:black; width:390px; height: 350px;" name="content" readonly><small>' + diary.content + '</small></div>'
         + '<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;"></div>';
 
     detailDiv.innerHTML = str1;
-
+    showDiaryWeather(diary.weather);
+    
 }
 
+
+function showDiaryWeather(data){
+
+   const wIconDiv = document.querySelector('#wIconDiv');
+   
+   str ='';
+   if(data ==1) {
+       str ='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/sun1.svg">';
+   }
+   if(data ==2) {
+       str ='날씨: <img width="22px;"  style="margin-left: 7px;"  id="svg2" src="/icons/cl1.svg">';
+   }
+   if(data ==3) {
+       str ='날씨: <img width="22px;" style="margin-left: 7px;"  id="svg3" src="/icons/r1.svg">';
+   }
+   if(data ==4) {
+       str ='날씨: <img width="22px;"   style="margin-left: 7px;" id="svg4" src="/icons/s1.svg">';
+   }
+   wIconDiv.innerHTML = str;
+}
 
 
 // dDayModal 디데이
@@ -470,8 +530,6 @@ function modalClose() {
     document.getElementById('id01').style.display = "none";
  //   document.getElementById('dDayName').value = "";
 }
-
-
 
 
 
