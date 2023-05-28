@@ -19,12 +19,8 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
     
     public Integer create(DiaryCreateDto dto) {
-    
-        Diary entity = Diary.builder().year(dto.getYear()).monthValue(dto.getMonthValue()).day(dto.getDay())
-                       .title(dto.getTitle()).content(dto.getDiaryContent()).weather(dto.getWeather()).build();
       
-       Diary d = diaryRepository.save(entity);
-        
+       Diary d = diaryRepository.save(dto.toEntity());
         
         return d.getDiaryId();
         

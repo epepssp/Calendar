@@ -24,7 +24,7 @@ public class DiaryRestController {
     
     @PostMapping("/add/diary")
     public ResponseEntity<Integer> addNewDiary(@RequestBody DiaryCreateDto dto){
-        log.info("다이어리 디티어ㅗ 잘 왔냐?={}", dto);
+        log.info("DiaryCreateDto 잘 왔냐?=DiaryCreateDto({}", dto);
         
        Integer diaryId = diaryService.create(dto);
         

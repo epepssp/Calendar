@@ -27,6 +27,8 @@ dependencies {
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// image thumbnail generator
+    implementation 'net.coobird:thumbnailator:0.4.18'
 }
 
 tasks.named('test') {

@@ -3,7 +3,7 @@
  */
 window.addEventListener('DOMContentLoaded', () => {
    now();
-   lastDay();
+ //  lastDay();
 });
 
 const svgElement1 = document.getElementById("svg1");
@@ -86,32 +86,27 @@ function showLeft(data){
 
 // modalDay 
 function dayPop(day) {
- 
-    
+   
     // 날짜 클릭하면 modalDay 뜸 
     document.getElementById('id01').style.display = 'block';
-    const modalDay = document.querySelector('#modalDay');
     
-     const monthValue = document.querySelector('#m').value;
+    const monthValue = document.querySelector('#monthValue').value;
     const mon = document.querySelector('#m2');
+    const d = document.querySelector('#day');
     
     mon.value = monthValue;
+    d.value =day;
     
-    axios
-        .get('/day/' + day)
-        .then(response => {
-            modalDay.value = response.data;
-            showFullDate();
-            showScheduleOfDay();  // Day의 일정 리스트
-        })
-        .catch(err => { console.log(err) });
+    showFullDate();
+    showScheduleOfDay();  // Day의 일정 리스트
+   
 };
 
 
 function showFullDate() {
-    const year = document.querySelector('#y').value;
+    const year = document.querySelector('#year').value;
     const monthValue = document.querySelector('#m2').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
     const full = document.querySelector('#fullDate');
     fullDate = year + monthValue + day;
     full.value = fullDate;
@@ -122,9 +117,11 @@ function showFullDate() {
 // Day 일정 리스트 요청
 function showScheduleOfDay() {
     
+lastDay();
+    
     const fullDate = document.querySelector('#fullDate').value;
     const monthValue = document.querySelector('#m2').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
     
    const data ={
        monthValue:monthValue,
@@ -195,9 +192,9 @@ function showInput() {
 function send() {
 
     const content = document.querySelector('#addP').value;
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
-    const day = document.querySelector('#modalDay').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+    const day = document.querySelector('#day').value;
     const full = document.querySelector('#fullDate').value;
 
 
@@ -226,30 +223,25 @@ function send() {
 // modalDay 앞 날짜 이동(Day -1)
 function frontDay() {
     
-    const day = document.querySelector('#modalDay').value;
-    const fullDate = document.querySelector('#fullDate').value;
-    const monthValue = document.querySelector('#m').value;
-    const year = document.querySelector('#y').value;
+    const d = document.querySelector('#day').value;
+    const monthValue = document.querySelector('#m2').value;
+    const year = document.querySelector('#year').value;
    
-    if(day != 1){
-            modalDay.value = day - 1;
+    if(d != 1){
+            day.value = d - 1;
             showFullDate();
             showScheduleOfDay();
     }
     
-    if(day == 1){
+    if(d == 1){
        var month  = monthValue-1;
-       
-       changeBackgrondCalendar(month);
-       
+ 
          axios
         .get('/front/day/' + month)
         .then(response => {
-            
-            m2.value = month;
-            modalDay.value = response.data;
-         
-            showFullDate();
+            m2.value = monthValue-1;
+            day.value = response.data;
+           showFullDate();
             showScheduleOfDay();
         })
         .catch(err => { console.log(err) });
@@ -258,40 +250,54 @@ function frontDay() {
 }
 
 
-function changeBackgrondCalendar(monthValue){
-     const year = document.querySelector('#y').value;
+function lastDay(){
+    const monthValue = document.querySelector('#m2').value;
+    const l = document.querySelector('#last');
     
-     
-   
+    axios
+        .get('/lastDay/' + monthValue)
+        .then(response => {
+            last.value = response.data;
+        })
+        .catch(err => { console.log(err) });
 }
+
 
 // modalDay 뒷 날짜 이동(Day +1)
 function backDay() {
-     const day = document.querySelector('#modalDay').value;
-    const fullDate = document.querySelector('#fullDate').value;
-    const monthValue = document.querySelector('#m').value;
-    const year = document.querySelector('#y').value;
-
+    const d = document.querySelector('#day').value;
+    const monthValue = document.querySelector('#m2').value;  // 모달의 month id =m2
+    const year = document.querySelector('#year').value;
+    const l = document.querySelector('#last').value;
     
-     const last = document.querySelector('#last').value;
+     console.log(monthValue);
+    console.log(d);
     
-      if(day != last){
-         axios
-        .get('/back/day/' + day)
+    
+    axios
+        .get('/lastDay/' + monthValue)
         .then(response => {
-            modalDay.value = response.data;
+            last.value = response.data;
+        })
+        .catch(err => { console.log(err) });
+    
+   
+    if(d != l){
+         axios
+        .get('/back/day/' + d)
+        .then(response => {
+            day.value = response.data;
             showFullDate();
             showScheduleOfDay();
         })
         .catch(err => { console.log(err) });
     }
     
-    if(day == last) {
+    if(d == l) {
           axios
         .get('/back/day/month/' + monthValue)
         .then(response => {
-             modalDay.value =1; 
-             m.value = response.data;
+             day.value =1; 
              m2.value = response.data;
             showFullDate();
             showScheduleOfDay();
@@ -302,37 +308,47 @@ function backDay() {
   
 }
 
-function lastDay(){
-    const monthValue = document.querySelector('#m').value;
-     const last= document.querySelector('#last');
-     
-        axios
-        .get('/lastDay/' + monthValue)
-        .then(response => {
-            console.log(response.data);
-            last.value = response.data;
-        })
-        .catch(err => { console.log(err) });
-    
-}
 
 
 // diaryModal 
-function showDiaryFoam() {
+function showDiaryFoam() {  // 1보류
     // 사이드바에서 내 일기장 클릭하면 
     document.getElementById("diaryModal").style.display = "block"; // diaryModal 뜨고
     document.getElementById("id01").style.display = "none";  // modalDay close
 
-    const modalDay = document.querySelector('#modalDay').value;
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
-    const dow = document.querySelector('#dow').value;
+    const day = document.querySelector('#day').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+
     const diaryDayDiv = document.querySelector('#diaryDayDiv');
 
     let str = '';
-    str += '<span>' + year + '년 ' + monthValue + '월 ' + modalDay + '일<span>';
+    str += '<span>' + year + '년 ' + monthValue + '월 ' + day + '일<span>';
     +'';
     diaryDayDiv.innerHTML = str;
+}
+
+
+function dateInfo(){   // 내 일기장 클릭시 diary create로 이동
+    const day = document.querySelector('#day').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+    
+    axios.get('/diary/create', {
+        params: {
+             year: year,
+             monthValue: monthValue,
+             day:day
+  }
+})
+  .then(response => {
+     window.location.href = '/diary/create?year=' + encodeURIComponent(year) + '&monthValue=' + encodeURIComponent(monthValue) + '&day=' + encodeURIComponent(day);
+  })
+  .catch(error => {
+    console.log(err);
+  });
+    
+    
 }
 
 
@@ -341,11 +357,11 @@ const diaryBtn = document.querySelector('#diaryBtn');
 // 새 일기 등록
 diaryBtn.addEventListener('click', e => {
 
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
     const title = document.querySelector('#title').value;
     const diaryContent = document.querySelector('#diaryContent').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
     const weather = document.querySelector('#weather').value;
 
     const data = {
@@ -381,60 +397,6 @@ function updateDiaryIcon(diaryId) {
 }
 
 
-function diaryPop(diaryId) {
-
-    axios
-        .get('/day/diary/' + diaryId)
-        .then(response => {
-            showDiary(response.data);
-
-        })
-        .catch(err => { console.log(err) });
-};
-
-// diaryDetailModal 
-function showDiary(diary) {
-  
-    // 일기 아이콘 클릭하면 diaryDetailModal 뜸 - 글 볼 수 있음
-    document.getElementById("diaryDetailModal").style.display = "block";
-  
-    
-    const wDiv = document.querySelector('#wDiv');
-    let str2 =`<input id="weather" type="hidden" value="${diary.weather}">`;
-    wDiv.innerHTML = str2;
-
-    let str = '<span>' + diary.year + '년 ' + diary.monthValue + '월 ' + diary.day + '일<span>';
-    detailDayDiv.innerHTML = str;
-    
-    let str1 = '<div class="mt-2 mb-1 border-bottom fw-bold" style="border-bottom-color: 3px solid #DCDCDC; height: 25px;" name ="title" readonly><span>' + diary.title + '</span></div>'
-        + '<div class="mt-2" style="border-color:black; width:390px; height: 350px;" name="content" readonly><small>' + diary.content + '</small></div>'
-        + '<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;"></div>';
-
-    detailDiv.innerHTML = str1;
-    showDiaryWeather(diary.weather);
-    
-}
-
-
-function showDiaryWeather(data){
-
-   const wIconDiv = document.querySelector('#wIconDiv');
-   
-   str ='';
-   if(data ==1) {
-       str ='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/sun1.svg">';
-   }
-   if(data ==2) {
-       str ='날씨: <img width="22px;"  style="margin-left: 7px;"  id="svg2" src="/icons/cl1.svg">';
-   }
-   if(data ==3) {
-       str ='날씨: <img width="22px;" style="margin-left: 7px;"  id="svg3" src="/icons/r1.svg">';
-   }
-   if(data ==4) {
-       str ='날씨: <img width="22px;"   style="margin-left: 7px;" id="svg4" src="/icons/s1.svg">';
-   }
-   wIconDiv.innerHTML = str;
-}
 
 
 // dDayModal 디데이

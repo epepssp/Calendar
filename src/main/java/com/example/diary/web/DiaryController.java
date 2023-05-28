@@ -20,5 +20,16 @@ public class DiaryController {
         
        return "/diary/main";
     }
+    
+    
+    @GetMapping("/diary/create")
+    public void createPage(Model model ,Integer year, Integer monthValue, Integer day) {
+        log.info(" 다이어리 크리에이트로???={} : {} : {}", year, monthValue, day);
+        
+        model.addAttribute("year", year);
+        model.addAttribute("monthValue",monthValue);
+        model.addAttribute("day", day);
+    
+    }
 
 }

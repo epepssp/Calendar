@@ -29,6 +29,7 @@ import com.example.diary.dto.CalendarDto;
 import com.example.diary.dto.DayDiaryDto;
 import com.example.diary.dto.DayDto;
 import com.example.diary.dto.ScheduleAddDto;
+import com.example.diary.dto.YearAndMonthDto;
 import com.example.diary.service.CalendarService;
 import com.example.diary.service.DDayService;
 import com.example.diary.service.DiaryService;
@@ -48,6 +49,29 @@ public class CalendarRestController {
     private final DDayService dDayService;
     
     
+    @PostMapping("/calendar/mini")
+    public ResponseEntity<Lists> miniVersion(@RequestBody YearAndMonthDto dto){
+        log.info("카ㅔ렌더 미니미니={} :{}", dto.getYear(), dto.getMonthValue());
+        
+        List<List<DayDiaryDto>> integratedList = integrateInfo(dto.getYear(), dto.getMonthValue());
+        
+       // log.info("미니 통합 카렌더 리스트?={}", integratedList.get(3));
+        List<DayDiaryDto>  d1 = integratedList.get(0); 
+        List<DayDiaryDto>  d2 = integratedList.get(1);
+        List<DayDiaryDto>  d3 = integratedList.get(2);
+        List<DayDiaryDto>  d4 = integratedList.get(3);
+        List<DayDiaryDto>  d5 = integratedList.get(4);
+        
+        Lists lists = new Lists(d1, d2, d3,d4, d5);
+        
+       // log.info("리스폰스ㅔㅇㄴ터팉통합?={}", lists.toString());
+        
+     
+        
+        return ResponseEntity.ok(lists);
+    }
+    
+    
     @GetMapping("/monthSchedule/{monthValue}")
     public ResponseEntity<Integer> nomthSchedule(@PathVariable int monthValue) {
         
@@ -65,13 +89,7 @@ public class CalendarRestController {
         return ResponseEntity.ok(monthValue);
     }
     
-    @GetMapping("/day/{day}")
-    public ResponseEntity<Integer> getReply(@PathVariable Integer day) {
-        log.info("getReply(클릭한 날짜={})", day);
-        
-      
-        return ResponseEntity.ok(day);
-    }
+  
     
     @GetMapping("/day/detail/{day}")
     public ResponseEntity<String> dayInfo(@PathVariable int day){
@@ -156,25 +174,25 @@ public ResponseEntity<Integer> showFrontDay(@PathVariable int monthValue){
     return ResponseEntity.ok(lastDay);
 }
 
-@GetMapping("/change/backgrondCalendar/{monthValue}")
-public ResponseEntity<Lists> changeCalendar(@PathVariable int monthValue){
-    log.info("백 카렌다 체인지 몬스?(먼스={})", monthValue);
-    
-    List<List<DayDiaryDto>> integratedList = integrateInfo(2023, monthValue);
-    
-   Lists lists = null;
-    if(integratedList.get(5).isEmpty()) {
-      lists = new Lists(integratedList.get(0),integratedList.get(1),integratedList.get(2),integratedList.get(3),integratedList.get(4),null);
-        log.info("백 카렌다 체인지 리스트스1111?(리스트??={})", lists);
-        
-    }
-    if(!integratedList.get(5).isEmpty()) {
-  lists = new Lists(integratedList.get(0),integratedList.get(1),integratedList.get(2),integratedList.get(3),integratedList.get(4),integratedList.get(5));
-        log.info("백 카렌다 체인지 리스트스2222?(리스트??={})", lists);
-    }
-   
-    return ResponseEntity.ok(lists);
-   }
+//@GetMapping("/change/backgrondCalendar/{monthValue}")
+//public ResponseEntity<Lists> changeCalendar(@PathVariable int monthValue){
+//    log.info("백 카렌다 체인지 몬스?(먼스={})", monthValue);
+//    
+//    List<List<DayDiaryDto>> integratedList = integrateInfo(2023, monthValue);
+//    
+//   Lists lists = null;
+//    if(integratedList.get(5).isEmpty()) {
+//      lists = new Lists(integratedList.get(0),integratedList.get(1),integratedList.get(2),integratedList.get(3),integratedList.get(4),null);
+//        log.info("백 카렌다 체인지 리스트스1111?(리스트??={})", lists);
+//        
+//    }
+//    if(!integratedList.get(5).isEmpty()) {
+//  lists = new Lists(integratedList.get(0),integratedList.get(1),integratedList.get(2),integratedList.get(3),integratedList.get(4),integratedList.get(5));
+//        log.info("백 카렌다 체인지 리스트스2222?(리스트??={})", lists);
+//    }
+//   
+//    return ResponseEntity.ok(lists);
+//   }
 
      
 //@GetMapping("/back/day/{fullDate}")
@@ -378,28 +396,28 @@ public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) {
     
     
 
-    // 스케쥴 리스트
-    Set<Integer> daysHaveSchedule = new HashSet<>(); 
-    for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
-        daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
-    }
-    
-    List<List<Schedule>> daysScheduleList = new ArrayList<>();
-    List<Schedule> eachOfDaySchedule = new ArrayList<>();
-    
-    for (Integer d : dList) {
-        if(daysHaveSchedule.contains(d)){
-             eachOfDaySchedule = scheduleService.findByDay(d);
-           for (int i = 0; i < eachOfDaySchedule.size(); i++) {
-               if(eachOfDaySchedule.get(i).getMonthValue() != date.getMonthValue()) {
-                   eachOfDaySchedule.remove(i);
-               }
-           }
-              daysScheduleList.add(eachOfDaySchedule);
-        } else {
-              daysScheduleList.add(null);
-         }
-     } 
+//    // 스케쥴 리스트
+//    Set<Integer> daysHaveSchedule = new HashSet<>(); 
+//    for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
+//        daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
+//    }
+//    
+//    List<List<Schedule>> daysScheduleList = new ArrayList<>();
+//    List<Schedule> eachOfDaySchedule = new ArrayList<>();
+//    
+//    for (Integer d : dList) {
+//        if(daysHaveSchedule.contains(d)){
+//             eachOfDaySchedule = scheduleService.findByDay(d);
+//           for (int i = 0; i < eachOfDaySchedule.size(); i++) {
+//               if(eachOfDaySchedule.get(i).getMonthValue() != date.getMonthValue()) {
+//                   eachOfDaySchedule.remove(i);
+//               }
+//           }
+//              daysScheduleList.add(eachOfDaySchedule);
+//        } else {
+//              daysScheduleList.add(null);
+//         }
+//     } 
     
     // 일기(다이어리) 리스트
     Set<Integer> daysHaveDiary= new HashSet<>(); 
@@ -416,27 +434,26 @@ public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) {
             }
      } 
     
-    // 디데이 리스트
-    Set<Integer> daysHaveDDay= new HashSet<>(); 
-    for (DDay i: dDayService.findByMonth(date.getMonthValue())) {
-        daysHaveDDay.add(i.getDay());
-     }
-    
-    List<Integer> dDayList = new ArrayList<>();
-    for (Integer d : dList) {
-        if (daysHaveDDay.contains(d)) {
-               dDayList.add(dDayService.findByD(d).getDDayId());
-             } else{
-               dDayList.add(null);
-             }
-     }   
-   
+//    // 디데이 리스트
+//    Set<Integer> daysHaveDDay= new HashSet<>(); 
+//    for (DDay i: dDayService.findByMonth(date.getMonthValue())) {
+//        daysHaveDDay.add(i.getDay());
+//     }
+//    
+//    List<Integer> dDayList = new ArrayList<>();
+//    for (Integer d : dList) {
+//        if (daysHaveDDay.contains(d)) {
+//               dDayList.add(dDayService.findByD(d).getDDayId());
+//             } else{
+//               dDayList.add(null);
+//             }
+//     }   
+//   
    
     // 다 합친 하나의 리스트 + 앞뒤로 
     List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();
     for (int i = 0; i < dList.size(); i++) {
-       dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
-                    .sList(daysScheduleList.get(i)).dDayId(dDayList.get(i)).build());
+       dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i)).build());
     }
    
     
