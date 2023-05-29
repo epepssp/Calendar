@@ -27,7 +27,7 @@ public class DiaryService {
     }
 
     public List<Diary> findByMonth(int monthValue) {
-        List<Diary> diaryList  =diaryRepository.findByMonthValue(monthValue);
+        List<Diary> diaryList  =diaryRepository.findByMonthValueOrderByDayDesc(monthValue);
         
         return diaryList;
     }

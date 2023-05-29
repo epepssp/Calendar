@@ -8,10 +8,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 function diaryPop(diaryId) {
+    alert(diaryId);
+    
     axios
         .get('/day/diary/' + diaryId)
         .then(response => {
-            showDiary(response.data);
+          console.log('tjdrhd');
       })
         .catch(err => { console.log(err) });
 };
@@ -34,13 +36,17 @@ function showDiary(diary){
         +`<div class="w3-container w3-cell"><input id="weather" type="hidden" value="${diary.weather}">`;
         
      if(diary.weather ==1) {
-       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/sun1.svg">';
+       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/1.svg">';
      } if(diary.weather ==2) {
-       str +='날씨: <img width="22px;"  style="margin-left: 7px;"  id="svg2" src="/icons/cl1.svg">';
+       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/2.svg">';
      } if(diary.weather ==3) {
-       str +='날씨: <img width="22px;" style="margin-left: 7px;"  id="svg3" src="/icons/r1.svg">';
+       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/3.svg">';
      } if(diary.weather ==4) {
-       str +='날씨: <img width="22px;"   style="margin-left: 7px;" id="svg4" src="/icons/s1.svg">';
+       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/4.svg">';
+     } if(diary.weather ==5) {
+       str +='날씨: <img width="22px;" style="margin-left: 7px;" id="svg1" src="/icons/5.svg">';
+     } if(diary.weather ==0) {
+       str +='날씨: X';
      }
      
   str +='</div></div>'

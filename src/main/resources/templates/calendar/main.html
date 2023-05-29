@@ -14,6 +14,9 @@
        
        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link href='https://fonts.googleapis.com/css?family=Julius Sans One' rel='stylesheet'>
+             <link href='https://fonts.googleapis.com/css?family=Patrick Hand SC' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Chathura' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
        <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -28,9 +31,7 @@
   
         
        <style>
-        
-        
-         
+     
          
          div.effectT{
             white-space: nowrap; 
@@ -139,12 +140,23 @@
    <div class="w3-container w3-cell text" th:each="d : ${d2}">
       <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
-        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        
+        <div class="col-2" th:if="${d.diaryId} != 0">
+          <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
+            <img class="icon" style="width: 14px;" src="/icons/heart.svg">
+          </a>
+        </div>
+          
         <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
       </div>
       <div th:if="${ d.today == 0 }">
         <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+        
+        <span th:if="${d.diaryId} != 0">
+          <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
+          <img class="icon" style="width: 14px;" src="/icons/heart.svg">
+          </a>
+        </span>
       </div>
       <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
    </div>
@@ -217,7 +229,7 @@
 </div>
 <!-- 달력 페이징 버튼 끝 -->
 
-<span th:onclick="|location.href='@{ /diary/create }'|">일기 Create</span>
+
 
 
 </div><!-- 메인 왼쪽 끝 -->
@@ -314,21 +326,12 @@
 <div id="diaryModal" class="w3-modal">
    <div class="w3-modal-content" style="width: 480px; height: 580px;">
     <span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br><br>
-     <form id="diaryFoam" class="w3-container m-3" method="post"><!-- 다이어리 모달 컨텐츠 전체 -->
+   !-- 다이어리 모달 컨텐츠 전체 -->
        <div class="w3-cell-row mb-3">
-          <span class="w3-container w3-cell" id="diaryDayDiv"></span><!-- 날짜 -->
-          <div class="w3-container w3-cell" align="right"><!-- 날씨 -->
-             <input id="weather" type="hidden">
-             <input id="1" value="1" type="hidden"><img width="22px;" style="margin-right: 10px;" id="svg1" src="/icons/sun1.svg">
-             <input id="2" value="2" type="hidden"><img width="22px;" style="margin-right: 10px;" id="svg2" src="/icons/cl1.svg">
-             <input id="3" value="3" type="hidden"><img width="22px;" style="margin-right: 10px;" id="svg3" src="/icons/r1.svg">
-             <input id="4" value="4" type="hidden"><img width="22px;" id="svg4" src="/icons/s1.svg">
-           </div>
+          <input id="did" type="text"/>
+
         </div> 
-        <input class="form-control mt-4" type="text" id ="title" placeholder="제목을 입력하세요">
-        <textarea class="form-control mt-2" style="height: 350px;" id="diaryContent" required></textarea>
-        <div align="right" style="border-color: 1px solid gray;" id="diaryBtn" class="m-2">저장하기</div>
-     </form> 
+
    </div>
 </div><!-- Diary Create For 끝 -->
   
@@ -370,8 +373,21 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
         
-    <script th:src="@{ /js/detailModal.js }"></script>
     <script th:src="@{ /js/calendar.js }"></script>
+  
+    <script>
+    function diaryPop(diaryId) {
+        alert(diaryId);
+        
+        axios
+        .get('/day/diary/' + diaryId)
+        .then(response => {
+          console.log('tjdrhd');
+      })
+        .catch(err => { console.log(err) })
+    };
+
+    </script>
    
            
 </div><!-- 메인 전체 끝 --> 

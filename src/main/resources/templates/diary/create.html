@@ -33,7 +33,7 @@
             font-family: 'Patrick Hand SC';font-size: 30px;
          }
          .hand2 {
-            font-family: 'Patrick Hand SC';font-size: 20px;
+            font-family: 'Patrick Hand SC';font-size: 19px;
          }
          
          .cha {
@@ -51,7 +51,7 @@
         
         .line {
             font-size: 6px;
-            border-top: 1px solid gray;
+            border-top: 1px solid #DCDCDC;
             width: 266px;
             white-space: nowrap;
             margin-left: 10px;
@@ -78,6 +78,9 @@
            padding: 0;
         }
      
+        .sortIcon {
+        padding: 0;
+        }
        </style>
        
     </head>
@@ -110,16 +113,18 @@
       </div>
       <div class="mt-2 border-top pt-1" style="border-top-color: 2px solid #DCDCDC; margin-left: 5px; margin-right: 5px;" align="left">
         <span class="fw-bold m-1">옥시시</span>(mega_ddn)
-        <span style="margin-left: 103px;"><img src="/icons/book.svg" width="20px;"></span>
       </div>
     </div><!-- 프로필영역 끝-->
     
-    <br><br>
-    
-     <span id="ms"></span>
-     <div id="mini"></div><!-- mini 달력 -->
+    <hr>
+       
+    <div class="w3-cell-row mb-1">
+       <div class="w3-container w3-cell" id="ms"></div>
+       <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><img id="sortBtnImg"></div>
+    </div> 
+    <div  id="mini"></div><!-- 달력 형식 -->
+    <div  id="listDiv"></div><!-- 리스트 형식 --> 
    
- 
     
 </div><!-- 메인 왼쪽 끝 -->
 
@@ -130,7 +135,7 @@
       <input type="hidden" id="day" th:value="${day}">
        
      <div class="row mb-4" style="height: 70px; width:910px; border-bottom: 2px solid #DCDCDC; display: inline-block; white-space: nowrap;">
-        <div class="m-2" style="vertical-align:botton; width:480px; display: inline-block;" id="dateDiv"></div><!-- 날짜 -->
+        <div class="m-2" style="vertical-align:botton; width:490px; display: inline-block;" id="dateDiv"></div><!-- 날짜 -->
     
        <div class="mb-4 mt-4" style="display: inline-block;"><!-- 날씨 -->
            <input id="weather" type="hidden"><span class="hand2">weather TODAY?</span>
@@ -228,9 +233,8 @@
     
     <!-- 상단/사이드바, 모달 등 모든 페이지에 들어가는 공통 자바스크립트 -->
     <script th:src="@{ /js/diary.js }"></script>
-    <script th:src="@{ /js/detailModal.js }"></script>
     <script th:src="@{ /js/fileUpload.js }"></script>
-    
+
     
 </div><!-- 메인 전체 컨테이너 80 끝 -->  
 </body>

@@ -6,37 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
  //  lastDay();
 });
 
-const svgElement1 = document.getElementById("svg1");
-  svgElement1.addEventListener("click", function() {
-  svgElement1.classList.toggle("invert");
-  weather(1);
-});
- 
- const svgElement2 = document.getElementById("svg2");
-  svgElement2.addEventListener("click", function() {
-  svgElement2.classList.toggle("invert");
-  weather(2);
-});
-
-const svgElement3 = document.getElementById("svg3");
-  svgElement3.addEventListener("click", function() {
-  svgElement3.classList.toggle("invert");
-  weather(3);
-});
-
-const svgElement4 = document.getElementById("svg4");
-  svgElement4.addEventListener("click", function() {
-  svgElement4.classList.toggle("invert");
-  weather(4);
-});
-    
-
-
-function weather(i){
-    const weather = document.querySelector('#weather');
-    weather.value = i;
-    
-}
 
 
 function now(){
@@ -339,8 +308,8 @@ function dateInfo(){   // 내 일기장 클릭시 diary create로 이동
              year: year,
              monthValue: monthValue,
              day:day
-  }
-})
+         }
+        })
   .then(response => {
      window.location.href = '/diary/create?year=' + encodeURIComponent(year) + '&monthValue=' + encodeURIComponent(monthValue) + '&day=' + encodeURIComponent(day);
   })

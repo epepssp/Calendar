@@ -28,8 +28,10 @@ import com.example.diary.domain.Week;
 import com.example.diary.dto.CalendarDto;
 import com.example.diary.dto.DayDiaryDto;
 import com.example.diary.dto.DayDto;
+import com.example.diary.dto.MiniDiaryDto;
 import com.example.diary.dto.ScheduleAddDto;
 import com.example.diary.dto.YearAndMonthDto;
+import com.example.diary.repository.DiaryAttachmentRepository;
 import com.example.diary.service.CalendarService;
 import com.example.diary.service.DDayService;
 import com.example.diary.service.DiaryService;
@@ -47,7 +49,39 @@ public class CalendarRestController {
     private final ScheduleService scheduleService;
     private final DiaryService diaryService;
     private final DDayService dDayService;
+    private final DiaryAttachmentRepository diaryAttachmentRepository;
     
+    @PostMapping("/calendar/miniList")
+    public ResponseEntity<List<MiniDiaryDto>> miniListVersion(@RequestBody YearAndMonthDto dto){
+        log.info("카ㅔ렌더 미니미니리스트령식??={} :{}", dto.getYear(), dto.getMonthValue());
+        
+        List<Diary> dd = new ArrayList<>();
+        for (Diary d: diaryService.findByMonth(dto.getMonthValue())) {
+            if(d.getYear() == dto.getYear()) {
+                dd.add(d);
+            }
+        }
+        
+        List<MiniDiaryDto> miniList = new ArrayList<>();
+
+        for (Diary s : dd) {
+            MiniDiaryDto miniDto = MiniDiaryDto
+                                     .builder()
+                                     .diaryId(s.getDiaryId())
+                                     .year(s.getYear())
+                                     .monthValue(s.getMonthValue())
+                                     .day(s.getDay())
+                                     .weather(s.getWeather())
+                                     .title(s.getTitle())
+                                     .uuid(diaryAttachmentRepository.findByDiaryDiaryId(s.getDiaryId()).get(0).getUuid())
+                                     .fileName(diaryAttachmentRepository.findByDiaryDiaryId(s.getDiaryId()).get(0).getFileName())
+                                     .build();
+            miniList.add(miniDto);
+        }
+       
+        
+        return ResponseEntity.ok(miniList);
+    }
     
     @PostMapping("/calendar/mini")
     public ResponseEntity<Lists> miniVersion(@RequestBody YearAndMonthDto dto){

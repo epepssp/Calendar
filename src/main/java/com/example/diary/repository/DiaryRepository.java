@@ -8,7 +8,7 @@ import com.example.diary.domain.Diary;
 
 public interface DiaryRepository extends JpaRepository<Diary, Integer>{
 
-    List<Diary> findByMonthValue(int monthValue);
+    List<Diary> findByMonthValueOrderByDayDesc(int monthValue);
 
     Diary findByDay(Integer day);
 
