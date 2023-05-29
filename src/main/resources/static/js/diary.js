@@ -2,7 +2,7 @@
  * 
  */
 window.addEventListener('DOMContentLoaded', () => {
-dateDiv();
+
 calendarList();
 diaryList();
 
@@ -13,23 +13,28 @@ let sort = 1;
 
   const mini = document.getElementById("mini");
   const listDiv = document.getElementById("listDiv");
-  const sortBtnImg = document.getElementById("sortBtnImg");
+ // const sortBtnImg = document.getElementById("sortBtnImg");
+   const sorti = document.getElementById("sorti");
 
   mini.style.display = "block";
   listDiv.style.display = "none";
 
-  sortBtnImg.src = "/icons/list.svg";
+  sorti.classList.add("far", "fa-list-alt");
 
 function sortTypeChange() {
    if (sort === 1) {
       mini.style.display = "none";
       listDiv.style.display = "block";
-      sortBtnImg.src = "/icons/table.svg";
+      sorti.classList.remove("far", "fa-list-alt");
+      sorti.innerHTML = '<i class="material-icons" style="font-size:19px;">grid_on</i>';
+    //  sortBtnImg.src = "/icons/table.svg";
       sort = 2; // 1일 경우 2로 변경
    } else {
       mini.style.display = "block";
       listDiv.style.display = "none";
-      sortBtnImg.src = "/icons/list.svg";
+      sorti.innerHTML = "";
+      sorti.classList.add("far", "fa-list-alt");
+  //    sortBtnImg.src = "/icons/list.svg";
       sort = 1; // 2일 경우 1로 변경
    }
 
@@ -296,23 +301,7 @@ function showMini(data){
    }
 
 
-function dateDiv(){ 
-          
-        const day = document.querySelector('#day').value;
-        const year = document.querySelector('#year').value;
-        const monthValue = document.querySelector('#monthValue').value;
-          
-        const ms = document.querySelector('#ms');
 
-        let m = '<span class="fw-bold">'+monthValue+'월의 일기</span>';
-        ms.innerHTML = m;
-
-        const dateDiv = document.querySelector('#dateDiv');
-        let str ='';
-         str += '<div class="m-2" style="vertical-align:botton; width:160px; display: inline-block;" >'
-           +'<span class="ale m-1">'+ year +'</span>년 <span class="ale m-1">'+ monthValue+'</span>월 <span class="ale m-1">'+ day +'</span>일</div>';
-          dateDiv.innerHTML = str;
-    }
     
 
  

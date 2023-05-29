@@ -26,6 +26,8 @@
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <script src="https://kit.fontawesome.com/009f152c56.js" crossorigin="anonymous"></script>
         
+        <!-- google icon --> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
         
        <style>
         
@@ -41,7 +43,8 @@
          }
          
          .ale { 
-             font-family: 'Alegreya Sans SC'; font-size: 22px;
+             font-family: 'Alegreya Sans SC'; font-size: 24px;
+             font-weight: bold;
          }
          
          .invert {
@@ -93,11 +96,19 @@
  <div class="w3-bar"><!-- 바 -->
      <div class="w3-cell-row mt-3 mb-2" style="background-color: #00FF7F; height: 90px;"><!--컨테이너 담을 cell row -->
          <div class="w3-container w3-cell" >
-           <p> </p>
-           </div>
-         <div class="w3-container w3-cell" align="right">
-           <p class="m-3 fw-bold" style="font-style:italic; font-size: 25px;"></p>
+                      
+         <i class='fas fa-th-large' style="font-size:15px;"></i>
          </div>
+       
+         
+            <div class="w3-container w3-cell" align="right">
+         <a th:href="@{ /calendar }"><i class="material-icons m-3" style="font-size:50px;color:white">event</i></a>
+           
+           <a><i class="material-icons m-3" style="font-size:50px;color:white">import_contacts</i></a>
+           
+            
+      </div>
+      
      </div><!-- cell row end -->
   </div><!-- 바 end -->
 
@@ -120,7 +131,7 @@
        
     <div class="w3-cell-row mb-1">
        <div class="w3-container w3-cell" id="ms"></div>
-       <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><img id="sortBtnImg"></div>
+       <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
     </div> 
     <div  id="mini"></div><!-- 달력 형식 -->
     <div  id="listDiv"></div><!-- 리스트 형식 --> 
@@ -135,10 +146,10 @@
       <input type="hidden" id="day" th:value="${day}">
        
      <div class="row mb-4" style="height: 70px; width:910px; border-bottom: 2px solid #DCDCDC; display: inline-block; white-space: nowrap;">
-        <div class="m-2" style="vertical-align:botton; width:490px; display: inline-block;" id="dateDiv"></div><!-- 날짜 -->
+        <div class="m-2" style="vertical-align:botton; width:470px; display: inline-block;" id="dateDiv"></div><!-- 날짜 -->
     
        <div class="mb-4 mt-4" style="display: inline-block;"><!-- 날씨 -->
-           <input id="weather" type="hidden"><span class="hand2">weather TODAY?</span>
+           <input id="weather" type="hidden"><span style="font-family: 'Alegreya Sans SC'; ">How's the Weather?</span>
              
           <span style="margin-right: 13px; margin-left: 15px;">
             <svg id="svg1" xmlns="http://www.w3.org/2000/svg" width="30" height="30"  fill="#A9A9A9" class="bi bi-brightness-high mb-1" viewBox="0 0 16 16">
@@ -175,8 +186,8 @@
        </div><!-- 날씨 끝 -->
       </div><!-- 날짜/날씨 끝 -->
      
-     <div class="row mb-2" style=" width:910px; height:45px; border: 1px solid gray; display: inline-block;" ><!-- 제목 -->
-        <span><input class="cha" style="border: none; display:inline-block;  width: 760px; "type="text" id="title" placeholder="T I T L E"></span> 
+     <div class="row mb-2" style=" width:910px; height:45px; border: 1px solid gray; display: inline-block;" align="left"><!-- 제목 -->
+        <span><input class="cha" style="border: none; display:inline-block; width: 760px; border-right:1px solid gray;"type="text" id="title" placeholder="T I T L E"></span> 
         <div onclick="document.getElementById('fileModal').style.display='block'" class="rounded m-1 p-1" 
         style="border: 1px solid #DCDCDC; display:inline-block; width: 100px; "><img class="p-1" width="23px;"  src="/icons/images.svg">사진첨부</div>
     </div>
@@ -191,7 +202,7 @@
         <textarea id="diaryContent" style="height: 350px; border: 1px solid gray;"></textarea>
      </div>
      
-     <div align="right"><div class="mt-2 ale" align="center" id="diaryCreateBtn" style="width: 83px; height:35px; margin-right:20px; border: 1px solid gray;">create</div></div>
+     <div align="right"><div class="mt-2" align="center" id="diaryCreateBtn" style="font-family: 'Alegreya Sans SC'; font-size: 22px; width: 83px; height:35px; margin-right:10px; border: 1px solid gray;">create</div></div>
     
 
 
@@ -234,6 +245,36 @@
     <!-- 상단/사이드바, 모달 등 모든 페이지에 들어가는 공통 자바스크립트 -->
     <script th:src="@{ /js/diary.js }"></script>
     <script th:src="@{ /js/fileUpload.js }"></script>
+    
+    <script>
+    date();
+    
+    function date(){ 
+        
+        const day = document.querySelector('#day').value;
+        const year = document.querySelector('#year').value;
+        const monthValue = document.querySelector('#monthValue').value;
+          
+        const ms = document.querySelector('#ms');
+        let m = '<span class="fw-bold">'+monthValue+'월의 일기</span>';
+        ms.innerHTML = m;
+
+        const part = year.substring(0, 2);
+        console.log(part);
+        const pa = year.substring(2, 3);
+        console.log(pa);
+        const pat = year.substring(3, 4);
+        
+        const dateDiv = document.querySelector('#dateDiv');
+        let str ='';
+         str +='<div class="m-2" style="vertical-align:botton; width:160px; display: inline-block;">'
+             +'<span class="ale m-1" style="color:#A9A9A9;"><small>'+part+'</small></span><span class="ale" style="color:#9370DB;">'+pa+'</span><span class="ale m-1" style="color:#9ACD32;">'+pat+'</span>년 '
+             +'<span class="ale m-1" style="color:#FF6347;">'+ monthValue+'</span>월 '
+             +'<span class="ale m-1" style="color:#00BFFF;">'+ day +'</span>일</div>';
+          dateDiv.innerHTML = str;
+    }
+    
+    </script>
 
     
 </div><!-- 메인 전체 컨테이너 80 끝 -->  

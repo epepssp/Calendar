@@ -27,6 +27,8 @@
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <script src="https://kit.fontawesome.com/009f152c56.js" crossorigin="anonymous"></script>
         
+       <!-- google icon --> 
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
         
        <style>
         
@@ -110,8 +112,10 @@
            <p> </p>
            </div>
          <div class="w3-container w3-cell" align="right">
-           <p class="m-3 fw-bold" style="font-style:italic; font-size: 25px;"></p>
-         </div>
+           <a th:href="@{ /calendar }"><i class="material-icons m-3" style="font-size:50px;color:white">event</i></a>
+           
+           <a><i class="material-icons m-3" style="font-size:50px;color:white">import_contacts</i></a>
+        </div>
      </div><!-- cell row end -->
   </div><!-- 바 end -->
 
@@ -135,8 +139,9 @@
        
     <div class="w3-cell-row mb-1">
        <div class="w3-container w3-cell" id="ms"></div>
-       <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><img id="sortBtnImg"></div>
+       <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
     </div> 
+    
     <div  id="mini"></div><!-- 달력 형식 -->
     <div  id="listDiv"></div><!-- 리스트 형식 --> 
    
@@ -229,6 +234,7 @@
     <script th:src="@{ /js/fileUpload.js }"></script>
     
     <script>
+    dateDiv();
     weathers();
     
     function weathers(){
@@ -253,6 +259,23 @@
         detailW.innerHTML = str;
     }
        
+    function dateDiv(){ 
+        
+        const day = document.querySelector('#day').value;
+        const year = document.querySelector('#year').value;
+        const monthValue = document.querySelector('#monthValue').value;
+          
+        const ms = document.querySelector('#ms');
+
+        let m = '<span class="fw-bold">'+monthValue+'월의 일기</span>';
+        ms.innerHTML = m;
+
+        const dateDiv = document.querySelector('#dateDiv');
+        let str ='';
+         str += '<div class="m-2" style="vertical-align:botton; width:160px; display: inline-block;" >'
+           +'<span class="ale m-1">'+ year +'</span>년 <span class="ale m-1">'+ monthValue+'</span>월 <span class="ale m-1">'+ day +'</span>일</div>';
+          dateDiv.innerHTML = str;
+    }
     </script>
     
     
