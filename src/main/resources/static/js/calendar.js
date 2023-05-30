@@ -14,12 +14,13 @@ function now(){
      const tYear= today.getFullYear()
      const tMonth= today.getMonth() + 1;
      const tDay= today.getDate();
+     
      const hDiv = document.querySelector('#hDiv');
      str ='';
      
-     str +='<div style="font-size: 11px; font-weight: bold; background-color:#FFE4E1; margin-left:100px;">'
-          +'<span id="tYear">'+tYear+'</span>년 <span id="tMonth">'+tMonth+'</span>월 <span id="tDay">'+tDay+'</span>일 / '
-          +'<span style="color: #FF6347;">TODAY</span></div>';
+     str +='<span style="font-size:13px; margin-left:10px;"><span style="color:#ff8080;">t </span><span style="color:#FFFF00;">o </span><span style="color:#d2ff4d;">d </span>'
+          +'<span style="color:#4dffff;">a </span><span style="color:#cca1f7;">y</span></span>  '
+          +'<small class="ale" style="font-size:15px; color:white"><span id="tYear">"'+tYear+'</span>.<span id="tMonth">'+tMonth+'</span>.<span id="tDay">'+tDay+'"</span></small>';
      hDiv.innerHTML = str;
      
      axios
@@ -37,17 +38,16 @@ function now(){
 function showLeft(data){
     const dDayDiv = document.querySelector('#dDayDiv');
     str='';
-    
+      
     for(let x of data) {
-        str +='<div style="margin-left: 70px;" align="center">';
         if(x.subtract < 0) {
-           str +='<span class="fw-bold" style="color: #FF6347;"><small>♡'+x.subtract+'</small></span> <span><small>'+x.name+'</small></span></div>';
+           str +='<div style="color: #FF6347;"><small>D '+x.subtract+'</small></span> <span><small>'+x.name+'</small></div>';
         } 
         if(x.subtract > 0) {
-           str +='<span class="fw-bold"  style="color: #4169E1;"><small>♡+'+x.subtract+'</small></span> <span><small>'+x.name+'</small></span></div>';
+           str +='<div style="color: #4169E1;"><small><img width="11px;" src="/icons/2hh.svg">+'+x.subtract+'</small></span> <span><small>'+x.name+'</small></div>';
         }
         
-     } str +='<br>';
+     } 
      dDayDiv.innerHTML = str;
     
 }

@@ -301,10 +301,6 @@ function showMini(data){
    }
 
 
-
-    
-
- 
  function createDiary(day){
     const year = document.querySelector('#year').value;
     const monthValue = document.querySelector('#monthValue').value;

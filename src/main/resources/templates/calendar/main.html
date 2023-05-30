@@ -14,7 +14,7 @@
        
        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link href='https://fonts.googleapis.com/css?family=Julius Sans One' rel='stylesheet'>
-             <link href='https://fonts.googleapis.com/css?family=Patrick Hand SC' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Patrick Hand SC' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Chathura' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
        <link
@@ -22,12 +22,14 @@
         rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
         crossorigin="anonymous" />
+       
         
        <!-- CSS -->
        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <script src="https://kit.fontawesome.com/009f152c56.js" crossorigin="anonymous"></script>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       
        
        <!-- google icon --> 
        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -69,7 +71,7 @@
         }
         
         .mirror-image {
-             transform: scaleX(-1);
+            transform: scaleX(-1);
         }
         
         .invert {
@@ -85,7 +87,36 @@
            padding: 0;
         }
         
+         .ale { 
+             font-family: 'Alegreya Sans SC'; font-size: 18px;
+         }
         
+        .child-div {
+            position: absolute;
+            background-color: #428a61;
+            z-index: 2;
+        }
+
+        .parent-div {
+            position: relative;
+            z-index: 3;
+            background-color:#73492b;
+        }
+        
+        .css1 {
+            position: absolute;
+            background-color: white;
+            z-index: 1;
+        }
+        
+         .css2 {
+            position: relative;
+        }
+        
+        .rotate-45 {
+         transform: rotate(-45deg);
+         }
+         
        </style>
        
     </head>
@@ -98,6 +129,7 @@
  <div class="w3-bar"><!-- 바 -->
      <div class="w3-cell-row mt-3 mb-2" style="background-color: #DC143C; height: 90px;"><!--컨테이너 담을 cell row -->
         <div class="w3-container w3-cell" >
+           
         </div>
          
         <div class="w3-container w3-cell" style="vertical-align: bottom;"  align="right">
@@ -208,10 +240,11 @@
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 5 -->
   <div class="w3-container w3-cell text" th:each="d : ${d5}">
-     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
-       <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
-       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
-       <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:white; ">
+       <div class="col-2 fw-bold ale" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d"  th:text="${ d.day }"></div>
+       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId">
+         <img class="icon mt-1" style="width: 14px;" src="/icons/heart.svg"></div>
+       <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
      </div>
      <div th:if="${ d.today == 0 }">
        <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
@@ -251,46 +284,50 @@
    
 <div class="col-3 p-4"><!-- 메인 오른쪽 영역 -->
 
-    <div style="border: 1px solid #708090; height: 325px; "><!-- 프로필영역 -->
+    <div class="mb-5" style="border: 1px solid #708090; height: 325px; "><!-- 프로필영역 -->
       <div class="m-2" align="center" style="height: 270px; border: 1px solid gray;">
         <img src="/icons/ddn.jpeg" width="270px;">
       </div>
       <div class="w3-cell-row mt-2 border-top pt-1" align="left" style="border-top-color: 2px solid #DCDCDC; height:25px; margin-left: 10px; margin-right: 5px;">
         <div class="w3-container w3-cell con" style="width: 25px;"> <i class="material-icons">account_circle</i></div> 
         <div class="w3-container w3-cell con m-1"> <span class="fw-bold mt-1">옥시시 </span>(mega_ddn)</div>
-     
       </div>
     </div><!-- 프로필영역 끝-->
-
-    <div><!-- month/ today 합친 -->
-      <div class="mt-4 mb-4" style="border:1px solid gray; height: 195px;"><!--  Month's -->
-        <div class="m-1 pb-1">
-          <span style="margin-left:5px;"><img src="/icons/pin1.svg" width="15px;"></span><span class="fw-bold m-2" style="font-size: 14px;">Month's</span><span style="margin-left:146px;"><img src="/icons/pin1.svg" width="15px;"></span>
-        </div>
-        <div class="m-2">
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-          <h6 class="border-bottom" style="height:12px; border-bottom-color: 2px solid #DCDCDC;"></h6>
-        </div>
-      </div>
     
-      <div class="mb-1" align="right" id="hDiv"></div>
-  
-      <div style="margin-left:100px; border: 1px solid gray;"><!-- Today's -->
-        <div class="m-1 pb-1"><!-- bottom 컬러? -->
-          <span style="margin-left:6px; margin-right: 26px;"><img src="/icons/pin.svg" class="mirror-image" width="15px;"></span> 
-          <span class="fw-bold" style="font-size: 15px;">⦁ Today's ⦁</span>
-          <span style="margin-left:23px;"><img src="/icons/pin.svg" width="15px;"></span>
-        </div>
-        <div class="m-1 pb-1 border-bottom" style=" border-bottom-color: 2px solid #DCDCDC;" id="dDayDiv"></div><!-- d-day 리스트 -->
-        <div class="rounded mb-2 mt-2" align="center" style="margin-left:75px; border: 1px solid gray; width: 100px;" onclick="showDDayInput()"><img style="padding-bottom: 3px;" width="15px;" src="/icons/hff.svg"><small> D-DAY 추가</small></div>
-      </div><!-- Today's 끝-->
-    </div><!-- month/ today 끝 -->
+    
+   <!-- 게시판(notice board) -->
+    <div class="parent-div p-2" style="width:270px; height:240px;">
+      <div  class="child-div" style="width:100%; height:100%; position: relative;">
+        <div class="ale" style="width:100%; color:white;" align="center"><span>⦁ </span>Notice board<span> ⦁</span></div>
+       
+        <div class="mb-2" style="display: inline-block;" id="hDiv"></div>
+        
+     <div style="margin-left: 100px;">
+     <div class="rounded css1 css2 m-1" style="width:110px;"><!-- Today's -->
+     
+       <!-- 2개 같음 . 둘 다 반전 안됨 -->
+       <img src="/icons/pin2.svg" class="mirror-image" style="position: absolute; top: 0; left: 0; transform: translate(-50%, -50%);" width="13px;">
+       <img src="/icons/pin2.svg" style="position: absolute; top: 0; right: 0; transform: translate(50%, -50%);" width="13px;">
 
+       <img src="/icons/pin2.svg" class="position-absolute translate-middle top-0 start-0 scaleX-1" width="13px;">
+        <img  src="/icons/pin2.svg" class="position-absolute translate-middle top-0 start-100" width="13px;">
+        <!-- 우씨!!!!!!!!!!!!!!!!!!!! -->
+        
+        <span style="margin-left: 10px;" class="ale row"><small>d-day List</small></span>
+        <div align="center" class="p-1 mb-1" style="font-size:13px;" id="dDayDiv"></div><!-- d-day 리스트 -->
+     </div><!-- Today's 끝-->
+     </div>
+      
+      </div>
+    </div><!-- 게시판(notice board) 끝 -->
+    
+ 
+ 
+ 
+     
+  <div class="rounded mb-2 mt-2" align="center" style="margin-left:75px; border: 1px solid gray; width: 100px;" onclick="showDDayInput()">
+          <img style="padding-bottom: 3px;" width="15px;" src="/icons/hff.svg"><small> D-DAY 추가</small>
+        </div>
 </div><!--메인 오른쪽 끝 -->
 </div><!-- 메인 block 끝 -->
   
@@ -388,9 +425,35 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
         crossorigin="anonymous"></script>
         
+        
     <script th:src="@{ /js/calendar.js }"></script>
   
     <script>
+    
+    today();
+    
+    function today(){
+         const divToday = document.querySelector('#divToday');
+         let str ='';
+         
+         str +='<span style="color:#ff6666;">t </span><span style="color:#ffb366;">o </span><span style="color:#0bda73;">d </span>'
+             +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span>';
+         
+         divToday.innerHTML = str;
+         
+         const divTodays = document.querySelector('#divTodays');
+         
+         str2 ='';
+         
+         str2 +='<span style="margin-left:6px; margin-right: 26px;"><img src="/icons/pin.svg" class="mirror-image" width="15px;"></span>'
+              +'<span>⦁ <span style="color:#ff6666;">t </span><span style="color:#ffb366;">o </span><span style="color:#0bda73;">d </span>'
+              +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span>\'<span style="color:#C0C0C0;">s</span> ⦁</span>'
+              +'<span style="margin-left:23px;"><img src="/icons/pin.svg" width="15px;"></span>';
+              
+         
+         divTodays.innerHTML = str2;
+    }
+    
     function diaryPop(diaryId) {
         alert(diaryId);
         
