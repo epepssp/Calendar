@@ -48,4 +48,18 @@ public class DiaryService {
         return d;
     }
 
+    public Diary findByMD(Integer monthValue, Integer d) {
+        
+    
+        List<Diary> diaryList  =diaryRepository.findByMonthValueOrderByDayDesc(monthValue);
+        Diary diary = null;
+        for (Diary s : diaryList) {
+            if(s.getDay() == d) {
+                 diary = s;
+                
+            }
+        } return diary;
+       
+    }
+
 }

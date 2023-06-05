@@ -84,6 +84,15 @@
         .sortIcon {
         padding: 0;
         }
+        
+        .emoji {
+             transition: transform 0.2s;
+        }
+
+        .emoji:hover {
+             color: red;
+             transform: scale(1.2);
+        }
        </style>
        
     </head>
@@ -186,27 +195,95 @@
        </div><!-- 날씨 끝 -->
       </div><!-- 날짜/날씨 끝 -->
      
-     <div class="row mb-2" style=" width:910px; height:45px; border: 1px solid gray; display: inline-block;" align="left"><!-- 제목 -->
+     <!-- 제목 -->
+     <div class="row mb-2" style=" width:909px; height:45px; border: 1px solid gray; display: inline-block;" align="left">
         <span><input class="cha" style="border: none; display:inline-block; width: 760px; border-right:1px solid gray;"type="text" id="title" placeholder="T I T L E"></span> 
         <div onclick="document.getElementById('fileModal').style.display='block'" class="rounded m-1 p-1" 
-        style="border: 1px solid #DCDCDC; display:inline-block; width: 100px; "><img class="p-1" width="23px;"  src="/icons/images.svg">사진첨부</div>
-    </div>
+        style="border: 1px solid #DCDCDC; display:inline-block; width: 100px;"><img class="p-1" width="23px;"  src="/icons/images.svg">사진첨부</div>
+     </div>
    
-    <div class="col"><!-- 첨부한 파일 리스트 보여주는  영역 -->
+     <!-- 첨부한 파일 리스트 보여주는  영역 -->
+     <div class="col">
         <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
         <div id="uploads"></div> <!-- saveTemporarily 리스트 보여주는 영역 -->
      </div>
   
-     
-     <div class="row" style="width: 910px;">
+   
+    <!-- 이모티콘 --> 
+    <div class="row" align="right" style="border-top: 1px solid gray; border-left: 1px solid gray; border-right: 1px solid gray; position: relative;">
+        <span><button class="w3-button w3-right" onclick="w3_open()"><i class="fa-regular fa-face-smile" style="font-size: 22px;"></i></button></span>
+      
+       <!--이모티콘  Sidebar -->
+       <div class="w3-sidebar w3-bar-block mt-3" align="center" style="display:none; right:0; padding:0px; border: 1px solid black;  margin-right:90px; position: absolute; width:300px; height:330px;" id="mySidebar">
+         <button onclick="w3_close()" class="w3-bar-item w3-small"><span style="float: right;">Close &times;</span></button>
+          
+          <div id="emoji-list" class="card mt-4" style="width: 250px; height: 250px; border: 1px solid red;"><!-- 사이드바 컨텐츠 -->
+             <div class="w3-cell-row mt-2" style="width: 100%;">
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😁"><i class="fa-regular fa-face-smile-beam m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😉"><i class="fa-regular fa-face-smile-wink m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😊"><i class="fa-regular fa-face-laugh m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😄"><i class="fa-regular fa-face-laugh-beam m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😆"><i class="fa-regular fa-face-laugh-squint m-1" style="font-size: 20px;"></i></div>
+            </div>
+            
+             <div class="w3-cell-row mt-1" style="width: 100%;">
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😘"><i class="fa-regular fa-face-kiss-wink-heart m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😍"><i class="fa-regular fa-face-grin-hearts m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😜"><i class="fa-regular fa-face-grin-tongue-squint m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😅"><i class="fa-regular fa-face-grin-beam-sweat m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="🙄"><i class="fa-regular fa-face-rolling-eyes m-1" style="font-size: 20px;"></i></div>
+            </div>
+            
+            <div class="w3-cell-row mt-1" style="width: 100%;">
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😮"><i class="fa-regular fa-face-surprise m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😐"><i class="fa-regular fa-face-meh-blank m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😐"><i class="fa-regular fa-face-meh m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="🙁"><i class="fa-regular fa-face-frown-open m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😕"><i class="fa-regular fa-face-frown m-1" style="font-size: 20px;"></i></div>
+            </div>
+            
+             <div class="w3-cell-row mt-1" style="width: 100%;">
+                <div class="w3-container w3-cell emoji p-1" data-emoji="😵"><i class="fa-regular fa-face-dizzy m-1" style="font-size: 20px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="😢"><i class="fa-regular fa-face-sad-tear m-1" style="font-size: 20px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="😢"><i class="fa-regular fa-face-sad-cry m-1" style="font-size: 20px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="😬"><i class="fa-regular fa-face-grimace m-1" style="font-size: 20px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="😡"><i class="fa-regular fa-face-angry m-1" style="font-size: 20px;"></i></div>
+            </div>
+            
+             <div class="w3-cell-row mt-2" style="width: 100%;">
+                <div class="w3-container w3-cell emoji p-1" data-emoji="⭐"><i class="fa-solid fa-star m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="⭐"><i class="fa-regular fa-star m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="❤️"><i class="fa-solid fa-heart m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="❤️"><i class="fa-regular fa-heart m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="🎵"><i class="fa-solid fa-music m-1" style="font-size: 19px;"></i></div>
+            </div>
+            
+            <div class="w3-cell-row mt-2" style="width: 100%;">
+                <div class="w3-container w3-cell emoji p-1" data-emoji="🚲"><i class="fa-solid fa-bicycle m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="🛀"><i class="fa-solid fa-bath m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="💩"><i class="fa-solid fa-poo m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="💉"><i class="fa-solid fa-syringe m-1" style="font-size: 19px;"></i></div>
+                <div class="w3-container w3-cell emoji p-1" data-emoji="☕"><i class="fa-solid fa-mug-saucer m-1" style="font-size: 19px;"></i></div>
+            </div>
+         </div><!-- 사이드바 컨텐츠 끝 -->
+          
+       </div><!-- 이모티콘 사이드바 끝 -->
+    </div><!-- 이모티콘 끝 -->
+      
+      
+     <div class="row" style="width: 908px;">
         <textarea id="diaryContent" style="height: 350px; border: 1px solid gray;"></textarea>
      </div>
      
-     <div align="right"><div class="mt-2" align="center" id="diaryCreateBtn" style="font-family: 'Alegreya Sans SC'; font-size: 22px; width: 83px; height:35px; margin-right:10px; border: 1px solid gray;">create</div></div>
-    
-
+     <div align="right">
+       <div class="mt-2" align="center" id="diaryCreateBtn" style="font-family: 'Alegreya Sans SC'; font-size: 22px; width: 83px; height:35px; margin-right:10px; border: 1px solid gray;">create</div>
+     </div>  
 
 </div><!-- 일기 전체 끝 -->
+
+
+
+
 
 </div><!-- 메인 오른쪽 끝 -->
 
@@ -274,6 +351,25 @@
           dateDiv.innerHTML = str;
     }
     
+    
+    const emojiList = document.querySelectorAll('.emoji');
+    const textarea = document.getElementById('diaryContent');
+    
+    emojiList.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+        const selectedEmoji = emoji.getAttribute('data-emoji');
+        textarea.value += selectedEmoji;
+      });
+    });
+    
+    
+    function w3_open() {
+    	  document.getElementById("mySidebar").style.display = "block";
+    	}
+
+    	function w3_close() {
+    	  document.getElementById("mySidebar").style.display = "none";
+    	}
     </script>
 
     

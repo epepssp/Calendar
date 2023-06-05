@@ -154,7 +154,7 @@ public class CalendarController {
          List<Integer> diaryList = new ArrayList<>();
         for (Integer d : dList) {
             if (daysHaveDiary.contains(d)) {
-               diaryList.add(diaryService.findByD(d).getDiaryId());
+               diaryList.add(diaryService.findByMD(date.getMonthValue(),d).getDiaryId());
                 } else{
                     diaryList.add(0);
                 }
