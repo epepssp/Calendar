@@ -20,7 +20,7 @@ function now(){
      
      str +='<span style="font-size:13px; margin-left:10px;"><span style="color:#ff8080;">t </span><span style="color:#FFFF00;">o </span><span style="color:#d2ff4d;">d </span>'
           +'<span style="color:#4dffff;">a </span><span style="color:#cca1f7;">y</span></span>  '
-          +'<small class="ale" style="font-size:15px; color:white"><span id="tYear">"'+tYear+'</span>.<span id="tMonth">'+tMonth+'</span>.<span id="tDay">'+tDay+'"</span></small>';
+          +'<small class="ale underline" style="font-size:15px; color:white"><span id="tYear">"'+tYear+'</span>.<span id="tMonth">'+tMonth+'</span>.<span id="tDay">'+tDay+'"</span></small>';
      hDiv.innerHTML = str;
      
      axios
@@ -32,7 +32,6 @@ function now(){
         .catch(err => { console.log(err) });
      
 }
-
 
 
 function showLeft(data){
@@ -429,32 +428,29 @@ function showSubtract(subtract) {
 }
 
 // 디데이 추가 함수
-const dDayBtn = document.querySelector('#dDayBtn');
-
-dDayBtn.addEventListener('click', e => {
-    const untilDate = document.querySelector('#untilDate').value;
-    const name = document.querySelector('#name').value;
+ function newDday(){
     
-    console.log(name);
+        
+     const untilDate = document.querySelector('#untilDate').value;
+     const name = document.querySelector('#name').value;
+     
+            const data = {
+                untilDate: untilDate,
+                name: name
+            }
+            console.log('여기왔냐')
+            console.log(data);
+            
+            axios
+            .post('/dday/add', data)
+            .then(response => {
+                modalClose();
+                location.reload();
+                alert('D-DAY 등록되었습니다!');
+            })
 
-
-    const data = {
-        untilDate: untilDate,
-        name: name
+            .catch(err => { console.log(err) });
     }
-    console.log('여기왔냐')
-    console.log(data);
-
-    axios
-        .post('/dday/add', data)
-        .then(response => {
-            modalClose();
-            location.reload();
-            alert('D-DAY 등록되었습니다!');
-        })
-
-        .catch(err => { console.log(err) });
-})
 
 function modalClose() {
     document.getElementById("dDayModal").style.display = "none";

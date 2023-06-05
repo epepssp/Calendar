@@ -45,7 +45,7 @@ public class DiaryRestController {
     }
     
     @GetMapping("/day/diary/{diaryId}")
-    public ResponseEntity<Diary> detail(Integer diaryId){
+    public ResponseEntity<Diary> detail(@PathVariable Integer diaryId){
         log.info("다이어flIDIDIDI 잘 왔냐?={}", diaryId);
         
         Diary diary = diaryService.read(diaryId);

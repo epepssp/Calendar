@@ -113,9 +113,11 @@
             position: relative;
         }
         
-        .rotate-45 {
-         transform: rotate(-45deg);
-         }
+       .underline {
+           -webkit-text-decoration: underline double red;
+           text-decoration: underline double red;
+           text-underline-offset: 3px;
+        }
          
        </style>
        
@@ -171,7 +173,7 @@
       <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
         <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
-        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
+        <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
       </div>
       <div th:if="${ d.today == 0 }">
         <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
@@ -184,7 +186,7 @@
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 2 -->
    <div class="w3-container w3-cell text" th:each="d : ${d2}">
-      <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+      <div class="row" th:if="${ d.today == 1 }" style="background-color:white;">
         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
         
         <div class="col-2" th:if="${d.diaryId} != 0">
@@ -193,11 +195,10 @@
           </a>
         </div>
           
-        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
+       <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
       </div>
       <div th:if="${ d.today == 0 }">
         <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-        
         <span th:if="${d.diaryId} != 0">
           <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
           <img class="icon" style="width: 14px;" src="/icons/heart.svg">
@@ -213,7 +214,7 @@
       <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
         <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
-        <div class="col-7 fw-bold pt-1" align="right" style="color: #0000FF; font-size: 10px;"><small>TODAY</small></div>
+        <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
       </div>
       <div th:if="${ d.today == 0 }">
         <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
@@ -225,31 +226,38 @@
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 4 -->
   <div class="w3-container w3-cell text" th:each="d : ${d4}">
-     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+  
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1;">
        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
-       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
-       <div class="col-7 fw-bold pt-1" align="right" style="color: #FF6347; font-size: 10px;"><small>TODAY</small></div>
+       <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId">
+          <img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+      <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
      </div>
+     
      <div th:if="${ d.today == 0 }">
        <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
      </div>
+     
      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
   </div>
 </div> 
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 5 -->
   <div class="w3-container w3-cell text" th:each="d : ${d5}">
-     <div class="row" th:if="${ d.today == 1 }" style="background-color:white; ">
+  
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:white;">
        <div class="col-2 fw-bold ale" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d"  th:text="${ d.day }"></div>
        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId">
          <img class="icon mt-1" style="width: 14px;" src="/icons/heart.svg"></div>
        <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
      </div>
+     
      <div th:if="${ d.today == 0 }">
        <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
      </div>
+     
      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
   </div>
 </div> 
@@ -408,7 +416,7 @@
          
           <span style="margin-left: 13px; width:15px; font-size: 7px;"><small>D-DAY'S NAME</small><input type="text" id="name" style="font-size: 15px; width:170px; margin-left: 7px;display: inline-block;"></span>
         </div>
-        <small><span id="dDayBtn" style="margin-left:200px; font-size: 10px;" class="rounded border p-1 mt-1">D-DAY추가</span></small>
+        <small><span onclick="newDday();" style="margin-left:200px; font-size: 10px;" class="rounded border p-1 mt-1">D-DAY추가</span></small>
       </div>
    </div>
 </div><!-- DDay모달 끝 -->
@@ -440,18 +448,7 @@
              +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span>';
          
          divToday.innerHTML = str;
-         
-         const divTodays = document.querySelector('#divTodays');
-         
-         str2 ='';
-         
-         str2 +='<span style="margin-left:6px; margin-right: 26px;"><img src="/icons/pin.svg" class="mirror-image" width="15px;"></span>'
-              +'<span>⦁ <span style="color:#ff6666;">t </span><span style="color:#ffb366;">o </span><span style="color:#0bda73;">d </span>'
-              +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span>\'<span style="color:#C0C0C0;">s</span> ⦁</span>'
-              +'<span style="margin-left:23px;"><img src="/icons/pin.svg" width="15px;"></span>';
-              
-         
-         divTodays.innerHTML = str2;
+       
     }
     
     function diaryPop(diaryId) {
@@ -464,6 +461,8 @@
       })
         .catch(err => { console.log(err) })
     };
+    
+   
 
     </script>
    
