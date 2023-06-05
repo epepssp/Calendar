@@ -95,8 +95,13 @@ public class CalendarRestController {
         List<DayDiaryDto>  d3 = integratedList.get(2);
         List<DayDiaryDto>  d4 = integratedList.get(3);
         List<DayDiaryDto>  d5 = integratedList.get(4);
+        List<DayDiaryDto>  d6 = null;
         
-        Lists lists = new Lists(d1, d2, d3,d4, d5);
+        if(!integratedList.get(5).isEmpty()) {
+            d6 = integratedList.get(5);
+        }
+         
+        Lists lists = new Lists(d1, d2, d3,d4, d5, d6);
         
        // log.info("리스폰스ㅔㅇㄴ터팉통합?={}", lists.toString());
         
@@ -414,19 +419,34 @@ public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) {
     
     
     List<Integer> dList =new ArrayList<>(); //  
-    if(original-1 >0) {  // dLsit: HTML에 달력 그리기 위한 데이리스트
+    // dLsit: HTML에 달력 그리기 위한 데이리스트
+    if(original != 0) {  
         for (int i = 0; i < original-1; i++) {
            dList.add(0);
-          }
-    }
-    for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
+          } 
+        for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
          dList.add(j);
+      }
     }
-    if(35-sub >0) {
+    
+    if(original == 0) {
+        for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
+            dList.add(j);
+         }
+    }
+         
+    
+    if(35 >= sub) { // 5주까지
        for (int i = 0; i <35- sub; i++) {
            dList.add(0);
           }
     }
+    
+    if(35 < sub) { // 6주까지 있는 경우
+        for (int i = 0; i <42- sub; i++) {
+            dList.add(0);
+           }
+     }
     
     
 
@@ -496,6 +516,7 @@ public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) {
     List<DayDiaryDto>  d3 = new ArrayList<>();
     List<DayDiaryDto>  d4 = new ArrayList<>();
     List<DayDiaryDto>  d5 = new ArrayList<>(); 
+    List<DayDiaryDto> d6 = new ArrayList<>();
     
     List<List<DayDiaryDto>> integratedList = new ArrayList<>();
     for (int i = 0; i < dayDiaryDtoList.size(); i++) {
@@ -523,17 +544,14 @@ public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) {
             d5.add(dayDiaryDtoList.get(i));
         }
         integratedList.add(d5);
+        
+        if(34 < i && i< 42) {
+            d6.add(dayDiaryDtoList.get(i));
+        }
+        integratedList.add(d6);
+        
     }   
  
-    if (dayDiaryDtoList.size() >= 35) {
-        List<DayDiaryDto> d6 = new ArrayList<>();
-        for (int n = 35; n < 42; n++) {
-            if( 34 < n && n< dList.size()) {
-                d6.add(dayDiaryDtoList.get(n));
-            }  
-            integratedList.add(d1);
-        }
-   }
    
     return integratedList;
 }

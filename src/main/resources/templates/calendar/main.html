@@ -119,6 +119,15 @@
            text-underline-offset: 3px;
         }
         
+        @keyframes blink {
+           0% { visibility: hidden; }
+           50% { visibility: hidden; }
+           100% { visibility: visible; }
+        }
+  
+       .blink {
+         animation: blink 1s infinite;
+        }
          
        </style>
        
@@ -214,12 +223,15 @@
   <div class="w3-container w3-cell text" th:each="d : ${d3}">
       <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
-        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId">
+            <img class="icon" style="width: 14px;" src="/icons/bo.svg"></div>
         <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
+        
       </div>
       <div th:if="${ d.today == 0 }">
         <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId">
+         <img class="icon" style="width: 14px;" src="/icons/bo.svg"></span>
       </div>
       <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
    </div>
@@ -260,6 +272,21 @@
      </div>
      
      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+  </div>
+</div> 
+
+<div th:if="${d6}" class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 6 -->
+  <div class="w3-container w3-cell text" th:each="d : ${d6}">
+     <div class="row" th:if="${ d.today == 1 }" style="background-color:#FFE4E1; ">
+        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
+        <div class="col-2" th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></div>
+        <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
+      </div>
+      <div th:if="${ d.today == 0 }">
+        <span th:if="${d.day} != 0" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+        <span th:if="${d.diaryId} != 0"  th:diaryId="${d.diaryId}" onclick="diaryPop(this.getAttribute('diaryId'));" id="diaryId"><img class="icon" style="width: 14px;" src="/icons/heart.svg"></span>
+      </div>
+      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
   </div>
 </div> 
 <!-- 달력 끝 -->
@@ -329,6 +356,7 @@
       
       </div>
     </div><!-- 게시판(notice board) 끝 -->
+    
     
  <!-- 디데이 추가 버튼 -->
   <div class="rounded mb-2 mt-2" align="center" style="margin-left:20px; border: 1px solid gray; width: 100px;" onclick="showDDayInput()">
@@ -445,8 +473,8 @@
          const divToday = document.querySelector('#divToday');
          let str ='';
          
-         str +='<span style="color:#ff6666;">t </span><span style="color:#ffb366;">o </span><span style="color:#0bda73;">d </span>'
-             +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span>';
+         str +='<span class="blink"><span style="color:#ff6666;">t </span><span style="color:#ffb366;">o </span><span style="color:#0bda73;">d </span>'
+             +'<span style="color:#66d9ff;">a </span><span style="color:#d966ff;">y</span></span>';
          
          divToday.innerHTML = str;
        

@@ -281,7 +281,14 @@ function showMini(data){
    
     
     let str5='';
-    str5 +='<div class="row line" style="border-bottom: 1px solid gray;">';
+    if(data.d6){
+         str5 +='<div class="row line">';
+    }
+    if(!data.d6){
+         str5 +='<div class="row line" style="border-bottom: 1px solid gray;">';
+    } 
+         
+ 
     for (let i = 0; i < 7; i++) {
         if(data.d5[i].diaryId != 0) {
            str5 +=`<div class="box" style="background-color:#eaeafb;"><a style="text-decoration: none;" href="/diary/detail?diaryId=${data.d5[i].diaryId }">`
@@ -296,8 +303,28 @@ function showMini(data){
         }
     } 
     str5 +='</div>';
+    
+    
+    let str6 ='';
+    if(data.d6){
+       str6 +='<div class="row line" style="border-bottom: 1px solid gray;">';
+       for (let i = 0; i < 7; i++) {
+           if(data.d6[i].diaryId != 0) {
+               str6 +=`<div class="box" style="background-color:#eaeafb;"><a style="text-decoration: none;" href="/diary/detail?diaryId=${data.d6[i].diaryId }">`
+                    +'<small>'+ data.d6[i].day+'</small></a></div>';
+           }
+           if(data.d6[i].diaryId == 0 && data.d6[i].day == 0) {
+               str6 +='<div class="box" style="color: white;"><small>'+ data.d6[i].day+'</small></div>';
+           }
+           if(data.d6[i].diaryId == 0 && data.d6[i].day != 0) {
+               str6 += `<div class="box" day="${data.d6[i].day}" onclick="createDiary(this.getAttribute(\'day\'));">`
+                    +'<small>'+ data.d6[i].day+'</small></div>';
+           }
+       } 
+       str6 +='</div>';
+    }
       
-    mini.innerHTML = str1 + str2 + str3 + str4 + str5;
+    mini.innerHTML = str1 + str2 + str3 + str4 + str5 + str6;
    }
 
 
