@@ -4,7 +4,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 
 calendarList();
-diaryList();
+
 
 });
 
@@ -43,6 +43,30 @@ function sortTypeChange() {
  // 버튼 클릭 이벤트 리스너 등록
 const sortBtn = document.getElementById("sortBtn");
 sortBtn.addEventListener("click", sortTypeChange);
+
+
+
+  //이모티콘
+    const emojiList = document.querySelectorAll('.emoji');
+    const textarea = document.getElementById('diaryContent');
+    
+    emojiList.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+        const selectedEmoji = emoji.getAttribute('data-emoji');
+        textarea.value += selectedEmoji;
+      });
+    });
+    
+    
+    function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+        }
+
+
 
 
 
@@ -160,6 +184,92 @@ diaryCreateBtn.addEventListener('click', e => {
 
 });
 
+
+// diaryList + paging
+window.onload = function() {
+    
+  const divPaging = document.getElementById('divPaging');
+  const pagination = document.getElementById('pagination');
+  
+  const year = document.querySelector('#year').value;
+  const monthValue = document.querySelector('#monthValue').value;
+
+  
+function setPage() {
+    alert('불럿니!!');
+    
+     const data ={
+         year:year,
+         monthValue:monthValue
+    }
+      
+    axios.post('/calendar/setPage', data)
+      .then(response => {
+        const pageList = response.data;
+     
+    //    document.getElementById('currentPage').textContent = pageList.pageable.pageNumber + 1;
+        renderItems(pageList);
+        renderPagination(pageList);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  
+  setPage();
+  
+ 
+
+// 페이징 버튼  
+function renderPagination(pageList){
+    console.log('dlfjgrp ehlsd');
+    console.log(pageList.page);
+    
+  //  pagination.innerHTML = '';
+
+    // 현재 페이지 번호와 전체 페이지 수 가져오기
+    const currentPage = pageList.pageable.pageNumber + 1;
+    const totalPages = pageList.totalPages;
+    
+    console.log('현재페이지');
+    console.log(currentPage);
+     console.log(totalPages);
+ 
+ 
+const maxPagesToShow = 3; // 최대로 출력할 페이지 수
+const startPage = Math.max(currentPage - Math.floor(maxPagesToShow / 2), 1);
+const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+    
+ let str ='';
+ 
+  str +='<a href="#">Prev</a>';
+  for (let i = startPage; i <= endPage; i++) {
+     str +='<a href="#" onclick="setPageNumber(event, ' + (i - 1) + ');">'+i+'</a>';
+  }
+  str +='<a href="#" >Next</a>';
+
+    pagination.innerHTML = str;
+    
+
+   
+} // renderPagination 끝
+
+
+
+
+function renderItems(pageList) {
+  divPaging.innerHTML = '';
+  console.log(pageList);
+    console.log(pageList.content);
+  
+   pageList.content.forEach(item => {
+    const listItem = document.createElement('div');
+    listItem.textContent = item.title;
+    divPaging.appendChild(listItem);
+  });
+}
+
+
 function diaryList(){
     const year = document.querySelector('#year').value;
     const monthValue = document.querySelector('#monthValue').value;
@@ -172,12 +282,46 @@ function diaryList(){
       axios.post('/calendar/miniList', data)
         .then(response => {
             showMiniList(response.data);
-              })
+        //    pagingList(response.data);
+            })
         .catch(err => { console.log(err) });
 }
 
+  diaryList();
+  
+};
+
+
+/*
+ // 현재 페이지 번호
+  var tempPage = 1;
+
+function renderPagination() {
+    var paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '현재 페이지: ' + tempPage;
+  }
+
+  // 초기 페이지 번호 표시
+  renderPagination();
+  
+  
+
+  // 다음 페이지로 이동
+  const nextBtn = document.querySelector('#nextBtn');
+  document.getElementById('nextBtn').addEventListener('click', nextPage);
+  function nextPage() {
+    // Ajax 요청을 통해 다음 페이지 데이터 가져오기
+    // 필요한 처리 및 렌더링 작업 수행
+    alert('넥스트!!!!!');
+  }
+*/  
+  
+
+
+
+
 function showMiniList(data){
-    console.log(data);
+
     const listDiv = document.querySelector('#listDiv');
     let str='';
     

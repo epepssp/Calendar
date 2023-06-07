@@ -29,6 +29,8 @@
         <!-- google icon --> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
         
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.min.js"></script>
+        
        <style>
         
          .hand1 {
@@ -93,6 +95,30 @@
              color: red;
              transform: scale(1.2);
         }
+        
+      
+        
+        .pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 1px 6px;
+  font-size:12px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
        </style>
        
     </head>
@@ -272,7 +298,7 @@
       
       
      <div class="row" style="width: 908px;">
-        <textarea id="diaryContent" style="height: 350px; border: 1px solid gray;"></textarea>
+        <textarea id="diaryContent" style="height: 150px; border: 1px solid gray;"></textarea>
      </div>
      
      <div align="right">
@@ -280,6 +306,24 @@
      </div>  
 
 </div><!-- 일기 전체 끝 -->
+
+
+  <div style="border: 1px solid red;" id="divPaging"></div>
+<span id="currentPage"></span>
+
+
+
+<div class="pagination" id="pagination">
+
+</div>
+
+<div class="pagina" style="font-size:14px; border: 1px solid blue;">
+  <a href="#" >Prev</a>
+  <a href="#">1</a>
+  <a href="#" class="active">2</a>
+  <a href="#">3</a>
+  <a href="#">Next</a>
+</div>
 
 
 </div><!-- 메인 오른쪽 끝 -->
@@ -348,25 +392,30 @@
           dateDiv.innerHTML = str;
     }
     
-    
-    const emojiList = document.querySelectorAll('.emoji');
-    const textarea = document.getElementById('diaryContent');
-    
-    emojiList.forEach(emoji => {
-      emoji.addEventListener('click', () => {
-        const selectedEmoji = emoji.getAttribute('data-emoji');
-        textarea.value += selectedEmoji;
-      });
-    });
-    
-    
-    function w3_open() {
-    	  document.getElementById("mySidebar").style.display = "block";
-    	}
+    function setPageNumber(event,i){
+        event.preventDefault();
+        
+     const data = { pageNumber: i };
+     
+     axios.post('/calendar/setPageNumber', data)
+     .then(response => {
+       // 서버 응답 처리
+       alert('오예섯ㅇ곧');
+       callBack();
+     })
+     .catch(error => {
+       // 에러 처리
+     });
+   
+  }
+ 
+ function callBack() {
+   setPage(); // setPage() 함수 호출
+ } 
 
-    	function w3_close() {
-    	  document.getElementById("mySidebar").style.display = "none";
-    	}
+ 
+
+  
     </script>
 
     

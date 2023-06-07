@@ -285,7 +285,7 @@ public class CalendarController {
     
     
     
-    @GetMapping({ "/calendar/front", "/calendar/back" })
+    @GetMapping({ "/calendar/front", "/calendar/back", "/calendar/selected" })
     public String frontCalendar(Integer year, Integer monthValue, Model model) {
         
         log.info("백 트론츠 잘 받았나영?={} : {}", year, monthValue);

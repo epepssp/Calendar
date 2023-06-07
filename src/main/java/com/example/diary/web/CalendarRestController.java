@@ -10,6 +10,11 @@ import java.util.stream.Collectors;
 
 import javax.swing.plaf.metal.MetalIconFactory.TreeLeafIcon;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +34,15 @@ import com.example.diary.dto.CalendarDto;
 import com.example.diary.dto.DayDiaryDto;
 import com.example.diary.dto.DayDto;
 import com.example.diary.dto.MiniDiaryDto;
+import com.example.diary.dto.PageNumberDto;
+import com.example.diary.dto.PageSetDto;
 import com.example.diary.dto.ScheduleAddDto;
 import com.example.diary.dto.YearAndMonthDto;
 import com.example.diary.repository.DiaryAttachmentRepository;
 import com.example.diary.service.CalendarService;
 import com.example.diary.service.DDayService;
 import com.example.diary.service.DiaryService;
+
 import com.example.diary.service.ScheduleService;
 
 import lombok.RequiredArgsConstructor;
@@ -50,6 +58,83 @@ public class CalendarRestController {
     private final DiaryService diaryService;
     private final DDayService dDayService;
     private final DiaryAttachmentRepository diaryAttachmentRepository;
+
+    
+    @PostMapping("/calendar/setPage")
+    public ResponseEntity<Page<MiniDiaryDto>> setPage(@RequestBody YearAndMonthDto dto, @PageableDefault(size = 5) Pageable pageable){
+        log.info("페이징리스트요청할data잘옴??={} ", dto);
+        
+        int pageNumber = pageable.getPageNumber(); // 클라이언트에서 전달된 페이지 번호
+        int pageSize = pageable.getPageSize(); // 클라이언트에서 전달된 페이지 크기
+        
+      // int page = dto.getPage();
+        
+        log.info("페이지 넘버={}",pageNumber);
+     //   log.info("페이지 디티오 ={}",page);
+
+        List<Diary> dd = diaryService.findByMonth(dto.getMonthValue());
+        List<Diary> filteredDd = dd.stream()
+                .filter(d -> d.getYear() == dto.getYear())
+                .collect(Collectors.toList());
+
+        List<MiniDiaryDto> dtoList = new ArrayList<>();
+        for (Diary diary : filteredDd) {
+            MiniDiaryDto miniDto = fromEntity(diary);
+            dtoList.add(miniDto);
+        }
+
+        int totalPages = (int) Math.ceil((double) dtoList.size() / pageSize);
+        if (pageNumber >= totalPages) {
+            pageNumber = totalPages - 1; // 페이지 번호를 유효한 범위 내에 맞춤
+        }
+        pageable = PageRequest.of(pageNumber, pageSize);
+        int startIndex = pageNumber * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, dtoList.size());
+        List<MiniDiaryDto> pagedList = dtoList.subList(startIndex, endIndex);
+        Page<MiniDiaryDto> pageList = new PageImpl<>(pagedList, pageable, dtoList.size());
+       
+   
+        return ResponseEntity.ok(pageList);
+    }
+    
+    @PostMapping("/calendar/setPageNumber")
+    public ResponseEntity<?> setPageNumber(@RequestBody PageNumberDto dto) {
+        // pageNumber를 사용하여 원하는 작업을 수행
+        // 예: 페이지 번호에 따른 데이터 조회 등
+        int pageNumber = dto.getPageNumber();
+        
+        return ResponseEntity.ok().build();
+    }
+    
+    
+    @PostMapping("/calendar/pagingList")
+    public ResponseEntity<Page<MiniDiaryDto>> pagingVersion(@RequestBody List<MiniDiaryDto> list, @PageableDefault(size = 6) Pageable pageable){
+        log.info("페이징리스트요청할data잘옴??={} ", list);
+        
+        int pageNumber = pageable.getPageNumber(); // 클라이언트에서 전달된 페이지 번호
+        int pageSize = pageable.getPageSize(); // 클라이언트에서 전달된 페이지 크기
+
+     // 전달된 페이지 번호와 페이지 크기가 유효한 범위 내에 있는지 확인
+        int totalPages = (int) Math.ceil((double) list.size() / pageSize);
+        if (pageNumber >= totalPages) {
+            pageNumber = totalPages - 1; // 페이지 번호를 유효한 범위 내에 맞춤
+        }
+        
+        pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Diary> plists = diaryService.getPagedDiaryList(list.get(0).getYear(), list.get(0).getMonthValue(), pageable); // DiaryService에서 페이지 데이터 가져오기
+        
+        List<MiniDiaryDto> dtoList = new ArrayList<>();
+        for (Diary diary : plists.getContent()) {
+            MiniDiaryDto dto = fromEntity(diary);
+            dtoList.add(dto);
+        }
+
+        //  long total = plists.getTotalElements(); // 실제 데이터의 수
+        Page<MiniDiaryDto> pageList = new PageImpl<>(dtoList, pageable, plists.getTotalElements());
+        
+        return ResponseEntity.ok(pageList);
+    }
+    
     
     @PostMapping("/calendar/miniList")
     public ResponseEntity<List<MiniDiaryDto>> miniListVersion(@RequestBody YearAndMonthDto dto){
@@ -64,24 +149,27 @@ public class CalendarRestController {
         
         List<MiniDiaryDto> miniList = new ArrayList<>();
 
-        for (Diary s : dd) {
-            MiniDiaryDto miniDto = MiniDiaryDto
-                                     .builder()
-                                     .diaryId(s.getDiaryId())
-                                     .year(s.getYear())
-                                     .monthValue(s.getMonthValue())
-                                     .day(s.getDay())
-                                     .weather(s.getWeather())
-                                     .title(s.getTitle())
-                                     .uuid(diaryAttachmentRepository.findByDiaryDiaryId(s.getDiaryId()).get(0).getUuid())
-                                     .fileName(diaryAttachmentRepository.findByDiaryDiaryId(s.getDiaryId()).get(0).getFileName())
-                                     .build();
+        for (Diary diary : dd) {
+            MiniDiaryDto miniDto = fromEntity(diary);
             miniList.add(miniDto);
-        }
+         }
        
-        
         return ResponseEntity.ok(miniList);
     }
+    
+    
+    // MiniDiaryDto 객체 리턴
+    private MiniDiaryDto fromEntity(Diary diary) {
+        
+        return MiniDiaryDto.builder()
+                           .diaryId(diary.getDiaryId()).year(diary.getYear())
+                           .monthValue(diary.getMonthValue()).day(diary.getDay())
+                           .weather(diary.getWeather()).title(diary.getTitle())
+                           .uuid(diaryAttachmentRepository.findByDiaryDiaryId(diary.getDiaryId()).get(0).getUuid())
+                           .fileName(diaryAttachmentRepository.findByDiaryDiaryId(diary.getDiaryId()).get(0).getFileName())
+                           .build();
+    }
+    
     
     @PostMapping("/calendar/mini")
     public ResponseEntity<Lists> miniVersion(@RequestBody YearAndMonthDto dto){
