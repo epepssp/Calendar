@@ -96,7 +96,23 @@
              transform: scale(1.2);
         }
         
-      
+      .image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 6px; 
+  width: 10%;
+ height: 10%;
+
+  color: #fff;
+  padding: 10px;
+}
         
         .pagination {
   display: inline-block;
@@ -308,22 +324,20 @@
 </div><!-- 일기 전체 끝 -->
 
 
-  <div style="border: 1px solid red;" id="divPaging"></div>
+<!-- 페이징 관련 -->
+<div style="border: 1px solid red;" id="divPaging"></div>
 <span id="currentPage"></span>
+<div class="pagination" id="pagination"></div>
+<!-- 페이징 관련 끝 -->
 
+<br>
 
-
-<div class="pagination" id="pagination">
-
+<!-- 사진 오른쪽 아래 글 넣기 연습중 -->
+<div class="image-container">
+   <img src="/icons/ibbs.png" width="200px;">
+    <span class="caption">미미미</span>
 </div>
-
-<div class="pagina" style="font-size:14px; border: 1px solid blue;">
-  <a href="#" >Prev</a>
-  <a href="#">1</a>
-  <a href="#" class="active">2</a>
-  <a href="#">3</a>
-  <a href="#">Next</a>
-</div>
+<!-- 사진 글넣기 연습 끝 -->
 
 
 </div><!-- 메인 오른쪽 끝 -->

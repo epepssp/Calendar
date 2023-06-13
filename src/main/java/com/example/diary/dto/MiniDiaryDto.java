@@ -29,6 +29,6 @@ public class MiniDiaryDto {
     private String uuid;
     private String fileName;
     
-    
+    private int totalAttachments;
     
 }

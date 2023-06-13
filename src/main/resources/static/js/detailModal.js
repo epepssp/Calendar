@@ -11,7 +11,7 @@ function diaryPop(diaryId) {
     alert(diaryId);
     
     axios
-        .get('/day/diary/' + diaryId)
+      .get('/day/diary/', { params: {diaryId:diaryId}})
         .then(response => {
           console.log('tjdrhd');
       })

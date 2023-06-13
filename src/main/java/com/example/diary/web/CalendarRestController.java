@@ -107,33 +107,33 @@ public class CalendarRestController {
     }
     
     
-    @PostMapping("/calendar/pagingList")
-    public ResponseEntity<Page<MiniDiaryDto>> pagingVersion(@RequestBody List<MiniDiaryDto> list, @PageableDefault(size = 6) Pageable pageable){
-        log.info("페이징리스트요청할data잘옴??={} ", list);
-        
-        int pageNumber = pageable.getPageNumber(); // 클라이언트에서 전달된 페이지 번호
-        int pageSize = pageable.getPageSize(); // 클라이언트에서 전달된 페이지 크기
-
-     // 전달된 페이지 번호와 페이지 크기가 유효한 범위 내에 있는지 확인
-        int totalPages = (int) Math.ceil((double) list.size() / pageSize);
-        if (pageNumber >= totalPages) {
-            pageNumber = totalPages - 1; // 페이지 번호를 유효한 범위 내에 맞춤
-        }
-        
-        pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Diary> plists = diaryService.getPagedDiaryList(list.get(0).getYear(), list.get(0).getMonthValue(), pageable); // DiaryService에서 페이지 데이터 가져오기
-        
-        List<MiniDiaryDto> dtoList = new ArrayList<>();
-        for (Diary diary : plists.getContent()) {
-            MiniDiaryDto dto = fromEntity(diary);
-            dtoList.add(dto);
-        }
-
-        //  long total = plists.getTotalElements(); // 실제 데이터의 수
-        Page<MiniDiaryDto> pageList = new PageImpl<>(dtoList, pageable, plists.getTotalElements());
-        
-        return ResponseEntity.ok(pageList);
-    }
+//    @PostMapping("/calendar/pagingList")
+//    public ResponseEntity<Page<MiniDiaryDto>> pagingVersion(@RequestBody List<MiniDiaryDto> list, @PageableDefault(size = 6) Pageable pageable){
+//        log.info("페이징리스트요청할data잘옴??={} ", list);
+//        
+//        int pageNumber = pageable.getPageNumber(); // 클라이언트에서 전달된 페이지 번호
+//        int pageSize = pageable.getPageSize(); // 클라이언트에서 전달된 페이지 크기
+//
+//     // 전달된 페이지 번호와 페이지 크기가 유효한 범위 내에 있는지 확인
+//        int totalPages = (int) Math.ceil((double) list.size() / pageSize);
+//        if (pageNumber >= totalPages) {
+//            pageNumber = totalPages - 1; // 페이지 번호를 유효한 범위 내에 맞춤
+//        }
+//        
+//        pageable = PageRequest.of(pageNumber, pageSize);
+//        Page<Diary> plists = diaryService.getPagedDiaryList(list.get(0).getYear(), list.get(0).getMonthValue(), pageable); // DiaryService에서 페이지 데이터 가져오기
+//        
+//        List<MiniDiaryDto> dtoList = new ArrayList<>();
+//        for (Diary diary : plists.getContent()) {
+//            MiniDiaryDto dto = fromEntity(diary);
+//            dtoList.add(dto);
+//        }
+//
+//        //  long total = plists.getTotalElements(); // 실제 데이터의 수
+//        Page<MiniDiaryDto> pageList = new PageImpl<>(dtoList, pageable, plists.getTotalElements());
+//        
+//        return ResponseEntity.ok(pageList);
+//    }
     
     
     @PostMapping("/calendar/miniList")
@@ -167,6 +167,7 @@ public class CalendarRestController {
                            .weather(diary.getWeather()).title(diary.getTitle())
                            .uuid(diaryAttachmentRepository.findByDiaryDiaryId(diary.getDiaryId()).get(0).getUuid())
                            .fileName(diaryAttachmentRepository.findByDiaryDiaryId(diary.getDiaryId()).get(0).getFileName())
+                          .totalAttachments(diaryAttachmentRepository.findByDiaryDiaryId(diary.getDiaryId()).size())
                            .build();
     }
     

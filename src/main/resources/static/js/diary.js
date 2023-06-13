@@ -5,8 +5,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 calendarList();
 
-
-});
+ 
+});  // 윈도우 
 
 
 let sort = 1;
@@ -65,9 +65,6 @@ sortBtn.addEventListener("click", sortTypeChange);
         function w3_close() {
           document.getElementById("mySidebar").style.display = "none";
         }
-
-
-
 
 
 
@@ -332,7 +329,8 @@ function showMiniList(data){
              +'<div class="w3-container w3-cell"><div style="color:#A9A9A9; font-size: 9px;">'+x.year+'.'+x.monthValue+'.'+x.day+' 일기</div>'
              +`<a style="text-decoration: none;" href="/diary/detail?diaryId=${ x.diaryId }">`
              +'<span style="color:#FF6347;">⦁</span> '+x.title+'</a></div>'
-             +'<div class="w3-container w3-cell" style="width:38px;"><img class="rounded" width="35px;" height="42px;" src="/api/view/'+x.uuid + '_' + x.fileName +'" /></div></div>';
+             +'<div class="w3-container w3-cell" style="width:38px;">'
+             +'<div class="image-container"><img class="rounded" width="35px;" height="42px;" src="/api/view/'+x.uuid + '_' + x.fileName +'" /><span class="caption">'+x.totalAttachments+'</span></div></div></div>';
     }
     
     str +='</div></div>';

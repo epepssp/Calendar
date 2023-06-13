@@ -29,6 +29,8 @@ public class DiaryAttachment implements Comparable<DiaryAttachment> {
     @ManyToOne
     private Diary diary;
 
+    
+    
     // @OneToMany 처리에서 순서에 맞게 정렬하기 위해서.
     @Override
     public int compareTo(DiaryAttachment other) {
