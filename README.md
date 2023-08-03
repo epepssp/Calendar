@@ -26,6 +26,58 @@
 ## 구현 기능
 ### 1. Calendar
 + #### Calendar 생성
+    > CalendarController.java 일부
+    ```java
+
+        LocalDate date = LocalDate.of(year,monthValue, 1); 
+        
+        String dayOfWeekS = date.getDayOfWeek().toString(); // 월 1일의 요일
+        
+        // Enum 이용해서 요일 차 계산: (HTML에서 달력 그릴때 몇번째칸부터 1일시작할지)
+        // 차이만큼 0 널고 리스트 만들어서 넘기면 제대로 그릴 수 있음
+        int original = 0;
+        Week w = Week.valueOf(dayOfWeekS);  
+        for(Week e: Week.values()) {
+            if(e.equals(w)) {
+              original=  e.ordinal();
+            }
+        }    
+        
+        // 뒤에 빈 칸은 몇칸인지 계산해서 역시 0넣음. HTML 달력 모양 깨지지 않게  
+        int sub = date.getMonth().maxLength() + original;
+        
+        List<Integer> dList =new ArrayList<>(); //  
+        
+        
+        // dLsit: HTML에 달력 그리기 위한 데이리스트
+        if(original != 0) {  
+            for (int i = 0; i < original-1; i++) {
+               dList.add(0);
+              } 
+            for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
+             dList.add(j);
+          }
+        }
+        
+        if(original == 0) {
+            for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
+                dList.add(j);
+             }
+        }
+             
+        
+        if(35 >= sub) { // 5주까지
+           for (int i = 0; i <35- sub; i++) {
+               dList.add(0);
+              }
+        }
+        
+        if(35 < sub) { // 6주까지 있는 경우
+            for (int i = 0; i <42- sub; i++) {
+                dList.add(0);
+               }
+       }
+    ```
 + #### Today
   + ##### 컬러 + 블링크 효과
   + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
