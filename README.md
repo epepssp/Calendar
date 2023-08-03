@@ -203,7 +203,7 @@
   ```
 
   > fileUpload.js
-  ```javaScript
+  ```javascript
 
      // 모달의 업로드 버튼 클릭 이벤트 처리
      document.querySelector('#modalUploadBtn').addEventListener('click', e => {
