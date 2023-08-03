@@ -78,7 +78,7 @@
        }
     ```
 + #### Today
-  + ##### 컬러 + 블링크 효과
+  + ##### Color + Blink Effect 사용하여 Today 표시
   + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
 + #### Calendar 이동
   + ##### Front, Back 버튼
