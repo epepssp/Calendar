@@ -86,9 +86,9 @@
        }
   ```
   + ##### day의 Schedule list, diaryId
-    > DayDiaryDto.java
+  > DayDiaryDto.java
   
-    ```java
+  ```java
     
         public class DayDiaryDto {
 
@@ -99,11 +99,11 @@
 
           // day와 함께 전달할 정보(day 일정 리스트, 다이어리Id)를 묶어 DayDiaryDto 만듦
       }
-    ```
+  ```
 
-    > CalendarController.java 일부
+  > CalendarController.java 일부
   
-    ```java
+  ```java
     
         // 스케쥴(일정) 리스트
         Set<Integer> daysHaveSchedule = new HashSet<>(); 
@@ -164,7 +164,7 @@
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
                         .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
        }
-    ```
+  ```
     
     
 + #### 외부 경로(로컬 폴더) 사진 업로드
