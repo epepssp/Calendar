@@ -95,9 +95,77 @@
           private int day;
           private Integer diaryId;      // 일기
           private List<Schedule> sList; // day에 등록된 일정 리스트
+          private int today;            // today면= 1, 아니면 =0 
 
           // day와 함께 전달할 정보(day 일정 리스트, 다이어리Id)를 묶어 DayDiaryDto 만듦
       }
+    ```
+
+    > CalendarController.java 일부
+  
+    ```java
+    
+        // 스케쥴(일정) 리스트
+        Set<Integer> daysHaveSchedule = new HashSet<>(); 
+        for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
+            daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
+        }
+        
+        List<List<Schedule>> daysScheduleList = new ArrayList<>();
+        List<Schedule> eachOfDaySchedule = new ArrayList<>();
+       
+        for (Integer d : dList) {
+            if(daysHaveSchedule.contains(d)){
+                 eachOfDaySchedule = scheduleService.findByDayOfMonth(date.getMonthValue(),d);
+                 daysScheduleList.add(eachOfDaySchedule);
+            }
+            else {
+                  daysScheduleList.add(null);
+             }
+         } 
+        
+
+        
+        // 일기(다이어리) 리스트
+        Set<Integer> daysHaveDiary= new HashSet<>(); 
+        for (Diary m : diaryService.findByMonth(date.getMonthValue())) {
+            daysHaveDiary.add(m.getDay()); // 스케쥴이 있는 날짜들
+        }
+        
+         List<Integer> diaryList = new ArrayList<>();
+        for (Integer d : dList) {
+            if (daysHaveDiary.contains(d)) {
+               diaryList.add(diaryService.findByMD(date.getMonthValue(),d).getDiaryId());
+                } else{
+                    diaryList.add(0);
+                }
+         }
+
+        // Today
+        List<Integer> to = new ArrayList<>();
+        if(LocalDate.now().getMonthValue() == date.getMonthValue()) {
+           for (Integer i : dList) {
+              if(i == LocalDate.now().getDayOfMonth()) {
+                  to.add(1);
+              } else {
+                  to.add(0);
+              }
+            }
+        }
+        
+        if(LocalDate.now().getMonthValue() != date.getMonthValue()) {
+            for (Integer i : dList) {
+                to.add(0);
+            }
+        }
+
+
+        // 통합 리스트 + 앞뒤로 
+        List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();
+        for (int i = 0; i < dList.size(); i++) {
+           dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
+                        .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
+       }
     ```
     
     
