@@ -242,17 +242,17 @@
 
 
                 // 업로드 선택한 파일들 innerHTML로 diary create 페이지에 보여줌   
-                const htmlStr = `
-<div class="card my-2">
-    <div class="card-header d-flex justify-content-center">
-        ${x.fileName}
-        <button class="btnDelete btn-close" aria-label="Close"
-            data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
-    </div>
-    <div class="card-body">
-        ${img}
-    </div>
-</div>`;
+               
+ const htmlStr = `<div class="card my-2">
+                     <div class="card-header d-flex justify-content-center">
+                      ${x.fileName}
+                        <button class="btnDelete btn-close" aria-label="Close"
+                         data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
+                     </div>
+                     <div class="card-body">
+                     ${img}
+                     </div>
+                  </div>`;
                 
          uploadResults.innerHTML += htmlStr;
        });   
