@@ -374,8 +374,7 @@
          textarea.value += selectedEmoji;
         });
      });
-    
-    
+      
      function w3_open() {
           document.getElementById("mySidebar").style.display = "block";
      }
@@ -386,6 +385,57 @@
   
   ```
 + #### 정렬(sort) 기준 선택
+  + ##### Sort
+  > create.html
+  ```html
+
+      <div class="w3-cell-row mb-1">
+        <div class="w3-container w3-cell" id="ms"></div>
+        <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
+      </div>
+  
+      <div id="mini"></div><!-- 미니 캘린더 형식 -->
+      <div id="listDiv"></div><!-- 리스트 형식 -->
+  
+  ```
+  > diary.js
+  ```javascript
+
+     let sort = 1;
+  
+     const mini = document.getElementById("mini");
+     const listDiv = document.getElementById("listDiv");
+     const sorti = document.getElementById("sorti");
+
+     <!-- 디폴트: 미니 캘린더 형식 -->
+     mini.style.display = "block";
+     listDiv.style.display = "none";
+
+     sorti.classList.add("far", "fa-list-alt");
+
+     <!-- 정렬(Sort) 아이콘 클릭했을 때 sort Type 바꾸는 함수 -->
+     function sortTypeChange() {
+         if (sort === 1) {
+             mini.style.display = "none";
+             listDiv.style.display = "block";
+             sorti.classList.remove("far", "fa-list-alt");
+             sorti.innerHTML = '<i class="material-icons" style="font-size:19px;">grid_on</i>';
+             sort = 2; // 1일 경우 2로 변경
+         } else {
+             mini.style.display = "block";
+             listDiv.style.display = "none";
+             sorti.innerHTML = "";
+             sorti.classList.add("far", "fa-list-alt");
+             sort = 1; // 2일 경우 1로 변경
+         }
+     }
+
+     // 버튼 클릭 이벤트 리스너 등록
+     const sortBtn = document.getElementById("sortBtn");
+     sortBtn.addEventListener("click", sortTypeChange);
+  
+  ```
+  
 + #### 엔터로 등록 
 + #### Calendar 와 Diary 각종 연결과 이동 기능
 
