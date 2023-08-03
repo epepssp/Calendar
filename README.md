@@ -294,7 +294,46 @@
      }
   ```
   
-+ #### Diary Create - Weather 
++ #### Diary Create - Weather
+  + ##### Weather 선택 (중복 선택X, 하나만 고를 수 있게)
+  > diary.js
+  ```javascript
+
+       let weather = null; // 초기에는 값이 없는 상태
+
+       function svgClick(n) {
+
+         if (weather === null) {  
+             weather = n; // 변수 weather에 새로운 값 저장
+             updateWeather(n);
+             console.log("변수 값이 저장. weather =", weather);
+         } else if (weather === n) {
+             weather = null; // 저장된 값을 취소하기 위해 변수를 null로 설정
+             updateWeather(null);
+             console.log("변수 값이 취소. weather =", weather);
+         } else {
+             isClickable = false; // 클릭 비활성화  
+             console.log("변화 없음. weather =", weather);
+         }
+      }
+
+      function handleClick(btn, n) {
+          let isClickable = true; // 클릭 가능한 상황인지 True, False
+  
+          if (weather !== null && weather !== n) {
+              isClickable = false; // 클릭 비활성화
+          }
+          if (isClickable) { // 클릭 가능한 경우에만 동작 수행
+              svgClick(n); 
+              btn.classList.toggle("invert");
+          }
+       }
+
+       function updateWeather(n){
+           const weather = document.querySelector('#weather');
+           weather.value = n;
+       }
+  ```
 + #### Diary Create - Emoji
 + #### 정렬(sort) 기준 선택
 + #### 엔터로 등록 
