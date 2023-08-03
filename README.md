@@ -115,7 +115,7 @@
 
 + #### Today
   + ##### Color, Blink Effect
-<div align="center"><img src="https://github.com/epepssp/Calendar/assets/118948099/fc6646a9-ee1e-4f7e-9466-6d975ac72c65" width="550" height="400" alt="투데이"></div> 
+<div align="center"><img src="https://github.com/epepssp/Calendar/assets/118948099/fc6646a9-ee1e-4f7e-9466-6d975ac72c65" width="580" height="400" alt="투데이"></div> 
   + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
 
 + #### Day 모달
