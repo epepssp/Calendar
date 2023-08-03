@@ -18,7 +18,7 @@
 + JavaScript
 
 ## 주요기능 소개
-+ API 사용하지 않고 수작업으로 구현한 Calendar 기능
++ Calendar
 + 일정 추가
 + D-DAY 설정
 + 일기장
