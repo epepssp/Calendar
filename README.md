@@ -111,7 +111,7 @@
   ```
 
   + ##### 원하는 날짜 선택
-<div ><img style="margin-left: 100px;"src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
+<div ><img style="margin-left: 100;"src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
 
 + #### Today
   + ##### Color, Blink Effect
