@@ -25,7 +25,7 @@
 
 ## 구현 기능
 ### 1. Calendar
-+ #### Calendar 생성
++ #### API 사용하지 않고 직접 Calendar 구현하기
     > CalendarController.java 일부
     ```java
 
@@ -77,12 +77,34 @@
                }
        }
     ```
+
++ #### Calendar 이동
+  + ##### Front, Back 버튼
+  ```html
+        <span th:if="${ dto.monthValue != 1}"><!-- 달력 페이징 프론트 버튼 -->
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
+    <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i></button>
+   </span>
+   <span th:if="${ dto.monthValue == 1}">
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
+  <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i></button>
+   </span>
+
+    <span th:if="${ dto.monthValue != 12}"><!-- 달력 페이징 백 버튼 -->
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
+        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i></button>
+   </span>
+   <span th:if="${ dto.monthValue == 12}">
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
+       <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i></button>
+   </span>
+  ```
+  + ##### 원하는 날짜 선택
+  + 
 + #### Today
   + ##### Color, Blink Effect
   + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
-+ #### Calendar 이동
-  + ##### Front, Back 버튼
-  + ##### 원하는 날짜 선택
+
 + #### Day 모달
   + ##### Calendar에서 특정 날짜를 클릭하면 모달창에 해당 날짜의 정보들을 볼 수 있다.
   + ##### 스케츌 추가/디데이 설정/일기 작성
