@@ -170,17 +170,19 @@
     
 + #### 외부 경로(로컬 폴더) 사진 업로드
 
+ > application.properties 일부
   ```application.properties
   
-        # Own configuration values
-        com.example.upload.path=C:\\diary\\uploads 
+      # Own configuration values
+      com.example.upload.path=C:\\diary\\uploads 
   
   ```
   > FileUploadController.java 일부
   ```java
 
-        @Value("${com.example.upload.path}")
-        private String uploadPath;    // 경로 주입
+      @Value("${com.example.upload.path}")
+      private String uploadPath;    // 경로 주입
+
   ```
 
   
