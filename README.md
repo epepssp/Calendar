@@ -169,7 +169,7 @@
     
     
 + #### 사진 첨부
-  + ##### 외부경로
+  + ##### 외부경로 설정
   > application.properties 일부
   ```application.properties
   
@@ -184,7 +184,115 @@
       private String uploadPath;    // 경로 주입
 
   ```
+  + ##### Diary Create 사진 업로드
+  > create.html 일부
 
+  ```html
+
+       <!-- 사진 첨부 버튼 -->
+       <div onclick="document.getElementById('fileModal').style.display='block'" class="rounded m-1 p-1">
+          <img src="/icons/images.svg">사진첨부
+       </div>
+
+       <!-- 첨부한 파일 리스트 보여주는  영역 -->
+       <div class="col">
+          <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
+          <div id="uploads"></div> <!-- saveTemporarily 리스트 보여주는 영역 -->
+       </div>
+  
+  ```
+
+  > fileUpload.js
+  ```javaScript
+
+     // 모달의 업로드 버튼 클릭 이벤트 처리
+     document.querySelector('#modalUploadBtn').addEventListener('click', e => {
+   
+        const formData = new FormData();
+        const fileInput = document.querySelector('input[name="files"]');
+        console.log(fileInput.files);
+       
+        for (let file of fileInput.files) {
+            console.log(file);
+            formData.append('files', file);
+        }
+          uploadFiles(formData);
+    });
+    
+    function uploadFiles(formData) {
+      
+        axios.post('/upload', formData)
+            .then(getUploadedThumbnails)
+            .catch(err => { console.log(err) })
+            .then(document.getElementById('fileModal').style.display = 'none');
+    }
+    
+    
+    function getUploadedThumbnails(response){
+            if (response.status == 200) {
+            response.data.forEach(x => {
+                //console.log(data);
+                // 이미지 파일이 아닌 경우, 디폴트 썸네일 이미지를 사용하도록.
+                let img = '';
+                if (x.image) {
+                    img = `<img src="/api/view/${x.link}" data-src="${x.uuid + '_' + x.fileName}" />`;
+                } else {
+                    img = `<img src="/images/file_128.png" data-src="${x.uuid + '_' + x.fileName}" />`;
+                }
+
+
+                // 업로드 선택한 파일들 innerHTML로 diary create 페이지에 보여줌   
+                const htmlStr = `
+<div class="card my-2">
+    <div class="card-header d-flex justify-content-center">
+        ${x.fileName}
+        <button class="btnDelete btn-close" aria-label="Close"
+            data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
+    </div>
+    <div class="card-body">
+        ${img}
+    </div>
+</div>`;
+                
+         uploadResults.innerHTML += htmlStr;
+       });   
+       
+         
+         document.querySelectorAll('.btnDelete').forEach(btn => {
+         btn.addEventListener('click', removeFileFromServer);
+        });
+          
+       const uploads = document.querySelector('#uploads');
+       const files = uploadResults.querySelectorAll('img');
+       
+       let str = '';
+       files.forEach(x => {
+             const imgLink = x.getAttribute('data-src');
+             str += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
+       });
+       uploads.innerHTML = str;
+    
+         
+    }
+    
+   function removeFileFromServer(event) {  // 업로드 하고자 선택했던 사진 제거
+        event.preventDefault();
+        //console.log(event.target);
+        //console.log(event.target.closest('.card'));
+        
+        const btn = event.target;
+        const uuid = btn.getAttribute('data-uuid');
+        const fname = btn.getAttribute('data-fname');
+        const fileName = uuid + '_' + fname;
+        //console.log(fileName);
+        
+        axios.delete('/remove/' + fileName)
+            .then(resp => { btn.closest('.card').remove() })
+            .catch(err => { console.log(err) })
+            .then(function () {});
+        
+     }
+  ```
   
 + #### weather
 + #### Emoji
