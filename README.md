@@ -27,7 +27,7 @@
 ### 1. Calendar
 + #### Calendar 생성
 + #### Today
- + ##### 컬러 + 블링크 효과
- + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
+  + ##### 컬러 + 블링크 효과
+  + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
 
 
