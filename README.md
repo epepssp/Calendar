@@ -110,9 +110,9 @@
   
   ```
   + ##### 원하는 날짜 선택
- <p align="center">
-  <img src="![날짜선택이동](https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35)">
-</p> 
+
+ ![날짜선택이동](https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35)
+
 
 + #### Today
   + ##### Color, Blink Effect
