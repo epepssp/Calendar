@@ -203,6 +203,7 @@
   ```
 
   > fileUpload.js
+  
   ```javascript
 
      // 모달의 업로드 버튼 클릭 이벤트 처리
@@ -271,11 +272,10 @@
              str += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
        });
        uploads.innerHTML = str;
-    
-         
+        
     }
     
-   function removeFileFromServer(event) {  // 업로드 하고자 선택했던 사진 제거
+   function removeFileFromServer(event) {  // 업로드 선택했던 사진 제거
         event.preventDefault();
         //console.log(event.target);
         //console.log(event.target.closest('.card'));
