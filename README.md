@@ -84,7 +84,5 @@
         // dList + 스케쥴 리스트 + 일기 리스트 = List<DayDiaryDto> 타입의 통합 리스트 생성 -> HTML에 그릴 수 있게 넘겨줌
   
     }
-  }
+   }
 ```
-
-- Today
