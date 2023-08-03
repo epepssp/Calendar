@@ -64,8 +64,7 @@
                 dList.add(j);
              }
         }
-             
-        
+               
         if(35 >= sub) { // 5주까지
            for (int i = 0; i <35- sub; i++) {
                dList.add(0);
