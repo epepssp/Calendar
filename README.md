@@ -168,9 +168,9 @@
   ```
     
     
-+ #### 외부 경로(로컬 폴더) 사진 업로드
-
- > application.properties 일부
++ #### 사진 첨부
+  + ##### 외부경로
+  > application.properties 일부
   ```application.properties
   
       # Own configuration values
