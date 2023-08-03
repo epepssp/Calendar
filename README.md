@@ -123,9 +123,7 @@
                   daysScheduleList.add(null);
              }
          } 
-        
-
-        
+          
         // 일기(다이어리) 리스트
         Set<Integer> daysHaveDiary= new HashSet<>(); 
         for (Diary m : diaryService.findByMonth(date.getMonthValue())) {
@@ -160,7 +158,7 @@
         }
 
 
-        // 통합 리스트 + 앞뒤로 
+        // 통합 리스트 - HTML에 통합 된 하나의 리스트로 넘긴다. 
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();
         for (int i = 0; i < dList.size(); i++) {
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
