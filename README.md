@@ -360,6 +360,31 @@
       </div><!--이모티콘 Sidebar 끝 -->
   
   ```
+  > diary.js
+  ```javascript
+  
+     //이모지
+     const emojiList = document.querySelectorAll('.emoji');
+     const textarea = document.getElementById('diaryContent');
+
+     //이모지 리스트 각각의 이모지에 이벤트 리스너 설정
+     emojiList.forEach(emoji => {
+         emoji.addEventListener('click', () => {
+         const selectedEmoji = emoji.getAttribute('data-emoji');
+         textarea.value += selectedEmoji;
+        });
+     });
+    
+    
+     function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+     }
+
+      function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+     }
+  
+  ```
 + #### 정렬(sort) 기준 선택
 + #### 엔터로 등록 
 + #### Calendar 와 Diary 각종 연결과 이동 기능
