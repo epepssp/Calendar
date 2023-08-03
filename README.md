@@ -29,5 +29,7 @@
 + #### Today
   + ##### 컬러 + 블링크 효과
   + ##### Notice Board 투데이 기준 D-Day 리스트 보여줌
-
++ #### Calendar 이동
+  + ##### Front, Back 버튼
+  + ##### 원하는 날짜 선택
 
