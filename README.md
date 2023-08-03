@@ -294,8 +294,8 @@
      }
   ```
   
-+ #### weather
-+ #### Emoji
++ #### Diary Create - Weather 
++ #### Diary Create - Emoji
 + #### 정렬(sort) 기준 선택
 + #### 엔터로 등록 
 + #### Calendar 와 Diary 각종 연결과 이동 기능
