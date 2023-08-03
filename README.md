@@ -335,6 +335,31 @@
        }
   ```
 + #### Diary Create - Emoji
+  + ##### Emoji
+  > create.html
+  ```html
+
+     <div class="w3-sidebar w3-bar-block mt-3" align="center" style="display:none; position: absolute;" id="mySidebar"><!--이모티콘 Sidebar -->
+        <div id="emoji-list" class="card mt-4" style="width: 250px; height: 250px; border: 1px solid red;"><!-- 사이드바 컨텐츠 -->
+           <!-- 추가할 이모지 data-emoji 형식으로 -->
+           <div class="w3-cell-row mt-2" style="width: 100%;">
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😁"><i class="fa-regular fa-face-smile-beam m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😉"><i class="fa-regular fa-face-smile-wink m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😊"><i class="fa-regular fa-face-laugh m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😄"><i class="fa-regular fa-face-laugh-beam m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😆"><i class="fa-regular fa-face-laugh-squint m-1" style="font-size: 20px;"></i></div>
+           </div>
+           <div class="w3-cell-row mt-1" style="width: 100%;">
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😘"><i class="fa-regular fa-face-kiss-wink-heart m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😍"><i class="fa-regular fa-face-grin-hearts m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😜"><i class="fa-regular fa-face-grin-tongue-squint m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="😅"><i class="fa-regular fa-face-grin-beam-sweat m-1" style="font-size: 20px;"></i></div>
+               <div class="w3-container w3-cell emoji p-1" data-emoji="🙄"><i class="fa-regular fa-face-rolling-eyes m-1" style="font-size: 20px;"></i></div>
+            </div>
+         </div><!-- 사이드바 컨텐츠 끝 -->
+      </div><!--이모티콘 Sidebar 끝 -->
+  
+  ```
 + #### 정렬(sort) 기준 선택
 + #### 엔터로 등록 
 + #### Calendar 와 Diary 각종 연결과 이동 기능
