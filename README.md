@@ -83,7 +83,8 @@
         // dList = HTML에 달력을 그리기 위한 day 리스트  -> 캘린더 그리기 완성
         // dList + 스케쥴 리스트 + 일기 리스트 = List<DayDiaryDto> 타입의 통합 리스트 생성 -> HTML에 그릴 수 있게 넘겨줌
   
-    }  
+    }
+  }
 ```
 
 + #### Today
