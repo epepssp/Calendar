@@ -436,7 +436,35 @@
   
   ```
   
-+ #### 엔터로 등록 
++ #### 엔터로 등록
+  > calendar.js
+  ```javascript
+
+     // 일정 추가 인풋
+     function showInput() {
+         const inputDiv = document.querySelector('#inputDiv');
+  
+         // 사이드바에서 일정 추가 클릭시 Input창 뜸
+         let str = '<input style="border:none;" autofocus="autofocus" id="addP" type="text" /><span id=addBtn style="margin-left: 10px;"><small>추가</small></span>';
+         inputDiv.innerHTML = str;
+
+         const addBtn = document.querySelector('#addBtn');  
+         addBtn.addEventListener('click', send);  // 추가 버튼으로 입력
+
+         var addScheduleInput = document.getElementById('addP');
+         addScheduleInput.addEventListener('keyup', function enterSend(event) {  // 엔터로 입력
+             let addScheduleInputValue = addScheduleInput.value;
+
+             if (event.keyCode === null) { // 입력된 내용이 없으면
+                   event.preventDefault();
+             }
+             if ((event.keyCode === 13) && ($.trim(addScheduleInputValue) != '')) { // 입력된 내용이 있으면
+                   send(); // 보냄
+             }
+         });
+     };
+  
+  ```
 + #### Calendar 와 Diary 각종 연결과 이동 기능
 
 
