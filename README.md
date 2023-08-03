@@ -29,7 +29,7 @@
     > CalendarController.java 일부
     ```java
 
-        LocalDate date = LocalDate.of(year,monthValue, 1); 
+        LocalDate date = LocalDate.of(year,monthValue, 1);  // 달력을 그릴 연도, 달
         
         String dayOfWeekS = date.getDayOfWeek().toString(); // 월 1일의 요일
         
