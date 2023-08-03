@@ -18,7 +18,7 @@
 + JavaScript
 
 ## 주요기능 소개
-+ Calendar
++ Calendar 보기
 + 일정 추가
 + D-DAY 설정
 + 일기장
