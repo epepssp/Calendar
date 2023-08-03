@@ -86,18 +86,18 @@
        }
     ```
   + ##### day의 Schedule list, diaryId
-   > DayDiaryDto.java
+    > DayDiaryDto.java
   
     ```java
     
-    public class DayDiaryDto {
+        public class DayDiaryDto {
 
-      private int day;
-      private Integer diaryId;      // 일기
-      private List<Schedule> sList; // day에 등록된 일정 리스트
+          private int day;
+          private Integer diaryId;      // 일기
+          private List<Schedule> sList; // day에 등록된 일정 리스트
 
-      // day와 함께 전달할 정보(day 일정 리스트, 다이어리Id)를 묶어 DayDiaryDto 만듦
-   }
+          // day와 함께 전달할 정보(day 일정 리스트, 다이어리Id)를 묶어 DayDiaryDto 만듦
+      }
     ```
     
     
