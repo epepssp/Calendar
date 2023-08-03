@@ -25,6 +25,63 @@
 
 ## 주요 구현 기능
 + #### API 사용하지 않고 직접 Calendar 만들기
+    > CalendarController.java 일부
+    ```java
+
+        // LocalDate date  = LocalDate.now();
+        LocalDate date = LocalDate.of(year,monthValue, 1);
+        // 현재 또는 전달 받은 year,monthValue 로 date 구함
+        
+        String dayOfWeekS = date.getDayOfWeek().toString();
+        // 월(month) 1일의 요일 구하고
+        
+        int original = 0;
+        Week w = Week.valueOf(dayOfWeekS);  
+        for(Week e: Week.values()) {
+            if(e.equals(w)) {
+              original=  e.ordinal();
+            }
+        }
+        // Enum 이용해서 요일 차 계산: (HTML에서 달력 그릴 때 몇번째칸부터 1일 시작 할 지)
+        // 차이 만큼 앞에 0 넣어 리스트 만들어서 넘기면 달력을 제대로 채울 수 있기 때문
+        
+        int sub = date.getMonth().maxLength() + original;
+        // 뒤에 빈 칸 계산해서 역시 0넣음. HTML 달력 모양 깨지지 않게  
+        
+        List<Integer> dList =new ArrayList<>(); 
+        // dLsit: HTML에 달력 그리기 위한 데이리스트
+        // 1일 시작 지점까지 0을 넣고, 1일 시작 지점부터 해당 월의 days를 넣고,
+        // 캘린더 양식(7x5, 7x6)에 맞게 뒤에 남는 칸 계산하여 0 넣는다.
+     
+        if(original != 0) { // 1일이 일요일이 아닌 요일인 경우
+            for (int i = 0; i < original-1; i++) { // 1일 시작 지점 까지 0 넣음
+               dList.add(0);
+              } 
+            for (int j = 0;j < date.getMonth().maxLength() +1; j++) { // 1일 시작 지점부터 해당 월의 days 넣음
+             dList.add(j);
+          }
+        }
+        
+        if(original == 0) { // 1일이 일요일인 경우
+            for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
+                dList.add(j);
+             }
+        }
+
+
+         // HTML에 그릴 캘린더 양식(7x5, 7x6)이 깨지지 않도록 뒤에 남는 칸 계산하여 0 넣는다.
+         if(35 >= sub) { // 5주까지
+           for (int i = 0; i <35- sub; i++) {
+               dList.add(0);
+              }
+        }
+        
+        if(35 < sub) { // 6주까지 있는 경우
+            for (int i = 0; i <42- sub; i++) {
+                dList.add(0);
+               }
+       }
+    ```
 + #### 외부 경로(로컬 폴더) 사진 업로드
 + #### weather
 + #### Emoji
@@ -39,43 +96,49 @@
     > CalendarController.java 일부
     ```java
 
-        LocalDate date = LocalDate.of(year,monthValue, 1);  // 달력을 그릴 연도, 달
+        // LocalDate date  = LocalDate.now();
+        LocalDate date = LocalDate.of(year,monthValue, 1);
+        // 현재 또는 전달 받은 year,monthValue 로 date 구함
         
-        String dayOfWeekS = date.getDayOfWeek().toString(); // 월 1일의 요일
+        String dayOfWeekS = date.getDayOfWeek().toString();
+        // 월(month) 1일의 요일 구하고
         
-        // Enum 이용해서 요일 차 계산: (HTML에서 달력 그릴때 몇번째칸부터 1일시작할지)
-        // 차이만큼 0 널고 리스트 만들어서 넘기면 제대로 그릴 수 있음
         int original = 0;
         Week w = Week.valueOf(dayOfWeekS);  
         for(Week e: Week.values()) {
             if(e.equals(w)) {
               original=  e.ordinal();
             }
-        }    
+        }
+        // Enum 이용해서 요일 차 계산: (HTML에서 달력 그릴 때 몇번째칸부터 1일 시작 할 지)
+        // 차이 만큼 앞에 0 넣어 리스트 만들어서 넘기면 달력을 제대로 채울 수 있기 때문
         
-        // 뒤에 빈 칸은 몇칸인지 계산해서 역시 0넣음. HTML 달력 모양 깨지지 않게  
         int sub = date.getMonth().maxLength() + original;
+        // 뒤에 빈 칸 계산해서 역시 0넣음. HTML 달력 모양 깨지지 않게  
         
-        List<Integer> dList =new ArrayList<>(); //  
-        
-        
+        List<Integer> dList =new ArrayList<>(); 
         // dLsit: HTML에 달력 그리기 위한 데이리스트
-        if(original != 0) {  
-            for (int i = 0; i < original-1; i++) {
+        // 1일 시작 지점까지 0을 넣고, 1일 시작 지점부터 해당 월의 days를 넣고,
+        // 캘린더 양식(7x5, 7x6)에 맞게 뒤에 남는 칸 계산하여 0 넣는다.
+     
+        if(original != 0) { // 1일이 일요일이 아닌 요일인 경우
+            for (int i = 0; i < original-1; i++) { // 1일 시작 지점 까지 0 넣음
                dList.add(0);
               } 
-            for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
+            for (int j = 0;j < date.getMonth().maxLength() +1; j++) { // 1일 시작 지점부터 해당 월의 days 넣음
              dList.add(j);
           }
         }
         
-        if(original == 0) {
+        if(original == 0) { // 1일이 일요일인 경우
             for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
                 dList.add(j);
              }
         }
-               
-        if(35 >= sub) { // 5주까지
+
+
+         // HTML에 그릴 캘린더 양식(7x5, 7x6)이 깨지지 않도록 뒤에 남는 칸 계산하여 0 넣는다.
+         if(35 >= sub) { // 5주까지
            for (int i = 0; i <35- sub; i++) {
                dList.add(0);
               }
