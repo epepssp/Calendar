@@ -83,23 +83,27 @@
   ```html
 
    <span th:if="${ dto.monthValue != 1}"><!-- 달력 프론트 이동 버튼 -->
-     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
+           (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
        <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
      </button>
    </span>
    <span th:if="${ dto.monthValue == 1}">
-     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
+           (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
         <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
      </button>
    </span>
 
    <span th:if="${ dto.monthValue != 12}"><!-- 달력 백 이동 버튼 -->
-      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
+            (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
         <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
       </button>
    </span>
    <span th:if="${ dto.monthValue == 12}">
-      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
+            (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
         <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
       </button>
    </span>
