@@ -27,9 +27,9 @@
 + #### API 사용하지 않고 직접 Calendar 만들기
   + ##### 1. dList 작성
     
-    > CalendarController.java 일부
+  > CalendarController.java 일부
   
-    ```java
+  ```java
 
         // LocalDate date  = LocalDate.now();
         LocalDate date = LocalDate.of(year,monthValue, 1);
@@ -84,7 +84,7 @@
                 dList.add(0);
                }
        }
-    ```
+  ```
   + ##### day의 Schedule list, diaryId
     > DayDiaryDto.java
   
