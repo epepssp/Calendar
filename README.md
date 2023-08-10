@@ -195,6 +195,8 @@
        </div>
 
        <!-- 첨부한 파일 리스트 보여주는  영역 -->
+       <!-- 사진 첨부 버큰 누르면 실시간으로 추가한 사진 리스트 보여질 영역 -->
+       <!-- 사진 추가 후 사진 첨부 버튼으로 이어서 추가 가능. 삭제(remove)도 가능 -->
        <div class="col">
           <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
           <div id="uploads"></div> <!-- saveTemporarily 리스트 보여주는 영역 -->
