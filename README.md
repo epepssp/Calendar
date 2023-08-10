@@ -482,7 +482,7 @@
   ```
   <br>
   
-+ #### Enter 입력
++ #### Enter Key 입력
   > calendar.js
   ```javascript
 
