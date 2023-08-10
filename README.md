@@ -370,8 +370,8 @@
   ```
   <br>
   
-+ #### Diary Create - Emoji
-  + ##### Emoji
++ #### 이모티콘(Emoji) 추가
+  + ##### Diary Create Page - Emoji 이용한 다채로운 글 작성
   > create.html
   ```html
 
