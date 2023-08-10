@@ -372,6 +372,8 @@
   
 + #### 이모티콘(Emoji) 추가
   + ##### Diary Create Page - Emoji 이용한 다채로운 글 작성
+ 
+     <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div> 
   > create.html
   ```html
 
@@ -420,7 +422,6 @@
      }
   
   ```
-   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div>
    
   <br>
   
