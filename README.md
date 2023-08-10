@@ -169,7 +169,7 @@
   <br>  
     
 + #### 사진 첨부 및 슬라이드
-  + ##### 외부경로 설정
+  + ##### 1. 외부경로 설정
   > application.properties 일부
   ```application.properties
   
@@ -184,7 +184,7 @@
       private String uploadPath;    // 경로 주입
 
   ```
-  + ##### Diary Create 사진 업로드
+  + ##### 2. Diary Create Page 사진 업로드
   > create.html 일부
 
   ```html
