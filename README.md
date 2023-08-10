@@ -296,7 +296,7 @@
      }
   ```
 
-  + ##### 3. Diary Detial Page 사진 슬라이드 보여주기
+  + ##### 3. Diary Detail Page 사진 슬라이드 보여주기
   > detail.html 일부
 
   ```detail.html
