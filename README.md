@@ -86,7 +86,7 @@
        }
   ```
   
-  + ##### 2. day/schedule/diary 정보 통합한 dayDiaryDtoList
+  + ##### 2. day/schedule/diary 통합 리스트(dayDiaryDtoList)
   > DayDiaryDto.java
   
   ```java
