@@ -25,7 +25,7 @@
 
 ## 주요 구현 기능
 + #### API 사용하지 않고 직접 Calendar 만들기
-  + ##### 1. dList 작성
+  + ##### dList 작성
     
   > CalendarController.java 일부
   
