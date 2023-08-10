@@ -514,7 +514,7 @@
   <br>
   
 + #### Month 이름 포인트 컬러 주기
-+ #### Calendar 와 Diary 각종 연결과 이동 기능
++ #### Calendar 와 Diary 다양한 연결/이동 기능
 
 
 
