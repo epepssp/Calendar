@@ -25,7 +25,7 @@
 
 ## 주요 구현 기능
 + #### API 사용하지 않고 직접 Calendar 만들기
-  + ##### dayList(dList) 작성
+  + ##### 1. dayList(dList) 작성
     
   > CalendarController.java 일부
   
@@ -86,7 +86,7 @@
        }
   ```
   
-  + ##### day/schedule/diary 정보 통합한 dayDiaryDtoList
+  + ##### 2. day/schedule/diary 정보 통합한 dayDiaryDtoList
   > DayDiaryDto.java
   
   ```java
