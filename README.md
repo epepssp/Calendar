@@ -429,7 +429,7 @@
   
 + #### 정렬(sort)
   + ##### 작성된 다이어리 목록 보기 - 미니 캘린더 or 리스트 형식 선택 가능
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="600" height="400" alt="정렬"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
   
   > create.html
   ```html
