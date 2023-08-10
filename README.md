@@ -194,7 +194,7 @@
           <img src="/icons/images.svg">사진첨부
        </div>
 
-       <!-- 첨부한 파일 리스트 보여주는  영역 -->
+       <!-- 첨부한 파일 리스트 보여주는 영역 -->
        <!-- 사진 첨부 버큰 누르면 실시간으로 추가한 사진 리스트 보여질 영역 -->
        <!-- 사진 추가 후 사진 첨부 버튼으로 이어서 추가 가능. 삭제(remove)도 가능 -->
        <div class="col">
@@ -294,6 +294,37 @@
             .then(function () {});
         
      }
+  ```
+
+  + ##### 3. Diary Detial Page 사진 슬라이드 보여주기
+  > detail.html 일부
+
+  ```detail.html
+  
+     <div class="w-50 container"> <!-- image slide -->
+       <div id="carouselExampleDark" class="carousel carousel-dark slide">
+       
+          <div class="carousel-inner">
+             <div class="carousel-item active">
+                <img id="img" th:src="${ '/api/view/'+firstImg.uuid+'_'+firstImg.fileName }" class="mx-auto d-block w-30" style="width:220px; height: 270px; object-fit: cover;"> 
+             </div> 
+             <div class="carousel-item" th:each=" imgList : ${ imgList } ">
+                <img id="img" th:src="${ '/api/view/'+imgList.uuid+'_'+imgList.fileName }" class="mx-auto d-block w-30" style="width:220px; height: 270px; object-fit: cover;"> 
+             </div>
+          </div>
+          
+         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+         </button>
+         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+         </button>
+         
+       </div>
+    </div>
+  
   ```
   <br> 
   
