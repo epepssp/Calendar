@@ -517,10 +517,9 @@
   + ##### 1. 원하는 날짜 클릭 -> Day Modal -> D-DAY 설정 클릭
   + ##### 2. 우측 Notice Board 아래 D-DAY 추가 버튼 클릭
   + ##### 원하는 날짜 선택시, D-DAY Count. 다른 날짜 선택도 가능.
-   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>
-
-    
+   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
 <br>
+
 + #### Month 이름 포인트 컬러 주기
 + #### Calendar 와 Diary 다양한 연결/이동 기능
 
