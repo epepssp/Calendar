@@ -329,7 +329,7 @@
   <br> 
   
 + #### Weather 선택
-  + ##### Diary Detail Page 일기 작성시 날씨 선택 기능 (중복 선택X, 하나만 고를 수 있게)
+  + ##### Diary Create Page - 일기 작성시 날씨 선택 기능 (중복 선택X, 하나만 고를 수 있게)
   > diary.js
   ```javascript
 
