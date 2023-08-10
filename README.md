@@ -168,7 +168,7 @@
   ```
   <br>  
     
-+ #### 사진 첨부
++ #### 사진 첨부 및 슬라이드
   + ##### 외부경로 설정
   > application.properties 일부
   ```application.properties
@@ -293,6 +293,7 @@
         
      }
   ```
+  <br> 
   
 + #### Diary Create - Weather
   + ##### Weather 선택 (중복 선택X, 하나만 고를 수 있게)
@@ -334,6 +335,8 @@
            weather.value = n;
        }
   ```
+  <br>
+  
 + #### Diary Create - Emoji
   + ##### Emoji
   > create.html
@@ -384,6 +387,8 @@
      }
   
   ```
+  <br>
+  
 + #### 정렬(sort) 기준 선택
   + ##### Sort
   > create.html
@@ -435,8 +440,9 @@
      sortBtn.addEventListener("click", sortTypeChange);
   
   ```
+  <br>
   
-+ #### 엔터로 등록
++ #### 엔터로 입력
   > calendar.js
   ```javascript
 
@@ -465,6 +471,8 @@
      };
   
   ```
+  <br>
+  
 + #### Month 이름 포인트 컬러 주기
 + #### Calendar 와 Diary 각종 연결과 이동 기능
 
