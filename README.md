@@ -481,7 +481,7 @@
   ```
   <br>
   
-+ #### 엔터로 입력
++ #### Enter 입력
   > calendar.js
   ```javascript
 
