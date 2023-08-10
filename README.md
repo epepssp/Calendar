@@ -330,6 +330,8 @@
   
 + #### Weather 선택
   + ##### Diary Create Page - 일기 작성시 날씨 선택 기능 (중복X, 하나만 고를 수 있게, 선택한 날씨로 저장됨)
+ 
+    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/ec3e6c85-34fc-4ace-b46c-7662f9616b40" width="600" height="400" alt="날씨"></div> 
   > diary.js
   ```javascript
 
