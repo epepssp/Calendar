@@ -1,5 +1,5 @@
 # tomydays
-<div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/4d9e5dc5-b47a-4cee-9671-3053f0e7d6ee" height="200" alt="tomydays"></div>
+<div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/4d9e5dc5-b47a-4cee-9671-3053f0e7d6ee" width="100%"  height="200" alt="tomydays"></div>
 
 ## 개요
 > #### 수료 후 틈틈히 개발&구현한 개인 프로젝트
