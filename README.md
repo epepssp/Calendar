@@ -365,10 +365,11 @@
   ```
   <br>
   
-+ #### 이모티콘(Emoji) 추가
-  + ##### Diary Create Page - Emoji 이용한 다채로운 글 작성
- 
-     <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div> 
+ ✔ Emoji
+  + ##### Emoji(이모티콘) 이용한 다채로운 글 작성
+  + ##### 원하는 이모티콘 컨텐츠 추가하여 Emoji Sidebar 구성, 각각의 이모지에 이벤트 리스너 설정
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div>
+  
   > create.html
   ```html
 
@@ -420,7 +421,7 @@
    
   <br>
   
-+ #### 정렬(sort)
+✔ 정렬(sort)
   + ##### 일기 목록 보기 - 미니 캘린더 or 리스트 형식 선택 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
   
@@ -475,7 +476,7 @@
   ```
   <br>
   
-+ #### 일정(Schedule) 
+✔ 일정(Schedule) 
   + ##### Calendar - Month 스케쥴 확인
   + ##### Day Modal Front,Back - Day 스케쥴 확인 
   + ##### 긴 내용 - 마우스 오버 효과
@@ -513,7 +514,7 @@
   ```
   <br>
 
-+ #### D-DAY
+✔ D-DAY
   + ##### 1. 원하는 날짜 클릭 -> Day Modal -> D-DAY 설정 클릭
   + ##### 2. 우측 Notice Board 아래 D-DAY 추가 버튼 클릭
   + ##### 원하는 날짜 선택시, D-DAY Count. 다른 날짜 선택도 가능.
