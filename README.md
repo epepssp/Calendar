@@ -320,7 +320,7 @@
   
   ✔ Weather 
    + ##### Diary Create -Today's Weather
-   + ##### 하나만 선택 가능(중복X), 선택 취소하고 날씨 재선택 가능
+   + ##### 하나만 선택 가능(중복X), 취소 후 재선택 가능
      
    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0bc50f68-ef11-4213-b2c1-ff09a8338767" width="620" height="400" alt="웨더"></div>
    
