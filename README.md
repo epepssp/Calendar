@@ -176,23 +176,13 @@
   ```
   <br>  
     
-+ #### 사진 첨부 및 슬라이드
-  + ##### 1. 외부경로 설정
-  > application.properties 일부
-  ```application.properties
-  
-      # Own configuration values
-      com.example.upload.path=C:\\diary\\uploads 
-  
-  ```
-  > FileUploadController.java 일부
-  ```java
-
-      @Value("${com.example.upload.path}")
-      private String uploadPath;    // 경로 주입
-
-  ```
-  + ##### 2. Diary Create Page 사진 업로드
+ ✔ Booque ver2 보다 업그레이드 된 이미지 업로드(외부 경로)
+  + ##### 이미지 여러장 추가 가능 - 드래그로 추가 / 추가 하고 또 추가 혹은 삭제 / 이미지 슬라이드
+   
+ 
+  + ##### Diary Create - 사진 업로드
+  + ##### 여러장 업로드 가능 / 드래그로 선택하여 업로드 가능 / 첨부파일 추가 여러번 가능 / 특정 이미지 선택하여 삭제(Remove)
+    
   > create.html 일부
 
   ```html
@@ -203,7 +193,7 @@
        </div>
 
        <!-- 첨부한 파일 리스트 보여주는 영역 -->
-       <!-- 사진 첨부 버큰 누르면 실시간으로 추가한 사진 리스트 보여질 영역 -->
+       <!-- 사진 첨부 버튼 누르면 실시간으로 추가된 사진 리스트 보여질 영역 -->
        <!-- 사진 추가 후 사진 첨부 버튼으로 이어서 추가 가능. 삭제(remove)도 가능 -->
        <div class="col">
           <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
@@ -221,10 +211,8 @@
    
         const formData = new FormData();
         const fileInput = document.querySelector('input[name="files"]');
-        console.log(fileInput.files);
        
         for (let file of fileInput.files) {
-            console.log(file);
             formData.append('files', file);
         }
           uploadFiles(formData);
@@ -242,7 +230,6 @@
     function getUploadedThumbnails(response){
             if (response.status == 200) {
             response.data.forEach(x => {
-                //console.log(data);
                 // 이미지 파일이 아닌 경우, 디폴트 썸네일 이미지를 사용하도록.
                 let img = '';
                 if (x.image) {
@@ -251,57 +238,53 @@
                     img = `<img src="/images/file_128.png" data-src="${x.uuid + '_' + x.fileName}" />`;
                 }
 
-
-                // 업로드 선택한 파일들 innerHTML로 diary create 페이지에 보여줌   
-               
-      const htmlStr = `<div class="card my-2">
-                     <div class="card-header d-flex justify-content-center">
-                      ${x.fileName}
-                        <button class="btnDelete btn-close" aria-label="Close"
-                         data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
-                     </div>
-                     <div class="card-body">
-                     ${img}
-                     </div>
-                  </div>`;
+       // 업로드 선택한 파일들 innerHTML로 diary create 페이지에 보여줌   
+       const htmlStr = `<div class="card my-2">
+                          <div class="card-header d-flex justify-content-center">
+                             ${x.fileName}
+                             <button class="btnDelete btn-close" aria-label="Close"
+                              data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
+                          </div>
+                          <div class="card-body">
+                             ${img}
+                          </div>
+                        </div>`;
                 
-         uploadResults.innerHTML += htmlStr;
-       });   
-       
-         
-         document.querySelectorAll('.btnDelete').forEach(btn => {
-         btn.addEventListener('click', removeFileFromServer);
-        });
+          uploadResults.innerHTML += htmlStr;
+      });   
+
+
+      // 업로드 목록에 추가된 사진들 각각 btnDelete 버튼 달아주기 
+      document.querySelectorAll('.btnDelete').forEach(btn => {
+             btn.addEventListener('click', removeFileFromServer);
+      });
           
-       const uploads = document.querySelector('#uploads');
-       const files = uploadResults.querySelectorAll('img');
+           const uploads = document.querySelector('#uploads');
+           const files = uploadResults.querySelectorAll('img');
        
-       let str = '';
-       files.forEach(x => {
-             const imgLink = x.getAttribute('data-src');
-             str += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
-       });
-       uploads.innerHTML = str;
-        
-    }
-    
-   function removeFileFromServer(event) {  // 업로드 선택했던 사진 제거
-        event.preventDefault();
-        //console.log(event.target);
-        //console.log(event.target.closest('.card'));
-        
-        const btn = event.target;
-        const uuid = btn.getAttribute('data-uuid');
-        const fname = btn.getAttribute('data-fname');
-        const fileName = uuid + '_' + fname;
-        //console.log(fileName);
+           let str = '';
+           files.forEach(x => {
+              const imgLink = x.getAttribute('data-src');
+              str += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
+            });
+
+           uploads.innerHTML = str;
+       }
+
+      // 사진 선택 제거
+      function removeFileFromServer(event) { 
+          event.preventDefault();
+      
+          const btn = event.target;
+          const uuid = btn.getAttribute('data-uuid');
+          const fname = btn.getAttribute('data-fname');
+          const fileName = uuid + '_' + fname;
         
         axios.delete('/remove/' + fileName)
             .then(resp => { btn.closest('.card').remove() })
             .catch(err => { console.log(err) })
             .then(function () {});
-        
-     }
+      }
   ```
 
   + ##### 3. Diary Detail Page 사진 슬라이드 보여주기
