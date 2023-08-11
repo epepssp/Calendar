@@ -1,19 +1,19 @@
 # tomydays
 <br>
-
 <div align="center"><img src="https://github.com/epepssp/Calendar/assets/118948099/4d9e5dc5-b47a-4cee-9671-3053f0e7d6ee" width="100%" alt="tomydays"></div>
-
 <br>
 
 ## 개요
 > #### 수료 후 틈틈히 개발&구현한 개인 프로젝트
 > #### 개발기간: 2023년 3월 8일 ~ 2023년 8월 4일<br>
+<br>
 
 ## 프로젝트 소개
 > #### Calendar를 기본 바탕으로 한 개인 다이어리
 > #### 일정 관리, D-DAY 설정, 일기 작성 
 > #### API 사용하지 않고 수작업으로(창의적인 나만의 방법으로) Calendar 구현
 > #### 
+<br>
 
 ## 사용 기술 및 개발환경
 + Java
@@ -21,12 +21,14 @@
 + HTML
 + CSS
 + JavaScript
+<br>  
 
 ## 주요기능 소개
 + Calendar 보기
 + 일정 추가
 + D-DAY 설정
 + 일기장
+<br>
 
 ## 주요 구현 기능
 + #### API 사용하지 않고 직접 Calendar 만들기
