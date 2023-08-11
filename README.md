@@ -554,6 +554,36 @@
      sortBtn.addEventListener("click", sortTypeChange);
   
   ```
+  > diary.js
+
+  ```javascript
+  
+     function showMini(data){    
+         const mini = document.querySelector('#mini');  // 미니캘린더 div
+
+          
+         let str2='';  // 캘린더 한 줄 시작 
+         str2 +='<div class="row line">';
+         for (let i = 0; i < 7; i++) {
+             if(data.d2[i].diaryId != 0) {    // 일기有 (Background-color有) - 클릭시 Diary Detail Page 이동 (작성한 일기 볼 수 있음)
+                 str2 +=`<div class="box" style="background-color:#eaeafb;"><a style="text-decoration: none;" href="/diary/detail?diaryId=${data.d2[i].diaryId }">`
+                      +'<small>'+ data.d2[i].day+'</small></a></div>';
+             }
+             if(data.d2[i].diaryId == 0) {   // 일기無 - 클릭시 해당 날짜 Diary Create Page 이동 (일기 작성 가능)
+                 str2 += `<div class="box" day="${data.d2[i].day}" onclick="createDiary(this.getAttribute(\'day\'));">`
+                      +'<small>'+ data.d2[i].day+'</small></div>';
+             }
+         } 
+         str2+='</div>';  // 캘린더 한 줄 끝
+
+         // 캘린더 줄 수 만큼 반복 작성
+                 
+         mini.innerHTML = str1 + str2 + str3 + str4 + str5 + str6;
+         
+      }
+
+
+  ```
   <br>
   
 **✔ 일정(Schedule)** 
