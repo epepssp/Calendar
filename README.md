@@ -372,6 +372,28 @@
     </div>
   
   ```
+
+  > FileUploadController.java
+  ```java
+      @GetMapping("/api/view/{fileName}")  // 로컬폴더 이미지 불러오기
+      public ResponseEntity<Resource> viewFile(@PathVariable String fileName) {
+          File file = new File(uploadPath, fileName);
+        
+          String contentType = null;
+          try {
+             contentType = Files.probeContentType(file.toPath());
+         } catch (IOException e) {
+              log.error("{} : {}", e.getCause(), e.getMessage());
+              return ResponseEntity.internalServerError().build();
+          }
+        
+           HttpHeaders headers = new HttpHeaders();
+           headers.add("Content-Type", contentType);
+           Resource resource = new FileSystemResource(file);
+        
+           return ResponseEntity.ok().headers(headers).body(resource);
+      }
+   ```
   <br> 
   
   **✔ Weather** 
