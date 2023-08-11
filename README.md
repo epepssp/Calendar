@@ -557,11 +557,11 @@
   > diary.js
 
   ```javascript
-  
-     function showMini(data){    
-         const mini = document.querySelector('#mini');  // 미니캘린더 div
 
-          
+     // 미니캘린더 형식
+     function showMini(data){   
+         const mini = document.querySelector('#mini'); 
+
          let str2='';  // 캘린더 한 줄 시작 
          str2 +='<div class="row line">';
          for (let i = 0; i < 7; i++) {
@@ -575,14 +575,33 @@
              }
          } 
          str2+='</div>';  // 캘린더 한 줄 끝
-
-         // 캘린더 줄 수 만큼 반복 작성
+                          // 캘린더 줄 수 만큼 반복 작성
                  
          mini.innerHTML = str1 + str2 + str3 + str4 + str5 + str6;
-         
+       }
+
+       // 리스트 형식
+       function showMiniList(data){
+           const listDiv = document.querySelector('#listDiv');
+           let str='';
+    
+           str +='<div style="border-top: 1px solid gray; margin-left: 10px; width: 266px; border-bottom: 1px solid gray;"><div style="border-top: 1px solid #DCDCDC;" >';
+    
+           for(let x of data){
+              str +='<div style="border-bottom: 1px solid #DCDCDC;" class="w3-cell-row p-1">'
+                  +'<div class="w3-container w3-cell"><div style="color:#A9A9A9; font-size: 9px;">'+x.year+'.'+x.monthValue+'.'+x.day+' 일기</div>'
+                  +`<a style="text-decoration: none;" href="/diary/detail?diaryId=${ x.diaryId }">`
+                  +'<span style="color:#FF6347;">⦁</span> '+x.title+'</a></div>'
+                  +'<div class="w3-container w3-cell" style="width:38px;">'
+                                                                                                     // 첨부 파일 리스트 인덱스 = 0 의 uuid, fileName                         // 첨부 이미지 파일 갯수         
+                  +'<div class="image-container"><img class="rounded" width="35px;" height="42px;" src="/api/view/'+x.uuid + '_' + x.fileName +'" /><span class="caption">'+x.totalAttachments+'</span></div></div></div>';
+           }
+    
+           str +='</div></div>';
+    
+           listDiv.innerHTML=str;
+    
       }
-
-
   ```
   <br>
   
