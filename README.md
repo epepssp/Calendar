@@ -31,8 +31,10 @@
 <br>
 
 ## 주요 구현 기능
-+ #### API 사용하지 않고 직접 Calendar 만들기
-  + ##### 1. dayList(dList) 작성
++ #### API 사용하지 않고, 직접 Calendar 그리기
++ ##### 월(Month) 시작 요일. 1일의 요일 -> 시작 지점: HTML의 달력 테이블 앞에 몇 칸 띄고 채워나갈 지
++ #####
++ ##### dList = 공백 + (1일 ~ 말일) + 공백  => 7X5=35 또는 7X6=42에 맞게 뒷 공백   
     
   > CalendarController.java 일부
   
@@ -93,19 +95,18 @@
        }
   ```
   
-  + ##### 2. day/schedule/diary 통합 리스트(dayDiaryDtoList)
+  + ##### DayDiaryDto : Day와 함께 전달할 Schedule/ Diary/ Today 
+  + ##### dList + Schedule/Diary/Today : 통합 리스트 
   > DayDiaryDto.java
   
   ```java
     
         public class DayDiaryDto {
 
-          private int day;
+          private int day;              // dList의 기준 - day
           private Integer diaryId;      // 일기
           private List<Schedule> sList; // day에 등록된 일정 리스트
           private int today;            // today면= 1, 아니면 =0 
-
-          // day와 함께 전달할 정보(day 일정 리스트, 다이어리Id)를 묶어 DayDiaryDto 만듦
       }
   ```
 
@@ -113,7 +114,7 @@
   
   ```java
     
-        // 스케쥴(일정) 리스트
+        // Schedule 리스트
         Set<Integer> daysHaveSchedule = new HashSet<>(); 
         for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
             daysHaveSchedule.add(m.getDay()); // 스케쥴이 있는 날짜들
@@ -132,7 +133,7 @@
              }
          } 
           
-        // 일기(다이어리) 리스트
+        // Diary 리스트
         Set<Integer> daysHaveDiary= new HashSet<>(); 
         for (Diary m : diaryService.findByMonth(date.getMonthValue())) {
             daysHaveDiary.add(m.getDay()); // 스케쥴이 있는 날짜들
@@ -147,7 +148,7 @@
                 }
          }
 
-        // Today
+        // Today or Not
         List<Integer> to = new ArrayList<>();
         if(LocalDate.now().getMonthValue() == date.getMonthValue()) {
            for (Integer i : dList) {
@@ -166,7 +167,7 @@
         }
 
 
-        // 통합 리스트 - HTML에 통합 된 하나의 리스트로 넘긴다. 
+        // 통합 리스트  
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();
         for (int i = 0; i < dList.size(); i++) {
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
