@@ -482,12 +482,12 @@
   + ##### Calendar
     + ###### Monthly 스케쥴 확인 / Front, Back 버튼 또는 원하는 날짜 직접 선택하여 Calendar 이동 가능 
   + ##### Day Click Modal  
-    + ###### Daily 스케쥴 확인 / 일정 추가(Enter Key 입력) / Day Front, Back 버튼으로 날짜 이동 가능   
+    + ###### Daily 스케쥴 확인 / 일정 추가 / Day Front, Back 버튼으로 날짜 이동 가능   
   + ##### Mouse hover-Effect
 
    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
   
-  + ##### Enter Key로 입력 가능
+  + ##### Enter Key 입력
   > calendar.js
   ```javascript
 
@@ -518,13 +518,13 @@
   ```
   <br>
 
-✔ D-DAY
-  + ##### 1. 원하는 날짜 클릭 -> Day Modal -> D-DAY 설정 클릭
-  + ##### 2. 우측 Notice Board 아래 D-DAY 추가 버튼 클릭
-  + ##### 원하는 날짜 선택시, D-DAY Count. 다른 날짜 선택도 가능.
-  + ##### Notice Board에 Today 기준 D-DAY Count 됨 
-   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
-<br>
+ ✔ D-DAY
+  + ##### Day Click Modal -> D-DAY 설정
+  + ##### 우측 하단 Notice Board 아래 -> D-DAY 추가
+  + ##### 날짜 선택 -> D-DAY Count 확인 가능
+  + ##### Notice Board -> Today 기준으로 Count된 D-DAY 리스트 
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
+  <br>
 
 + #### Month 이름 포인트 컬러 주기
 + #### Calendar 와 Diary 다양한 연결/이동 기능
