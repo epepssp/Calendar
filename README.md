@@ -251,7 +251,7 @@
       });   
 
 
-      // 업로드 목록에 추가된 사진들 각각 btnDelete 버튼 달아주기 
+      // 업로드 목록 사진 각각 btnDelete 버튼 달아주기 
       document.querySelectorAll('.btnDelete').forEach(btn => {
              btn.addEventListener('click', removeFileFromServer);
       });
@@ -268,8 +268,8 @@
            uploads.innerHTML = str;
        }
 
-      // 사진 선택 제거
-      function removeFileFromServer(event) { 
+       // 선택한 사진 제거
+       function removeFileFromServer(event) { 
           event.preventDefault();
       
           const btn = event.target;
@@ -281,13 +281,13 @@
             .then(resp => { btn.closest('.card').remove() })
             .catch(err => { console.log(err) })
             .then(function () {});
-      }
-  ```
+       }
+   ```
 
-  + ##### 3. Diary Detail Page 사진 슬라이드 보여주기
-  > detail.html 일부
+   + ##### 3. Diary Detail Page 사진 슬라이드 보여주기
+   > detail.html 일부
 
-  ```detail.html
+   ```detail.html
   
      <div class="w-50 container"> <!-- image slide -->
        <div id="carouselExampleDark" class="carousel carousel-dark slide">
