@@ -479,9 +479,11 @@
   <br>
   
 ✔ 일정(Schedule) 
-  + ##### Calendar - Month 스케쥴 확인
-  + ##### Day Modal Front,Back - Day 스케쥴 확인 
-  + ##### 긴 내용 - 마우스 오버 효과
+  + ##### Calendar
+    + ###### Monthly 스케쥴 확인 / Front, Back 버튼 또는 원하는 날짜 직접 선택하여 Calendar 이동 가능 
+  + ##### Day Click Modal  
+    + ###### Daily 스케쥴 확인 / 일정 추가(Enter Key 입력) / Day Front, Back 버튼으로 날짜 이동 가능   
+  + ##### Mouse hover-Effect
 
    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
   
