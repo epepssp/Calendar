@@ -590,6 +590,7 @@
            for(let x of data){
               str +='<div style="border-bottom: 1px solid #DCDCDC;" class="w3-cell-row p-1">'
                   +'<div class="w3-container w3-cell"><div style="color:#A9A9A9; font-size: 9px;">'+x.year+'.'+x.monthValue+'.'+x.day+' 일기</div>'
+                    // 제목 클릭시 Diary Detail 이동
                   +`<a style="text-decoration: none;" href="/diary/detail?diaryId=${ x.diaryId }">`
                   +'<span style="color:#FF6347;">⦁</span> '+x.title+'</a></div>'
                   +'<div class="w3-container w3-cell" style="width:38px;">'
