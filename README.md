@@ -421,8 +421,8 @@
    
   <br>
   
-✔ 정렬(sort)
-  + ##### 일기 목록 보기 - 미니 캘린더 or 리스트 형식 선택 가능
+ ✔ Sort (정렬)
+  + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 선택 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
   
   > create.html
@@ -430,6 +430,7 @@
 
       <div class="w3-cell-row mb-1">
         <div class="w3-container w3-cell" id="ms"></div>
+        <!-- Sort 버튼 -->
         <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
       </div>
   
@@ -437,22 +438,23 @@
       <div id="listDiv"></div><!-- 리스트 형식 -->
   
   ```
+
   > diary.js
   ```javascript
 
-     let sort = 1;
+     let sort = 1;    
   
      const mini = document.getElementById("mini");
      const listDiv = document.getElementById("listDiv");
      const sorti = document.getElementById("sorti");
 
-     <!-- 디폴트: 미니 캘린더 형식 -->
+     <!-- 정렬 디폴트 값 - 미니 캘린더형 -->
      mini.style.display = "block";
      listDiv.style.display = "none";
 
      sorti.classList.add("far", "fa-list-alt");
 
-     <!-- 정렬(Sort) 아이콘 클릭했을 때 sort Type 바꾸는 함수 -->
+     <!-- 정렬(Sort) 아이콘(버튼) 클릭했을 때 sort Type 바뀌는 함수 -->
      function sortTypeChange() {
          if (sort === 1) {
              mini.style.display = "none";
