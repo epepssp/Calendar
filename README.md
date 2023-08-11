@@ -284,7 +284,9 @@
        }
    ```
 
-   + ##### 3. Diary Detail Page 사진 슬라이드 보여주기
+   + ##### Diary Detail 
+   + ##### 이미지 슬라이드 / Thumbnails 
+  
    > detail.html 일부
 
    ```detail.html
