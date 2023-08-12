@@ -284,62 +284,6 @@
        }
    ```
 
-   > FileUploadController.java
-   ```java
-
-      @Value("${com.example.upload.path}")  // 외부 경로 주입 
-      private String uploadPath;
-    
-      @PostMapping("/upload")
-      public ResponseEntity<List<FileUploadResultDto>> upload(FileUploadDto dto) {
-        
-          List<MultipartFile> files = dto.getFiles();
-          if (files == null) {
-              return ResponseEntity.noContent().build();
-          }
-
-          List<FileUploadResultDto> list = new ArrayList<>();
-          files.forEach(mutipartFile -> {
-              FileUploadResultDto result = saveFile(mutipartFile);
-              list.add(result);
-          });
-
-          return ResponseEntity.ok(list);
-       }
-    
-    
-       private FileUploadResultDto saveFile(MultipartFile file) {
-           FileUploadResultDto result = null;
-        
-           String originalName = file.getOriginalFilename();
-           String uuid = UUID.randomUUID().toString();
-           boolean image = false;
-           String target = uuid + "_" + originalName;
-
-           File dest = new File(uploadPath, target);   // 파일 만들어 저장하고
-      
-            try {
-                file.transferTo(dest);
-
-                if (file.getContentType().startsWith("image")) { // 파일 컨텐츠 타입 이미지로 시작하는 경우 썸네일 설정
-                    image = true;
-                    String thumbnailTarget = "s_" + target;
-                    File thumbnailDest = new File(uploadPath, thumbnailTarget);
-                    Thumbnailator.createThumbnail(dest, thumbnailDest, 200, 200);
-                }
-                
-                result = FileUploadResultDto.builder()
-                    .uuid(uuid)
-                    .fileName(originalName)
-                    .image(image)
-                    .build();
-            } catch (IllegalStateException | IOException e) {
-                   e.printStackTrace();
-            }
-             return result;
-         }
-   ```
-
    + ##### Diary Detail 
    + ##### 이미지 슬라이드   
   
@@ -373,27 +317,6 @@
   
   ```
 
-  > FileUploadController.java
-  ```java
-      @GetMapping("/api/view/{fileName}")  // 로컬폴더 이미지 불러오기
-      public ResponseEntity<Resource> viewFile(@PathVariable String fileName) {
-          File file = new File(uploadPath, fileName);
-        
-          String contentType = null;
-          try {
-             contentType = Files.probeContentType(file.toPath());
-         } catch (IOException e) {
-              log.error("{} : {}", e.getCause(), e.getMessage());
-              return ResponseEntity.internalServerError().build();
-          }
-        
-           HttpHeaders headers = new HttpHeaders();
-           headers.add("Content-Type", contentType);
-           Resource resource = new FileSystemResource(file);
-        
-           return ResponseEntity.ok().headers(headers).body(resource);
-      }
-   ```
   <br> 
   
   **✔ Weather** 
@@ -767,7 +690,7 @@
       }
    ```
 
-
+====================================
 
 
 
