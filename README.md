@@ -469,7 +469,7 @@
          mini.innerHTML = str1 + str2 + str3 + str4 + str5 + str6;
        }
 
-       **// 리스트 형식**
+       // 리스트 형식
        function showMiniList(data){
            let str='';
     
