@@ -716,13 +716,55 @@
 
  **✔ D-DAY**
   + ##### D-DAY 설정 - Day Modal or 우측 하단 Notice Board 아래 -> D-DAY 추가
-  + ##### 날짜 선택하면 D-DAY Count 계산
-  + ##### Notice Board - Today 기준 D-DAY Count 
+  + ##### Notice Board - Today 기준 D-DAY Count 리스트
+  + ##### 날짜 선택 -> 바로 D-DAY Count 계산
+  
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
   <br>
 
+  > calendar.js
+  ```javascript
 
+       // 날짜 차이 계산 함수
+       function subtract(event) {
+            const untilDate = document.querySelector('#untilDate').value;
+            const year= today.getFullYear();
+            const monthValue = today.getMonth() + 1;
+            const today = new Date(); 
+            const day= today.getDate();
 
+            const data ={
+              untilDate:untilDate,
+              year:year,
+              monthValue:monthValue,
+              day:day
+           }
+
+          axios.post('/dday/subtract', data)
+               .then(response => {
+                  showSubtract(response.data);
+               })
+               .catch(err => { console.log(err) });
+       }
+   ```
+
+   > DDayRestController.java
+> 
+   ```java
+
+      @PostMapping("/dday/subtract")
+      public ResponseEntity<Integer> dDaySubtract(@RequestBody DDay entity){
+
+          LocalDate utDate = entity.getUntilDate(); // D-DAY 날짜
+          LocalDate frDate = LocalDate.of(entity.getYear(), entity.getMonthValue(),entity.getDay());  // 오늘
+
+          // subtract: D-DAY Count 값
+          long daysSubtract = ChronoUnit.DAYS.between(utDate,frDate);
+          int subtract = (int) daysSubtract;       
+        
+          return ResponseEntity.ok(subtract);
+      }
+   ```
 
 
 
