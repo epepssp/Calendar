@@ -266,10 +266,7 @@
             .catch(err => { console.log(err) })
             .then(function () {});
        }
-   ```
-
-   + ##### Diary Detail 
-   + ##### 이미지 슬라이드   
+   ``` 
   
    > detail.html 일부
 
