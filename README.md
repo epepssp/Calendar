@@ -161,7 +161,7 @@
   ```
   <br>  
     
- **✔ 파일 업로드 (Booque ver2 보다 업그레이드 된)**
+ **💡 파일 업로드 (Booque ver2 보다 업그레이드 된)**
   + ##### 여러개 업로드 / 드래그로 선택 업로드 / 첨부파일 추가 후 또 추가 / 이미지 제거 / Thumbnails / 슬라이드
     
   > create.html 일부
@@ -300,7 +300,7 @@
 
   <br> 
   
-  **✔ Weather** 
+  **💡 Weather** 
    + ##### 하나만 선택 가능(중복X), 취소 후 재선택 가능
      
    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0bc50f68-ef11-4213-b2c1-ff09a8338767" width="620" height="400" alt="웨더"></div>
@@ -346,7 +346,7 @@
   ```
   <br>
   
- **✔ Emoji**
+ **💡 Emoji**
   + ##### Emoji(이모티콘) 이용한 다채로운 글 작성
 
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div>
@@ -402,7 +402,7 @@
    
   <br>
   
- **✔ Sort (정렬)**
+ **💡 Sort (정렬)**
   + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 선택 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
 
@@ -495,7 +495,7 @@
   ```
   <br>
   
-**✔ 일정(Schedule)** 
+**💡 일정(Schedule)** 
   
   + ##### Mouse hover-Effect - 줄여서 .. 으로 표시된 내용 전체 확인 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
@@ -604,7 +604,7 @@
   ```
   <br>
   
- **✔ D-DAY**
+ **💡 D-DAY**
   + ##### D-DAY 설정 - Day Modal or 우측 하단 Notice Board 아래 -> D-DAY 추가
   + ##### Notice Board - Today 기준 D-DAY Count 리스트
   + ##### 날짜 선택 -> 바로 D-DAY Count 계산
