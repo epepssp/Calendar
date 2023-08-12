@@ -93,7 +93,7 @@
        }
   ```
   
-  + ##### dList + Schedule/Diary/Today : 통합 리스트 
+  + ##### dList + Schedule/Diary/Today : 통합 리스트  
 
   > CalendarController.java 일부
   
