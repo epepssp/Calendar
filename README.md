@@ -469,9 +469,8 @@
          mini.innerHTML = str1 + str2 + str3 + str4 + str5 + str6;
        }
 
-       // 리스트 형식
+       **// 리스트 형식**
        function showMiniList(data){
-           const listDiv = document.querySelector('#listDiv');
            let str='';
     
            str +='<div style="border-top: 1px solid gray; margin-left: 10px; width: 266px; border-bottom: 1px solid gray;"><div style="border-top: 1px solid #DCDCDC;" >';
