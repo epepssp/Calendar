@@ -412,20 +412,6 @@
  **✔ Sort (정렬)**
   + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 선택 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
-  
-  > create.html
-  ```html
-
-      <div class="w3-cell-row mb-1">
-        <div class="w3-container w3-cell" id="ms"></div>
-        <!-- Sort 버튼 -->
-        <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
-      </div>
-  
-      <div id="mini"></div><!-- 미니 캘린더 형식 -->
-      <div id="listDiv"></div><!-- 리스트 형식 -->
-  
-  ```
 
   > diary.js
   ```javascript
