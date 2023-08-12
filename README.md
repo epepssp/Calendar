@@ -27,10 +27,13 @@
 - API 사용하지 않고 나만의 창의적인 방식으로 직접 캘린더 구현
 -  캘린더
    - T O D A Y
-   - Notice Board
    - 캘린더 이동
      - Front / Back 버튼: Month 기준 -1, +1 씩 이동   
      - Date 타입 인풋창: 원하는 날짜 선택하여 즉시 이동
+   - Day Modal
+     - 해당 날짜의 일정 추가, D-DAY설정, 일기 쓰기
+     - 오늘의 일정 리스트
+     - Front / Back 버튼: Day 기준 -1, +1 씩 이동 
 + 일정 추가
 + D-DAY 설정
 + 일기장
