@@ -607,13 +607,84 @@
   <br>
   
 **✔ 일정(Schedule)** 
-  + ##### Calendar - Monthly 스케쥴 확인 / Front, Back 버튼 or 원하는 날짜 직접 선택하여 Calendar 이동 
-  + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가 / Day Front, Back 버튼으로 Day 이동   
-  + ##### Mouse hover-Effect - 줄여서 .. 으로 표시된 내용 전체 확인 가능
-
-   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
   
-  + ##### Enter Key 입력
+  + ##### Mouse hover-Effect - 줄여서 .. 으로 표시된 내용 전체 확인 가능
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
+  
+  + ##### Calendar: Monthly 스케쥴 확인
+  + ##### Front, Back 버튼 이동
+  ```html
+
+   <span th:if="${ dto.monthValue != 1}"><!-- 달력 프론트 이동 버튼 -->
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
+           (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
+       <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
+     </button>
+   </span>
+   <span th:if="${ dto.monthValue == 1}">
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
+           (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
+        <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
+     </button>
+   </span>
+
+   <span th:if="${ dto.monthValue != 12}"><!-- 달력 백 이동 버튼 -->
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
+            (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
+        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
+      </button>
+   </span>
+   <span th:if="${ dto.monthValue == 12}">
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
+            (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
+        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
+      </button>
+   </span>
+  
+  ```
+
+  + ##### 원하는 날짜 선택 이동
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
+  
+  + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가, 일기 작성, D-DAY 설정
+  + ##### Day Front, Back 버튼 이동
+   
+  > main.html
+  ```html
+
+     <!-- day 클릭 모달 -->
+     <div id="id01" class="w3-modal">
+        <div class="w3-modal-content" style="width: 280px; height: 400px;">
+    
+            <!-- day 클릭 모달 사이드바 메뉴 -->
+            <div class="w3-sidebar w3-center w3-bar-block" style="background-color:#F5F5F5; display:none; width:110px; height:150px;" id="mySidebar">
+                <button class="w3-bar-item w3-button" onclick="w3_close()"><span style="margin-right: 50px;"></span>&times;</button>
+                <span onclick="showDDayInput()" class="w3-bar-item w3-button w3-small">D-DAY ♥</span>
+                <span onclick="showInput()" class="w3-bar-item w3-button w3-small"><span onclick="w3_close()">일정 추가</span></span>
+                <span onclick="dateInfo()" class="w3-bar-item w3-button w3-small">내 일기장</span>
+            </div>
+            
+            <!-- day 클릭 모달 사이드바 열기 -->
+            <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button><br>  
+            
+            <div><small>&nbsp;&nbsp;오늘의 일정</small></div>
+            <div class="border rounded mt-1 mb-1" style="padding-left:15px; width:230px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
+
+            <span id="inputDiv"></span><!-- 추가할 일정 입력창 -->
+            <span id="modifyInputDiv"></span><!-- 일정 수정하기 위한 입력창 -->
+               
+            <!-- 날짜 Front/Back 이동 버튼 -->
+            <div class="w3-container mt-2" style="display: inline-block;">
+            <input type="hidden" id="last">
+               <button class="w3-button" style="margin-left:50px;" onclick="frontDay();"><img src="/icons/l.svg" width="12" height="12"></button>
+               <button class="w3-button" onclick="backDay();"><img src="/icons/r.svg" width="12" height="12"></button>
+            </div>
+        </div>
+     </div> <!-- 모달 끌 -->
+     
+  ```
+
+  + ##### 일정 추가 - Enter Key 입력
   > calendar.js
   ```javascript
 
@@ -642,7 +713,6 @@
      };
   
   ```
-  <br>
 
  **✔ D-DAY**
   + ##### Day Click Modal -> D-DAY 설정
@@ -659,7 +729,7 @@
 
 
 + #### Calendar 이동
-  + ##### Front, Back 버튼
+  + #####  Calendar Front, Back 버튼
   ```html
 
    <span th:if="${ dto.monthValue != 1}"><!-- 달력 프론트 이동 버튼 -->
