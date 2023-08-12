@@ -97,18 +97,6 @@
   
   + ##### DayDiaryDto : Day와 함께 전달할 Schedule/ Diary/ Today 
   + ##### dList + Schedule/Diary/Today : 통합 리스트 
-  > DayDiaryDto.java
-  
-  ```java
-    
-        public class DayDiaryDto {
-
-          private int day;              // dList의 기준 - day
-          private Integer diaryId;      // 일기
-          private List<Schedule> sList; // day에 등록된 일정 리스트
-          private int today;            // today면= 1, 아니면 =0 
-      }
-  ```
 
   > CalendarController.java 일부
   
