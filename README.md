@@ -32,7 +32,7 @@
 
 ## 주요 구현 기능
 **✔ API 사용하지 않고, 직접 Calendar 그리기**
-  + ##### dList = 공백 + (1일 ~ 말일) + 공백  => 7X5=35 또는 7X6=42에 맞게 뒷 공백   
+  + ##### dList - 달력 테이블에 
     
   > CalendarController.java 일부
   
