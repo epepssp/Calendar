@@ -93,7 +93,6 @@
        }
   ```
   
-  + ##### DayDiaryDto : Day와 함께 전달할 Schedule/ Diary/ Today 
   + ##### dList + Schedule/Diary/Today : 통합 리스트 
 
   > CalendarController.java 일부
