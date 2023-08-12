@@ -715,12 +715,22 @@
   ```
 
  **✔ D-DAY**
-  + ##### Day Click Modal -> D-DAY 설정
-  + ##### 우측 하단 Notice Board 아래 -> D-DAY 추가
-  + ##### 날짜 선택 -> D-DAY Count 확인 가능
-  + ##### Notice Board -> Today 기준으로 Count된 D-DAY 리스트 
+  + ##### D-DAY 설정 - Day Modal or 우측 하단 Notice Board 아래 -> D-DAY 추가
+  + ##### 날짜 선택하면 D-DAY Count 계산
+  + ##### Notice Board - Today 기준 D-DAY Count 
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
   <br>
+
+
+
+
+
+
+
+
+
+
+
 
 + #### Month 이름 포인트 컬러 주기
 + #### Calendar 와 Diary 다양한 연결/이동 기능
