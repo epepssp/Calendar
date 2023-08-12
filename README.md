@@ -713,7 +713,8 @@
      };
   
   ```
-
+  <br>
+  
  **✔ D-DAY**
   + ##### D-DAY 설정 - Day Modal or 우측 하단 Notice Board 아래 -> D-DAY 추가
   + ##### Notice Board - Today 기준 D-DAY Count 리스트
@@ -749,7 +750,7 @@
    ```
 
    > DDayRestController.java
-> 
+ 
    ```java
 
       @PostMapping("/dday/subtract")
