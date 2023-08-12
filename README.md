@@ -772,50 +772,6 @@
 
 
 
-
-
-+ #### Month 이름 포인트 컬러 주기
-+ #### Calendar 와 Diary 다양한 연결/이동 기능
-
-
-
-
-+ #### Calendar 이동
-  + #####  Calendar Front, Back 버튼
-  ```html
-
-   <span th:if="${ dto.monthValue != 1}"><!-- 달력 프론트 이동 버튼 -->
-     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
-           (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
-       <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
-     </button>
-   </span>
-   <span th:if="${ dto.monthValue == 1}">
-     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year}
-           (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
-        <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i>
-     </button>
-   </span>
-
-   <span th:if="${ dto.monthValue != 12}"><!-- 달력 백 이동 버튼 -->
-      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
-            (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
-        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
-      </button>
-   </span>
-   <span th:if="${ dto.monthValue == 12}">
-      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year}
-            (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
-        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i>
-      </button>
-   </span>
-  
-  ```
-
-  + ##### 원하는 날짜 선택
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
-
-
 + #### Today
   + ##### Color, Blink Effect
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/fc6646a9-ee1e-4f7e-9466-6d975ac72c65" width="580" height="400" alt="투데이"></div>
