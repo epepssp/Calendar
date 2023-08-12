@@ -308,7 +308,6 @@
   <br> 
   
   **✔ Weather** 
-   + ##### Diary Create -Today's Weather
    + ##### 하나만 선택 가능(중복X), 취소 후 재선택 가능
      
    <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0bc50f68-ef11-4213-b2c1-ff09a8338767" width="620" height="400" alt="웨더"></div>
@@ -356,7 +355,7 @@
   
  **✔ Emoji**
   + ##### Emoji(이모티콘) 이용한 다채로운 글 작성
-  + ##### 원하는 이모티콘 컨텐츠 추가하여 Emoji Sidebar 구성, 각각의 이모지에 이벤트 리스너 설정
+
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div>
   
   > create.html
