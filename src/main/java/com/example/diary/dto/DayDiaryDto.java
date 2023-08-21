@@ -21,10 +21,10 @@ import lombok.ToString;
 public class DayDiaryDto {
 
     private int day;
-    private Integer diaryId;
-    private List<Schedule> sList;
+    private Integer diaryId;      // 일기
+    private List<Schedule> sList; // day에 등록된 일정 리스트
     private Integer dDayId;
-    private int today;
+    private int today;   // today면= 1, 아니면 =0 
     private String dayOfWeek; // 0:일요일 ~ 6툐요일
     
   //  private String dDayName;

@@ -74,12 +74,12 @@ public class FileUploadController {
   
   
 //        Path path = Paths.get(uploadPath, target);
-        File dest = new File(uploadPath, target);
+        File dest = new File(uploadPath, target);   // 파일 만들어 저장하고
       
             try {
                 file.transferTo(dest); 
                 
-                if (file.getContentType().startsWith("image")) {
+                if (file.getContentType().startsWith("image")) { // 이미지로 시작하는 파일 썸네일 설정
                     image = true;
                     String thumbnailTarget = "s_" + target;
                     File thumbnailDest = new File(uploadPath, thumbnailTarget);
@@ -99,7 +99,7 @@ public class FileUploadController {
        return result;
     }
     
-    @GetMapping("/api/view/{fileName}")
+    @GetMapping("/api/view/{fileName}")  // 로컬폴더 이미지 불러오기
     public ResponseEntity<Resource> viewFile(@PathVariable String fileName) {
         log.info("viewFile(fileName={})", fileName);
         
@@ -120,6 +120,7 @@ public class FileUploadController {
         
         return ResponseEntity.ok().headers(headers).body(resource);
     }
+    
     
     @DeleteMapping("/remove/{fileName}")
     public ResponseEntity<Map<String, Boolean>> removeFile(@PathVariable String fileName) {

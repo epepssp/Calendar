@@ -185,11 +185,11 @@
    <div style="height: 60px;">
    <span th:if="${ dto.monthValue != 1}"><!-- 달력 페이징 프론트 버튼 -->
      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -1 }, year = ${ dto.year})}'|" >
-    <i class="material-icons" style="font-size:30px; color:#1ce3b1;">chevron_left</i></button>
+    <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i></button>
    </span>
    <span th:if="${ dto.monthValue == 1}">
      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/front?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +11 }, year = ${ dto.year -1})}'|" >
-  <i class="material-icons" style="font-size:30px; color:#1ce3b1;">chevron_left</i></button>
+  <i class="material-icons" style="font-size:30px; color: gray;">chevron_left</i></button>
    </span>
    
    <input type="hidden" id="monthName" th:value="${dto.month}">
@@ -208,12 +208,14 @@
     </h1>
     
    <span th:if="${ dto.monthValue != 12}"><!-- 달력 페이징 백 버튼 -->
-     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
-        <i class="material-icons" style="font-size:30px; color:#1ce3b1;">chevron_right</i></button>
+     <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} 
+     (monthValue =${ dto.monthValue +1 }, year = ${ dto.year})}'|">
+        <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i></button>
    </span>
    <span th:if="${ dto.monthValue == 12}">
-      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
-       <i class="material-icons" style="font-size:30px; color:#1ce3b1;">chevron_right</i></button>
+      <button class="w3-button mb-3" th:onclick="|location.href='@{ /calendar/back?monthValue={monthValue}&year={year} 
+      (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
+       <i class="material-icons" style="font-size:30px; color: gray;">chevron_right</i></button>
    </span>
    </div>
      <div id="selectDiv" class="w3-cell-row" align="right" style="height: 30px; display: none;">
@@ -256,26 +258,30 @@
 
 <div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;">  <!-- 2 -->
    <div class="w3-container w3-cell text" th:each="d : ${d2}">
-      <div class="row" th:if="${ d.today == 1 }">
-        <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
-        
-        <div class="col-2" th:if="${d.diaryId} != 0">
-          <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
-            <img class="icon" style="width: 14px;" src="/icons/heart.svg">
-          </a>
-        </div>
-          
-       <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div>
+   
+      <div class="row" th:if="${ d.today == 1 }"><!-- 투데이인 경우 -->
+         <div class="col-2 fw-bold" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div><!-- Day 클릭시 Day Modal -->
+         <div class="col-2" th:if="${d.diaryId} != 0"><!-- 해당 날짜에 작성된 일기 있으면 다이어리 아이콘 표시  -->
+           <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}"><!-- 아이콘 클릭 시 detail 페이지로 이동 -->
+             <img class="icon" style="width: 14px;" src="/icons/heart.svg">
+           </a>
+         </div>
+         <div class="col-7 pt-1 ale fw-bold" align="right" style="font-size: 13px;" id="divToday"></div><!-- 투데이 표시 -->
       </div>
-      <div th:if="${ d.today == 0 }">
-        <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
-        <span th:if="${d.diaryId} != 0">
-          <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
-          <img class="icon" style="width: 14px;" src="/icons/heart.svg">
-          </a>
-        </span>
+      
+      <div th:if="${ d.today == 0 }"><!-- 투데이 아닌 경우 -->
+         <span th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></span>
+         <span th:if="${d.diaryId} != 0">
+           <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
+             <img class="icon" style="width: 14px;" src="/icons/heart.svg">
+           </a>
+         </span>
       </div>
-      <div class="m-2" style="width:80px; height: 70px;"><div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div></div>
+      
+      <div class="m-2" style="width:80px; height: 70px;"><!-- 등록한 일정 리스트 -->
+        <div th:if="${d.sList}" class="effectT" style="width: 100px;" th:each="s : ${d.sList}"><small>⦁ <span th:text="${ s.content }"></span></small></div>
+      </div>
+      
    </div>
 </div> 
 
@@ -413,36 +419,39 @@
      <input type="hidden"  id="year" th:value="${dto.year}"/><input type="hidden" style="border:none; font-size:25px; width: 45px;" id="monthValue" th:value="${dto.monthValue}"/><input type="hidden" id="fullDate" />
       
      <div class="w3-cell-row p-2"> 
-          <div  class="w3-container w3-cell"> 
-            <div class="mt-4" th:text="${dto.year}" style="font-size: 13px; margin-left: 8px;" ></div>
+        <div  class="w3-container w3-cell"> 
+            <div class="mt-4" th:text="${dto.year}" style="font-size: 13px; margin-left: 8px;"></div><!-- 날짜 정보 -->
             <div align="right" style="display: inline-block; font-size: 25px;">
-              <input style="margin-left: 140px; border:none; font-size:25px; width: 30px;" id="m2" type="text"/>/
+               <input style="margin-left: 140px; border:none; font-size:25px; width: 30px;" id="m2" type="text"/>/
                <input style="border:none; font-size:25px; width: 45px;" id="day" type="text"/>
             </div>
             <span style="font-size: 8px; margin-left: 155px;" id="dow" th:text="${dto.dayOfWeek}"></span> 
             
-            <div class="w3-sidebar w3-center w3-bar-block" style="background-color:#F5F5F5; display:none ;  width:110px; height:150px;" id="mySidebar">
+            <!-- day 클릭 모달 사이드바 메뉴 -->
+            <div class="w3-sidebar w3-center w3-bar-block" style="background-color:#F5F5F5; display:none; width:110px; height:150px;" id="mySidebar">
                 <button class="w3-bar-item w3-button" onclick="w3_close()"><span style="margin-right: 50px;"></span>&times;</button>
                 <span onclick="showDDayInput()" class="w3-bar-item w3-button w3-small">D-DAY ♥</span>
                 <span onclick="showInput()" class="w3-bar-item w3-button w3-small"><span onclick="w3_close()">일정 추가</span></span>
                 <span onclick="dateInfo()" class="w3-bar-item w3-button w3-small">내 일기장</span>
             </div>
             
+            <!-- day 클릭 모달 사이드바 열기 -->
             <button class="w3-button w3-white" style="margin-left:190px; display: inline-block;" onclick="w3_open()"><span style="color:#C0C0C0;">&#9776;</span></button><br>  
             
             <div><small>&nbsp;&nbsp;오늘의 일정</small></div>
             <div class="border rounded mt-1 mb-1" style="padding-left:15px; width:230px; height: 150px; border: 1px solid gray;" id="sListDiv"></div> <!-- 일정 리스트 -->
-            <span id="inputDiv"></span><!-- 일정 추가 입력창 -->
-            <span id="modifyInputDiv"></span><!-- 일정 수정하기 입력창 -->
+            <span id="inputDiv"></span><!-- 추가할 일정 입력창 -->
+            <span id="modifyInputDiv"></span><!-- 일정 수정하기 위한 입력창 -->
                
-            <!-- 날짜 앞/뒤 버튼 -->
+            <!-- 날짜 Front/Back 이동 버튼 -->
             <div class="w3-container mt-2" style="display: inline-block;">
             <input type="hidden" id="last">
                <button class="w3-button" style="margin-left:50px;" onclick="frontDay();"><img src="/icons/l.svg" width="12" height="12"></button>
                <button class="w3-button" onclick="backDay();"><img src="/icons/r.svg" width="12" height="12"></button>
             </div>
-           </div>
+         </div>
       </div>
+      
    </div>
 </div>
 <!-- 모달 끌 -->

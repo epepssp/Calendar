@@ -73,7 +73,7 @@ let weather = null; // 초기에는 값이 없는 상태
 function svgClick(n) {
 
   if (weather === null) {  
-    weather = n; // 변수 weather에 새로운 값 저장\
+    weather = n; // 변수 weather에 새로운 값 저장
     updateWeather(n);
     console.log("변수 값이 저장. weather =", weather);
   } else if (weather === n) {
@@ -193,7 +193,7 @@ window.onload = function() {
 
   
 function setPage() {
-    alert('불럿니!!');
+   // alert('불럿니!!');
     
      const data ={
          year:year,
@@ -316,7 +316,7 @@ function renderPagination() {
 
 
 
-
+// 리스트형 정렬
 function showMiniList(data){
 
     const listDiv = document.querySelector('#listDiv');
@@ -339,6 +339,7 @@ function showMiniList(data){
     
 }
 
+
 function calendarList(){
     const year = document.querySelector('#year').value;
     const monthValue = document.querySelector('#monthValue').value;
@@ -355,6 +356,7 @@ function calendarList(){
         .catch(err => { console.log(err) });
 }
 
+// 미니 캘린더 정렬
 function showMini(data){    
    const mini = document.querySelector('#mini');
    
