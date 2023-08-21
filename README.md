@@ -414,7 +414,7 @@
   <br>
   
  **💡 Sort (정렬)**
-  + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 선택 가능
+  + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 방식 선택 가능
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
 
   > diary.js
