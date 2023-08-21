@@ -512,6 +512,7 @@
 
   + ##### 마우스 hover-Effect - 전체 내용 확인 가능
   + ##### Calendar: Monthly 스케쥴 확인
+
   + ##### Front, Back 버튼 이동
   ```html
 
@@ -546,9 +547,7 @@
   + ##### 원하는 날짜 선택 이동
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
   
-  + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가, 일기 작성, D-DAY 설정
-  + ##### Day Front, Back 버튼 이동
-   
+  + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가, 일기 작성, D-DAY 설정 가능
   > main.html
   ```html
 
