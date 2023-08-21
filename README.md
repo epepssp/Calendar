@@ -1,7 +1,7 @@
 # 🗓 tomydays
 <br>
 
-<div align="center"><img src="https://github.com/epepssp/Calendar/assets/118948099/4d9e5dc5-b47a-4cee-9671-3053f0e7d6ee" width="100%" alt="tomydays"></div>
+<div align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/96fddcfe-a834-454f-8e87-9936b5266f90" width="100%" alt="tomydays"></div>
 <br>
 
 ## 개요
@@ -185,7 +185,7 @@
  **💡 파일 업로드 (Booque ver2 보다 업그레이드 된)**
   + ##### 여러개 업로드 / 드래그로 선택 업로드 / 첨부파일 추가 후 또 추가 / 이미지 제거 / Thumbnails / 이미지 슬라이드
 
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/7532e188-a9bf-4319-83a1-0b3637c0709a" width="620" height="400" alt="사진"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/1f73aeef-6bb6-448c-afac-4a6911527903" width="620" height="400" alt="사진"></div>
     
   > create.html 일부
 
@@ -326,7 +326,7 @@
   **💡 Weather 선택** 
    + ##### 하나만 선택 가능(중복X), 취소 후 재선택 가능
      
-   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0bc50f68-ef11-4213-b2c1-ff09a8338767" width="620" height="400" alt="웨더"></div>
+   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/7141445f-4786-4c59-9112-7c72d5d327d9" width="620" height="400" alt="웨더"></div>
    
    > diary.js
   
@@ -372,7 +372,7 @@
  **💡 Emoji**
   + ##### Emoji(이모티콘) 이용한 다채로운 글 작성
 
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/882ab275-f82d-4aa7-80d9-4281531b575b" width="600" height="400" alt="이모지"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/25d61a59-863d-470f-8ec3-1a091dd92692" width="600" height="400" alt="이모지"></div>
   
   > create.html
   ```html
@@ -427,7 +427,7 @@
   
  **💡 Sort (정렬)**
   + ##### 미니 캘린더 or 리스트 두 가지 방식으로 일기 목록 정렬 방식 선택 가능
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/0d179c34-0396-4724-84ab-6a086d583e80" width="620" height="400" alt="정렬"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/044fc5b3-964a-4d44-85cd-3c4a44279f3f" width="620" height="400" alt="정렬"></div>
 
   > diary.js
   ```javascript
@@ -520,7 +520,7 @@
 **💡 일정(Schedule)** 
   
 
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/a0334b18-7875-428e-9c93-823df969303c" width="600" height="400" alt="일정"></div> 
 
   + ##### 마우스 hover-Effect - 전체 내용 확인 가능
   + ##### Calendar: Monthly 스케쥴 확인
@@ -557,7 +557,7 @@
   ```
 
   + ##### 원하는 날짜 선택 이동
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/ed2ede74-521d-4625-a041-ce75ad407f35" width="600" height="440" alt="날짜선택이동"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/fa5fd684-bfbd-49aa-8d3c-4a13a191bc68" width="600" height="440" alt="날짜선택이동"></div>
   
   + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가, 일기 작성, D-DAY 설정 가능
   > main.html
@@ -631,7 +631,7 @@
   + ##### Notice Board - Today 기준 D-DAY Count 리스트
   + ##### 날짜 선택 -> 바로 D-DAY Count 계산
   
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/72ee9b70-acd3-45cc-afc0-df8dd0b07605" width="600" height="400" alt="디데이"></div>  
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/1ad428b4-bf86-4f34-a32e-3b51c342d091" width="600" height="400" alt="디데이"></div>  
   <br>
 
   > DDayRestController.java
