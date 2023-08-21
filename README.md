@@ -26,17 +26,30 @@
 ## 주요기능 소개
 - API 사용하지 않고 나만의 창의적인 방식으로 직접 캘린더 구현
 -  캘린더
-   - T O D A Y
+   - T O D A Y: Color + Blink Effect 
    - 캘린더 이동
      - Front / Back 버튼: Month 기준 -1, +1 씩 이동   
      - Date 타입 인풋창: 원하는 날짜 선택하여 즉시 이동
    - Day Modal
      - 해당 날짜의 일정 추가, D-DAY설정, 일기 쓰기
      - 오늘의 일정 리스트
-     - Front / Back 버튼: Day 기준 -1, +1 씩 이동 
+     - Front / Back 버튼: Day 기준 -1, +1 씩 이동
+     - 마우스 hover-Effect - 긴 스케쥴 내용 전체 확인 가능
 + 일정 추가
+   - Enter Key 입력
 + D-DAY 설정
+   - 날짜 차이 계산 반환
+   - Notice Board 영역에 Today 기준으로 D-DAY 리스트 표시
 + 일기장
+   - Diary Page 따로 존재
+   - Calendar Page: 원하는 날짜 클릭 / Diary Page: 미니 캘린더의 색칠 안 된 날짜(작성된 일기가 없는 날짜) 클릭하여 일기 작성 가능
+   - 이미지 파일 업로드
+   - Weather 선택
+   - Emoji(이모티콘)
+   - Sort(정렬): 미니캘린더(액자식) or 리스트 형식으로 정렬 선택 가능
+   - 일기 작성시 Calendar에 다이어리 아이콘 표시됨 -> 클릭시 일기 상세페이지 이동
+   - 미니캘린더의 보라색 날짜(일기 작성된 날짜) or 리스트 형식의 일기 제목 클릭시 일기 상세 페이지 이동
+  
 <br>
 
 ## 주요 구현 기능
