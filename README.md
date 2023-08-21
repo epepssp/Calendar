@@ -507,9 +507,10 @@
   
 **💡 일정(Schedule)** 
   
-  + ##### Mouse hover-Effect - 줄여서 .. 으로 표시된 내용 전체 확인 가능
+
   <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/c190b6d8-dd29-4ac2-85c7-cd62eb719f76" width="600" height="400" alt="일정"></div> 
-  
+
+  + ##### 마우스 hover-Effect - 전체 내용 확인 가능
   + ##### Calendar: Monthly 스케쥴 확인
   + ##### Front, Back 버튼 이동
   ```html
