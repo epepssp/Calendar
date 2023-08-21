@@ -172,6 +172,8 @@
     
  **💡 파일 업로드 (Booque ver2 보다 업그레이드 된)**
   + ##### 여러개 업로드 / 드래그로 선택 업로드 / 첨부파일 추가 후 또 추가 / 이미지 제거 / Thumbnails / 이미지 슬라이드
+
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/Calendar/assets/118948099/7532e188-a9bf-4319-83a1-0b3637c0709a" width="620" height="400" alt="사진"></div>
     
   > create.html 일부
 
