@@ -520,7 +520,7 @@
 **💡 일정(Schedule)** 
   
 
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/a0334b18-7875-428e-9c93-823df969303c" width="600" height="400" alt="일정"></div> 
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/7762a146-fb85-4f2c-a35a-c2b7930433d7" width="600" height="400" alt="일정추가2"></div> 
 
   + ##### 마우스 hover-Effect - 전체 내용 확인 가능
   + ##### Calendar: Monthly 스케쥴 확인
@@ -557,7 +557,7 @@
   ```
 
   + ##### 원하는 날짜 선택 이동
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/fa5fd684-bfbd-49aa-8d3c-4a13a191bc68" width="600" height="440" alt="날짜선택이동"></div>
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/7e285afc-afad-4e7f-8ab7-ca464d4538c6" width="600" height="440" alt="날짜선택이동2"></div>
   
   + ##### Day Modal - Daily 스케쥴 확인 / 일정 추가, 일기 작성, D-DAY 설정 가능
   > main.html
@@ -631,7 +631,7 @@
   + ##### Notice Board - Today 기준 D-DAY Count 리스트
   + ##### 날짜 선택 -> 바로 D-DAY Count 계산
   
-  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/1ad428b4-bf86-4f34-a32e-3b51c342d091" width="600" height="400" alt="디데이"></div>  
+  <div style="margin-left: 100px;"><img src="https://github.com/epepssp/tomydays/assets/118948099/981f4051-9938-4bcc-9b53-ab7b4afcf78a" width="600" height="400" alt="디데이22"></div>  
   <br>
 
   > DDayRestController.java
