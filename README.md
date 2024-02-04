@@ -33,7 +33,7 @@
      - 해당 날짜의 일정 추가, D-DAY설정, 일기 쓰기
      - 오늘의 일정 리스트
      - Front / Back 버튼: Day 기준 -1, +1 씩 이동
-     - 마우스 hover-Effect - 긴 스케쥴 내용 전체 확인 가능
+     - 마우스 hover-Effect: 긴 스케쥴 내용 전체 확인 가능
 + 일정 추가
    - **Enter Key 입력**
 + D-DAY 설정
