@@ -16,11 +16,10 @@
 <br>
 
 ## 사용 기술 및 개발환경
-- Java
-- Spring Boot
-- HTML
-- CSS
-- JavaScript
+Java </br>
+SQL </br>
+Spring Boot </br>
+HTML/CSS/Java Script
 <br>  
 
 ## 기능 소개
