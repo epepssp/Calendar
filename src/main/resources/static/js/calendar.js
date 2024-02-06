@@ -3,22 +3,24 @@
  */
 window.addEventListener('DOMContentLoaded', () => {
    now();
-   lastDay();
+ //  lastDay();
 });
+
 
 
 function now(){
      const today = new Date();
  
-     const tYear= today.getFullYear();
+     const tYear= today.getFullYear()
      const tMonth= today.getMonth() + 1;
      const tDay= today.getDate();
+     
      const hDiv = document.querySelector('#hDiv');
      str ='';
      
-     str +='<div style="font-size: 11px; font-weight: bold; background-color:#FFE4E1; margin-left:100px;">'
-          +'<span id="tYear">'+tYear+'</span>년 <span id="tMonth">'+tMonth+'</span>월 <span id="tDay">'+tDay+'</span>일 / '
-          +'<span style="color: #FF6347;">TODAY</span></div>';
+     str +='<span style="font-size:13px; margin-left:10px;"><span style="color:#ff8080;">t </span><span style="color:#FFFF00;">o </span><span style="color:#d2ff4d;">d </span>'
+          +'<span style="color:#4dffff;">a </span><span style="color:#cca1f7;">y</span></span>  '
+          +'<small class="ale underline" style="font-size:15px; color:white"><span id="tYear">"'+tYear+'</span>.<span id="tMonth">'+tMonth+'</span>.<span id="tDay">'+tDay+'"</span></small>';
      hDiv.innerHTML = str;
      
      axios
@@ -32,21 +34,19 @@ function now(){
 }
 
 
-
 function showLeft(data){
     const dDayDiv = document.querySelector('#dDayDiv');
     str='';
-    
+      
     for(let x of data) {
-        str +='<div style="margin-left: 70px;" align="center">';
         if(x.subtract < 0) {
-           str +='<span class="fw-bold" style="color: #FF6347;"><small>♡'+x.subtract+'</small></span> <span><small>'+x.name+'</small></span></div>';
+           str +='<div style="color: #FF6347;"><small>D '+x.subtract+'</small></span> <span><small>'+x.name+'</small></div>';
         } 
         if(x.subtract > 0) {
-           str +='<span class="fw-bold"  style="color: #4169E1;"><small>♡+'+x.subtract+'</small></span> <span><small>'+x.name+'</small></span></div>';
+           str +='<div style="color: #4169E1;"><small><img width="11px;" src="/icons/2hh.svg">+'+x.subtract+'</small></span> <span><small>'+x.name+'</small></div>';
         }
         
-     } str +='<br>';
+     } 
      dDayDiv.innerHTML = str;
     
 }
@@ -54,32 +54,27 @@ function showLeft(data){
 
 // modalDay 
 function dayPop(day) {
- 
-    
+   
     // 날짜 클릭하면 modalDay 뜸 
     document.getElementById('id01').style.display = 'block';
-    const modalDay = document.querySelector('#modalDay');
     
-     const monthValue = document.querySelector('#m').value;
+    const monthValue = document.querySelector('#monthValue').value;
     const mon = document.querySelector('#m2');
+    const d = document.querySelector('#day');
     
     mon.value = monthValue;
+    d.value =day;
     
-    axios
-        .get('/day/' + day)
-        .then(response => {
-            modalDay.value = response.data;
-            showFullDate();
-            showScheduleOfDay();  // Day의 일정 리스트
-        })
-        .catch(err => { console.log(err) });
+    showFullDate();
+    showScheduleOfDay();  // Day의 일정 리스트
+   
 };
 
 
 function showFullDate() {
-    const year = document.querySelector('#y').value;
+    const year = document.querySelector('#year').value;
     const monthValue = document.querySelector('#m2').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
     const full = document.querySelector('#fullDate');
     fullDate = year + monthValue + day;
     full.value = fullDate;
@@ -90,9 +85,11 @@ function showFullDate() {
 // Day 일정 리스트 요청
 function showScheduleOfDay() {
     
+lastDay();
+    
     const fullDate = document.querySelector('#fullDate').value;
     const monthValue = document.querySelector('#m2').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
     
    const data ={
        monthValue:monthValue,
@@ -163,9 +160,9 @@ function showInput() {
 function send() {
 
     const content = document.querySelector('#addP').value;
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
-    const day = document.querySelector('#modalDay').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+    const day = document.querySelector('#day').value;
     const full = document.querySelector('#fullDate').value;
 
 
@@ -194,30 +191,25 @@ function send() {
 // modalDay 앞 날짜 이동(Day -1)
 function frontDay() {
     
-    const day = document.querySelector('#modalDay').value;
-    const fullDate = document.querySelector('#fullDate').value;
-    const monthValue = document.querySelector('#m').value;
-    const year = document.querySelector('#y').value;
+    const d = document.querySelector('#day').value;
+    const monthValue = document.querySelector('#m2').value;
+    const year = document.querySelector('#year').value;
    
-    if(day != 1){
-            modalDay.value = day - 1;
+    if(d != 1){
+            day.value = d - 1;
             showFullDate();
             showScheduleOfDay();
     }
     
-    if(day == 1){
+    if(d == 1){
        var month  = monthValue-1;
-       
-       changeBackgrondCalendar(month);
-       
+ 
          axios
         .get('/front/day/' + month)
         .then(response => {
-            
-            m2.value = month;
-            modalDay.value = response.data;
-         
-            showFullDate();
+            m2.value = monthValue-1;
+            day.value = response.data;
+           showFullDate();
             showScheduleOfDay();
         })
         .catch(err => { console.log(err) });
@@ -226,40 +218,54 @@ function frontDay() {
 }
 
 
-function changeBackgrondCalendar(monthValue){
-     const year = document.querySelector('#y').value;
+function lastDay(){
+    const monthValue = document.querySelector('#m2').value;
+    const l = document.querySelector('#last');
     
-     
-   
+    axios
+        .get('/lastDay/' + monthValue)
+        .then(response => {
+            last.value = response.data;
+        })
+        .catch(err => { console.log(err) });
 }
+
 
 // modalDay 뒷 날짜 이동(Day +1)
 function backDay() {
-     const day = document.querySelector('#modalDay').value;
-    const fullDate = document.querySelector('#fullDate').value;
-    const monthValue = document.querySelector('#m').value;
-    const year = document.querySelector('#y').value;
-
+    const d = document.querySelector('#day').value;
+    const monthValue = document.querySelector('#m2').value;  // 모달의 month id =m2
+    const year = document.querySelector('#year').value;
+    const l = document.querySelector('#last').value;
     
-     const last = document.querySelector('#last').value;
+     console.log(monthValue);
+    console.log(d);
     
-      if(day != last){
-         axios
-        .get('/back/day/' + day)
+    
+    axios
+        .get('/lastDay/' + monthValue)
         .then(response => {
-            modalDay.value = response.data;
+            last.value = response.data;
+        })
+        .catch(err => { console.log(err) });
+    
+   
+    if(d != l){
+         axios
+        .get('/back/day/' + d)
+        .then(response => {
+            day.value = response.data;
             showFullDate();
             showScheduleOfDay();
         })
         .catch(err => { console.log(err) });
     }
     
-    if(day == last) {
+    if(d == l) {
           axios
         .get('/back/day/month/' + monthValue)
         .then(response => {
-             modalDay.value =1; 
-             m.value = response.data;
+             day.value =1; 
              m2.value = response.data;
             showFullDate();
             showScheduleOfDay();
@@ -270,37 +276,47 @@ function backDay() {
   
 }
 
-function lastDay(){
-    const monthValue = document.querySelector('#m').value;
-     const last= document.querySelector('#last');
-     
-        axios
-        .get('/lastDay/' + monthValue)
-        .then(response => {
-            console.log(response.data);
-            last.value = response.data;
-        })
-        .catch(err => { console.log(err) });
-    
-}
 
 
 // diaryModal 
-function showDiaryFoam() {
+function showDiaryFoam() {  // 1보류
     // 사이드바에서 내 일기장 클릭하면 
     document.getElementById("diaryModal").style.display = "block"; // diaryModal 뜨고
     document.getElementById("id01").style.display = "none";  // modalDay close
 
-    const modalDay = document.querySelector('#modalDay').value;
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
-    const dow = document.querySelector('#dow').value;
+    const day = document.querySelector('#day').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+
     const diaryDayDiv = document.querySelector('#diaryDayDiv');
 
     let str = '';
-    str += '<span>' + year + '년 ' + monthValue + '월 ' + modalDay + '일<span>';
+    str += '<span>' + year + '년 ' + monthValue + '월 ' + day + '일<span>';
     +'';
     diaryDayDiv.innerHTML = str;
+}
+
+
+function dateInfo(){   // 내 일기장 클릭시 diary create로 이동
+    const day = document.querySelector('#day').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
+    
+    axios.get('/diary/create', {
+        params: {
+             year: year,
+             monthValue: monthValue,
+             day:day
+         }
+        })
+  .then(response => {
+     window.location.href = '/diary/create?year=' + encodeURIComponent(year) + '&monthValue=' + encodeURIComponent(monthValue) + '&day=' + encodeURIComponent(day);
+  })
+  .catch(error => {
+    console.log(err);
+  });
+    
+    
 }
 
 
@@ -309,18 +325,20 @@ const diaryBtn = document.querySelector('#diaryBtn');
 // 새 일기 등록
 diaryBtn.addEventListener('click', e => {
 
-    const year = document.querySelector('#y').value;
-    const monthValue = document.querySelector('#m').value;
+    const year = document.querySelector('#year').value;
+    const monthValue = document.querySelector('#monthValue').value;
     const title = document.querySelector('#title').value;
     const diaryContent = document.querySelector('#diaryContent').value;
-    const day = document.querySelector('#modalDay').value;
+    const day = document.querySelector('#day').value;
+    const weather = document.querySelector('#weather').value;
 
     const data = {
         year: year,
         monthValue: monthValue,
         day: day,
         title: title,
-        diaryContent: diaryContent
+        diaryContent: diaryContent,
+        weather: weather
     }
 
     axios.post('/add/diary', data)
@@ -346,34 +364,6 @@ function updateDiaryIcon(diaryId) {
         .catch(err => { console.log(err) });
 }
 
-
-function diaryPop(diaryId) {
-
-    axios
-        .get('/day/diary/' + diaryId)
-        .then(response => {
-            showDiary(response.data);
-
-        })
-        .catch(err => { console.log(err) });
-};
-
-// diaryDetailModal 
-function showDiary(diary) {
-    
-    // 일기 아이콘 클릭하면 diaryDetailModal 뜸 - 글 볼 수 있음
-    document.getElementById("diaryDetailModal").style.display = "block";
-
-    let str = '<span>' + diary.year + '년 ' + diary.monthValue + '월 ' + diary.day + '일<span>';
-    detailDayDiv.innerHTML = str;
-    
-    let str1 = '<h4 class="mt-5 border-bottom" style="border-bottom-color: 1px solid #DCDCDC; height: 20px;" name ="title" readonly>' + diary.title + '</h4>'
-        + '<div class="mt-2" style="border-color:white; height: 350px;" name="content" readonly>' + diary.content + '</div>'
-        + '<div class="w3-cell-row border-bottom" style="border-bottom-color: 1px solid #DCDCDC;"></div>';
-
-    detailDiv.innerHTML = str1;
-
-}
 
 
 
@@ -438,40 +428,35 @@ function showSubtract(subtract) {
 }
 
 // 디데이 추가 함수
-const dDayBtn = document.querySelector('#dDayBtn');
-
-dDayBtn.addEventListener('click', e => {
-    const untilDate = document.querySelector('#untilDate').value;
-    const name = document.querySelector('#name').value;
+ function newDday(){
     
-    console.log(name);
+        
+     const untilDate = document.querySelector('#untilDate').value;
+     const name = document.querySelector('#name').value;
+     
+            const data = {
+                untilDate: untilDate,
+                name: name
+            }
+            console.log('여기왔냐')
+            console.log(data);
+            
+            axios
+            .post('/dday/add', data)
+            .then(response => {
+                modalClose();
+                location.reload();
+                alert('D-DAY 등록되었습니다!');
+            })
 
-
-    const data = {
-        untilDate: untilDate,
-        name: name
+            .catch(err => { console.log(err) });
     }
-    console.log('여기왔냐')
-    console.log(data);
-
-    axios
-        .post('/dday/add', data)
-        .then(response => {
-            modalClose();
-            location.reload();
-            alert('D-DAY 등록되었습니다!');
-        })
-
-        .catch(err => { console.log(err) });
-})
 
 function modalClose() {
     document.getElementById("dDayModal").style.display = "none";
     document.getElementById('id01').style.display = "none";
  //   document.getElementById('dDayName').value = "";
 }
-
-
 
 
 

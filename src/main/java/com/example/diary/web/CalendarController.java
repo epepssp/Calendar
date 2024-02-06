@@ -44,7 +44,7 @@ public class CalendarController {
         LocalDate date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), 1);
 
         List<List<DayDiaryDto>> integratedList = integrateInfo(date.getYear(), date.getMonthValue());
-
+        
         model.addAttribute("d1", integratedList.get(0));
         model.addAttribute("d2", integratedList.get(1));
         model.addAttribute("d3", integratedList.get(2));
@@ -54,9 +54,7 @@ public class CalendarController {
         if (!integratedList.get(5).isEmpty()) {
             model.addAttribute("d6", integratedList.get(5));
         }
-
-   
-        
+     
         CalendarDto dto = calendarService.calendarCreate(date);
         model.addAttribute("dto", dto); // CalendarDto
         
@@ -89,6 +87,7 @@ public class CalendarController {
     public List<List<DayDiaryDto>> integrateInfo(int year, int monthValue) { 
         
         LocalDate date = LocalDate.of(year,monthValue, 1);
+        // LocalDate date  = LocalDate.now();
         
         String dayOfWeekS = date.getDayOfWeek().toString(); // 월 1일의 요일
         
@@ -100,29 +99,44 @@ public class CalendarController {
             if(e.equals(w)) {
               original=  e.ordinal();
             }
-        }
+        }    
         
         // 뒤에 빈 칸은 몇칸인지 계산해서 역시 0넣음. HTML 달력 모양 깨지지 않게  
         int sub = date.getMonth().maxLength() + original;
         
-        
         List<Integer> dList =new ArrayList<>(); //  
-        if(original-1 >0) {  // dLsit: HTML에 달력 그리기 위한 데이리스트
+        
+        
+        // dLsit: HTML에 달력 그리기 위한 데이리스트
+        if(original != 0) {  
             for (int i = 0; i < original-1; i++) {
                dList.add(0);
-              }
-        }
-        for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
+              } 
+            for (int j = 0;j < date.getMonth().maxLength() +1; j++) {
              dList.add(j);
+          }
         }
-        if(35-sub >0) {
+        
+        if(original == 0) {
+            for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
+                dList.add(j);
+             }
+        }
+             
+        
+        if(35 >= sub) { // 5주까지
            for (int i = 0; i <35- sub; i++) {
                dList.add(0);
               }
         }
         
+        if(35 < sub) { // 6주까지 있는 경우
+            for (int i = 0; i <42- sub; i++) {
+                dList.add(0);
+               }
+         }
+            
         
-
         // 스케쥴 리스트
         Set<Integer> daysHaveSchedule = new HashSet<>(); 
         for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
@@ -154,7 +168,7 @@ public class CalendarController {
          List<Integer> diaryList = new ArrayList<>();
         for (Integer d : dList) {
             if (daysHaveDiary.contains(d)) {
-               diaryList.add(diaryService.findByD(d).getDiaryId());
+               diaryList.add(diaryService.findByMD(date.getMonthValue(),d).getDiaryId());
                 } else{
                     diaryList.add(0);
                 }
@@ -222,15 +236,16 @@ public class CalendarController {
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
                         .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
         }
-       
         
         List<DayDiaryDto>  d1 = new ArrayList<>(); // 한 주 단위로 쪼개서
         List<DayDiaryDto>  d2 = new ArrayList<>();
         List<DayDiaryDto>  d3 = new ArrayList<>();
         List<DayDiaryDto>  d4 = new ArrayList<>();
         List<DayDiaryDto>  d5 = new ArrayList<>(); 
+        List<DayDiaryDto> d6 = new ArrayList<>();
         
         List<List<DayDiaryDto>> integratedList = new ArrayList<>();
+        
         for (int i = 0; i < dayDiaryDtoList.size(); i++) {
             if(i < 7) {
                 d1.add(dayDiaryDtoList.get(i));
@@ -256,36 +271,34 @@ public class CalendarController {
                 d5.add(dayDiaryDtoList.get(i));
             }
             integratedList.add(d5);
+            
+            if(34 < i && i< 42) {
+                d6.add(dayDiaryDtoList.get(i));
+            }
+            integratedList.add(d6);
+            
         }   
      
-        if (dayDiaryDtoList.size() >= 35) {
-            List<DayDiaryDto> d6 = new ArrayList<>();
-            for (int n = 35; n < 42; n++) {
-                if( 34 < n && n< dList.size()) {
-                    d6.add(dayDiaryDtoList.get(n));
-                }  
-                integratedList.add(d1);
-            }
-       }
-       
+
         return integratedList;
     }
     
     
     
     
-    @GetMapping({ "/calendar/front", "/calendar/back" })
+    @GetMapping({ "/calendar/front", "/calendar/back", "/calendar/selected" })
     public String frontCalendar(Integer year, Integer monthValue, Model model) {
         
         log.info("백 트론츠 잘 받았나영?={} : {}", year, monthValue);
         List<List<DayDiaryDto>> integratedList = integrateInfo(year, monthValue);
-        
+
         model.addAttribute("d1", integratedList.get(0));
         model.addAttribute("d2", integratedList.get(1));
         model.addAttribute("d3", integratedList.get(2));
         model.addAttribute("d4", integratedList.get(3));
         model.addAttribute("d5", integratedList.get(4));
 
+       
         if (!integratedList.get(5).isEmpty()) {
             model.addAttribute("d6", integratedList.get(5));
         }

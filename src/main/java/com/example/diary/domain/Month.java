@@ -2,7 +2,7 @@ package com.example.diary.domain;
 
 public enum Month {
 
-    JANUARY,
+    JANUARY, 
     FEBRUARY,
     MARCH,
     APRIL,
@@ -10,9 +10,9 @@ public enum Month {
     JUNE,
     JULY,
     AUGUST,
-    SEMTEMBER,
+    SEPTEMBER,
     OCTOBER,
     NOBEMVER,
-    DESEMBER
+    DESEMBER 
     
 };

@@ -1,40 +1,186 @@
-<!DOCTYPE html>
-<html xmlns:th="http://wwww.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    
+    
+    <head>
+    
+       <meta charset="utf-8" />
+       <!-- 반응형 웹 -->
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
+       
+       <title></title><!-- 안 넣어도 될 듯 -->
+       
+       <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous" />
+        
+       <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Borel' rel='stylesheet'>
+       <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        
+       <!-- CSS -->
+       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <script src="https://kit.fontawesome.com/009f152c56.js" crossorigin="anonymous"></script>
+        
+        
+       <style>
+       
+       
+    
+      .dosis {
+          font-family: 'Dosis',  sans-serif;
+          font-size: 35px;
+           animation: bounce 2s infinite;
+      }
+       
+       @keyframes bounce {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(20px);
+    }
+  }  
+  
 
-  <div></div>
-<h1>하잉ㅇ</h1>
-
-
-
-
-<div><a th:href="@{ /calendar }">오늘 날짜 보기</a></div>
-
-
-<br><br>
-<div><a th:href="@{ /layout }">레이아웃</a></div>
-
-<div><a th:href="@{ /test }">테스트레이아웃</a></div>
-<br><br>
-
-
-<input>
-
-
-<script>
-
-function now(){
-	
-	 axios
-     .get('/now')
-     .then(response => {
-         
-      
-     })
-     .catch(err => { console.log(err) });
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-</script>
-</html>
+.waviyDiv {
+  background-color:  #151719;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
+
+.waviy {
+  position: relative;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+  font-size: 60px;
+}
+.waviy span {
+
+  position: relative;
+  display: inline-block;
+  color: #fff;
+
+  animation: waviy 1s infinite;
+  animation-delay: calc(.1s * var(--i));
+  
+}
+@keyframes waviy {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
+       
+        .ale { 
+             font-family: 'Alegreya Sans SC'; font-size: 35px;
+             font-weight: bold;
+         }
+         
+          @keyframes blink {
+           0% { visibility: hidden; }
+           50% { visibility: hidden; }
+           100% { visibility: visible; }
+        }
+        
+        .blink {
+         animation: blink 1s infinite;
+        }
+        
+        
+        .borel {
+            font-family: 'Borel';font-size: 30px;
+        }
+         
+ 
+       </style>
+       
+    </head>
+    
+    
+    
+<body class="w3-content" style="max-width:2000px">
+
+  <div><!-- 메인 전체 -->
+    
+     <div class="dosis" align="center"></div><!-- 이 디브 없애면 왜 안되지? -->
+    
+     <a style="text-decoration: none;" th:href="@{ /calendar }">
+       <div class="waviyDiv">  
+         <div class="waviy dosis"> 
+           <span style="--i:1">t </span>
+           <span style="--i:2">o </span>
+           <span style="--i:3">m </span>
+           <span style="--i:4">y </span>
+           <span style="--i:5">d </span>
+           <span style="--i:6">a </span>
+           <span style="--i:7">y </span>
+           <span style="--i:8">s </span>
+         </div>
+       </div>
+     </a>
+     
+     
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous"></script>
+
+    <!-- 스크립트 작성 영영-->
+    <script>
+
+    function now(){
+    
+         axios
+         .get('/now')
+         .then(response => {
+      
+          })
+     .catch(err => { console.log(err) });
+     }
+    
+    
+    window.onload = function() {
+        const dosis = document.querySelector('.dosis');
+        const spans = dosis.querySelectorAll('span');
+        let index = 0;
+
+        function showNextLetter() {
+          if (index < spans.length) {
+            spans[index].style.display = 'inline';
+            index++;
+            setTimeout(showNextLetter, 100); // 다음 글자 나타나는 간격 (100ms)
+          }
+        }
+
+        showNextLetter();
+      };
+    </script>
+
+
+   </div><!-- 메인 전체 끝 -->
+
+</body>
+</html>
