@@ -227,7 +227,8 @@
 <br>
 
 ##### <div id="t8">8. DayDiaryDto 타입으로 리스트를 생성한다.</div>
->  CalendarController
+###### dList, daysScheduleList, diaryList, todayList를 통합하여 하나의 리스트를 
+
 ```java
 
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();   // DayDiaryDto: 다이어리 프로그램으로 데이에 담아 전달하려는 모든 정보 들어있는 dto
