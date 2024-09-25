@@ -604,19 +604,22 @@
 
 ```
 ###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
-```  <div class="box" th:day="${ data.d1[i].day }" onclick="createDiary(this.getAttribute(\'day\'));" th:text="${ data.d1[i].day }"></div>
+```
+     <div class="box" th:day="${ data.d1[i].day }" onclick="createDiary(this.getAttribute(\'day\'));" th:text="${ data.d1[i].day }"></div>
 ```
 <br>
 
 ##### 19. 작성 완료
 ###### &nbsp;◽&nbsp; 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭시 작성된 일기로 이동
-```  <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
+```
+     <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
         <img class="diaryIcon" src="/icons/heart.svg">
      </a>  
 ```
 
 ###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭시 작성된 일기로 이동
-```  <div class="box">
+```
+     <div class="box">
          <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ data.d1[i].diaryId })}"></a>
      </div>
 ```
