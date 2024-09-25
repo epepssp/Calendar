@@ -23,7 +23,7 @@
 <br>  
 
 ## 목차
-### 💎[ 통합 리스트](#num1)
+### 💎 통합 리스트
 ##### 0. 사용자로부터 [연, 월을 입력받는다.](#t0)
 ##### 1. [해당 월의 시작 요일](#t1)을 찾는다.
 ##### 2. Week enum을 정의하고 입력받은 요일 문자열과 일치하는 인덱스를 반환받는 방식으로 [요일 문자열을 숫자로 변환](#t2)한다.
@@ -36,7 +36,7 @@
 ##### 9. HTML에서 달력 날짜가 일주일 단위로 채워지므로, [통합 리스트를 7일 단위로 쪼개어 넘긴다.](#t9)
 <br>
 
-### 💎[ 달력 뷰](#num2)
+### 💎 달력 뷰
 ##### 10. 달력 날짜가 채워지는 순서? [1주일 단위로 반복문 작성한다.](#v1)
 ##### 11. [Day Modal](#modal): ◽ 날짜를 클릭하면 뜨는 모달<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ 일정 추가 / 일기 작성 / D-day 설정 기능<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ Front/Back 버튼 클릭하여 날짜 이동
 ##### 12. [Diary Icon](#icon): 작성된 일기가 있는 날짜에 표시되며, Diary Icon을 클릭하면 해당 일기의 detail page로 이동한다.
