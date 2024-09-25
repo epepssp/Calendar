@@ -1087,9 +1087,8 @@ function showMiniList(data){
 ```
 <br>
 
-##### 25. D-day Modal에서 날짜를 선택하면, D-day 계산 결과를 리턴
-###### &nbsp;◽&nbsp; 날짜 차이 계산: long daysSubtract = ChronoUnit.DAYS.between(선택한 날짜,오늘 날짜);
-###### &nbsp;◽&nbsp; 계산 결과를 int 타입으로 바꾼 값을 리턴함: int dDay = (int) daysSubtract;
+##### 25. D-day Modal에서 날짜를 선택 > D-day 계산하여 결과를 리턴 
+###### &nbsp;◽&nbsp; 날짜 차이 계산 = ChronoUnit.DAYS.between(선택한 날짜, 오늘 날짜);
 ###### &nbsp;◽&nbsp; 해당 날짜로 새로운 D-day를 설정(#ddayadd)하거나 or 다른 날짜 재선택 할 수 있다.
 > calendar.js
 ```javaScript
