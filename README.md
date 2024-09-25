@@ -1059,11 +1059,9 @@ function showMiniList(data){
 <br><br>
 
 ### 💡 디데이 (D-day)
-###### 24. 디데이 설정
 <div align="center"><img src="https://github.com/user-attachments/assets/12d65edd-1744-4ab5-aee8-d942f0a63050" width="680" alt="디데이22"></div><br>
 
-###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 / Notice Board 하단 "D-Day추가" 클릭하면 D-day Modal 뜸
-###### &nbsp;◽&nbsp; D-day Modal
+##### 24. [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 / Notice Board 하단 "D-Day추가" 클릭 > D-day Modal 뜸 
 > main.html
 ```html
      <!-- DDay 모달 -->
@@ -1087,8 +1085,10 @@ function showMiniList(data){
          </div><!-- 모달 컨텐츠 끝-->
      </div><!-- DDay모달 끝 -->
 ```
-###### &nbsp;◽&nbsp; D-day Modal에서 날짜를 선택하면, D-day 계산 결과를 리턴
-###### &nbsp;◽&nbsp; 그 날짜로 새로운 D-day를 설정(#ddayadd)하거나 or 다른 날짜 재선택 할 수 있다.
+<br>
+
+##### 25. D-day Modal에서 날짜를 선택하면, D-day 계산하여 결과를 리턴
+###### &nbsp;&nbsp; 그 날짜로 새로운 D-day를 설정(#ddayadd)하거나 or 다른 날짜 재선택 할 수 있다.
 > calendar.js
 ```javaScript
 
