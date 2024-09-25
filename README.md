@@ -23,7 +23,7 @@
 <br>  
 
 ## 목차
-### 💎 통합 리스트 생성
+#### 💎 통합 리스트 생성
 ##### 0. 사용자로부터 [연, 월을 입력받는다.](#t0)
 ##### 1. [해당 월의 시작 요일](#t1)을 찾는다.
 ##### 2. Week enum을 정의하고 입력받은 요일 문자열과 일치하는 인덱스를 반환받는 방식으로 [요일 문자열을 숫자로 변환](#t2)한다.
@@ -36,7 +36,7 @@
 ##### 9. HTML에서 달력 날짜가 일주일 단위로 채워지므로, [통합 리스트를 7일 단위로 쪼개어 넘긴다.](#t9)
 <br>
 
-### 💎 달력 뷰 구현
+#### 💎 달력 뷰 구현
 ##### 10. 달력 날짜가 채워지는 순서? [1주일 단위로 반복문 작성한다.](#v1)
 ##### 11. [Day Modal](#modal): ◽ [날짜를 클릭하면 뜨는 모달](#m1)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [일정 추가 / 일기 작성 / D-day 설정 기능](#m2)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [Front/Back 버튼 클릭하여 날짜 이동](#m3)
 ##### 12. [Diary Icon](#icon): 작성된 일기가 있는 날짜에 표시되며, Diary Icon을 클릭하면 해당 일기의 detail page로 이동한다.
@@ -46,11 +46,11 @@
 ##### 16. [Notice Board](#notice): 오늘 날짜 기준 D-day 리스트를 보여주는 영역
 <br>
 
-### 💎 일정 (Schedule)
+#### 💎 일정 (Schedule)
 ##### 17. 일정 추가: [Day Modal](#modal) 사이드바 "일정 추가" 클릭 > [모달 하단에 입력창(Input창) 생성됨](#show) > 내용 입력 후, 버튼 클릭 또는 [엔터키로 입력](#show)
 <br>
 
-### 💎 일기 (Diary)
+#### 💎 일기 (Diary)
 ##### 18. [일기 작성](#create): &nbsp;◽ [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
 ##### 19. [작성 완료](#detail): &nbsp;◽ 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭 시, 작성된 일기로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭 시, 작성된 일기로 이동
 ##### 20. 정렬 (Sort): &nbsp;◽ [미니 캘린더](#mini) 형식<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [리스트](#list) 형식
@@ -59,13 +59,13 @@
 ##### 23. [이모지 (Emoji)](#emoji) 
 <br>
 
-### 💎 디데이 (D-day)
+#### 💎 디데이 (D-day)
 ##### 24. 디데이 설정:&nbsp; ◽ [Day Modal](#modal) 사이드바 "D-DAY ♥" 클릭 > D-day Modal 뜸<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ Notice Board 하단 "D-Day추가" 버튼 클릭 > D-day Modal 뜸 
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > Modal에서 원하는 날짜 선택 > 오늘 날짜 기준 D-day 값 계산하여 보여줌 > D-day 설정하거나 or 다른 날짜 재선택 가능
 ##### 25. Notice Board: 오늘 날짜 기준D-day 리스트 보여줌
-<br><br>
+<br><br><br><br>
 
-## 구현 기능 소개
+## 구현 기능 
 ### <div id="num1">💡 통합 리스트 생성</div>
 
 ##### <div id="t0">0. 사용자로부터 연, 월을 입력받는다.</div>
