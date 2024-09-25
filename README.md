@@ -67,7 +67,220 @@
 
 <br><br>
 
-## 주요 구현 기능
+## 구현 기능 소개
+### <div id="num1">💎 통합 리스트</div>
+
+##### <div id="t0">0. 사용자로부터 연, 월을 입력받는다.</div>
+###### 디폴트 값으로 현재 날짜를 사용하며, 사용자가 선택한(입력한) 특정 날짜가 있다면 해당 날짜로 통합 리스트 생성을 요청한다.
+<br>
+  
+##### <div id="t1">1. 해당 월의 시작 요일을 찾는다.</div>
+###### 해당 월의 첫 번째 날이 무슨 요일인지에 따라 달력에서 날짜가 시작되는 위치가 달라지기 때문에 먼저 해당 월의 시작 요일을 찾아야 한다.
+
+>  CalendarController
+```java
+
+    LocalDate date = LocalDate.of(year,monthValue, 1);   // 입력 받은 year, monthValue를 사용하여 해당 월의 첫 번째 날을 생성한다
+    String dayOfWeekS = date.getDayOfWeek().toString();  // 해당 월의 시작 요일을 찾는다 (= 요일 문자열)
+
+```
+<br>
+
+##### <div id="t2">2. Week enum을 정의하고 입력받은 요일 문자열과 일치하는 인덱스를 반환받는 방식으로 요일 문자열을 숫자로 변환한다.</div>
+>  CalendarController
+```java
+
+    int front = 0;
+    Week w = Week.valueOf(dayOfWeekS);  // 문자열 dayOfWeekS(요일)을 Week 열거형으로 변환
+
+    for(Week e: Week.values()) {   
+        if(e.equals(w)) {   
+           front = e.ordinal();    // enum에서 해당 요일 문자열과 일치하는 인덱스 값 받아옴 -> 숫자 값으로 변환 완료 
+        }                            
+     }
+
+```
+<br>
+
+##### <div id="t3">3. 해당 월의 시작 요일과 마지막 요일을 고려해, 달력의 앞뒤 공백 칸에는 0을, 날짜가 표시될 칸에는 해당 날짜를 넣은 달력용 Day List(= dLsit)를 생성한다.</div>
+> CalendarController
+```java
+
+    // dLsit: HTML에 달력 그리기 위한 day리스트
+    // 통합 리스트의 뼈대가 됨 
+    // dList.length() = front + date.getMonth().maxLength() + back;
+
+    // 달력 마지막 줄: (앞 공백 + 날짜 갯수)를 7로 나눈 나머지 만큼 차있는 상태
+    int remainder = (front + date.getMonth().maxLength()) % 7 ;
+
+    // 달력 뒷 공백 = 7 - 나머지
+    int back = 7 - remainder;
+
+        List<Integer> dList =new ArrayList<>();
+   
+        if(front != 0) { 
+            for (int i = 0; i < front; i++) {
+                 dList.add(0);  // 앞 공백에 0 
+              } 
+        }
+        
+       for (int j = 1;j < date.getMonth().maxLength() +1; j++) {
+              dList.add(j);    // 날짜에는 날짜 넣고
+        }
+    
+        if(remainder != 0) { 
+           for (int i = 0; i < back; i++) {
+                dList.add(0);  // 뒷 공백에 0 
+              }
+        }
+
+```
+<br>
+
+##### <div id="t4">4. 통합리스트에 필요한 데이터들을 묶어 DayDiaryDto를 정의한다.</div>
+
+> DayDiaryDto
+```java
+
+    @ToString
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public class DayDiaryDto {
+
+       private int day;              // 날짜
+       private Integer diaryId;      // diaryId
+       private List<Schedule> sList; // day에 등록된 일정 리스트 - 리스트안의 리스트 형식
+       private int today;            // today면 = 1, 아니면 = 0 
+
+   }
+```
+<br>
+
+
+##### <div id="t5">5. 한 날짜에 여러 개의 일정이 있을 수 있으므로, 리스트 안에 리스트로 Schedule List를 생성한다.</div>
+ CalendarController
+```java
+
+        Set<Integer> daysHaveSchedule = new HashSet<>();  // daysHaveSchedule: (이번달에) 스케쥴이 있는 날짜
+        for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
+                 daysHaveSchedule.add(m.getDay());  // 해당 월에 스케쥴이 있는 날짜들: 하루에 스케쥴 어려개 가능 -> HashSet<>()으로
+                                                     // 날짜: 1 2 3 4 5 6 7 8... : 스케쥴이 있는 날짜: 3 4 6 8 ...
+        }
+        
+        List<List<Schedule>> daysScheduleList = new ArrayList<>();   // List안에 List 
+        List<Schedule> eachOfDaySchedule = new ArrayList<>();       // 날짜별 스케쥴 리스트
+    
+        for (Integer d : dList) {  // dList를 for문으로 돌려
+            if(daysHaveSchedule.contains(d)){   // 스케쥴이 있는 날짜인 경우
+                 eachOfDaySchedule = scheduleService.findByDayOfMonth(date.getMonthValue(),d);   // day 스케쥴 리스트
+                 daysScheduleList.add(eachOfDaySchedule);   // 날짜 안에 day 스케쥴 리스트 담기
+            }
+            else {  // 스케쥴이 없는 날짜인 경우
+                  daysScheduleList.add(null);   // null (스케쥴 없다는 의미)
+             }
+         } 
+```
+<br>
+
+##### <div id="t6">6. 작성된 일기가 있다면 diaryId를, 없다면 0을 넣어 Diary List를 생성한다.</div>
+>  CalendarController
+```java
+
+         Set<Integer> daysHaveDiary= new HashSet<>(); 
+         for (Diary m : diaryService.findByMonth(date.getMonthValue())) {
+               daysHaveDiary.add(m.getDay()); // 등록된 일기가 있는 날짜들
+         }
+        
+         List<Integer> diaryList = new ArrayList<>();
+         for (Integer d : dList) {
+            if (daysHaveDiary.contains(d)) {  // 등록된 일기가 있는 날짜인 경우
+                diaryList.add(diaryService.findByMD(date.getMonthValue(),d).getDiaryId());  // 그 날의 diaryId
+            } else{  // 등록된 일기 없으면
+                diaryList.add(0);  // 0
+            }
+         }
+
+```
+<br>
+
+##### <div id="t7">7. 오늘 날짜와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 넣어 Today List를 생성한다.</div> 
+>  CalendarController
+```java
+
+        List<Integer> to = new ArrayList<>();
+        if(LocalDate.now().getMonthValue() == date.getMonthValue()) {
+           for (Integer i : dList) {  // 월, 일 일치: 이게 오늘이잖아
+              if(i == LocalDate.now().getDayOfMonth()) {
+                  to.add(1);  // Today라고 알려주기 위해 1
+              } else {
+                  to.add(0);   //Today 아니면 0
+              }
+            }
+         }
+        
+        if(LocalDate.now().getMonthValue() != date.getMonthValue()) {
+            for (Integer i : dList) {
+                to.add(0);
+            }
+        }
+
+```
+<br>
+
+##### <div id="t8">8. DayDiaryDto 타입으로 리스트를 생성한다.</div>
+>  CalendarController
+```java
+
+        List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();   // DayDiaryDto: 다이어리 프로그램으로 데이에 담아 전달하려는 모든 정보 들어있는 dto
+        for (int i = 0; i < dList.size(); i++) {
+           dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
+                        .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
+        }
+
+```
+<br>
+
+##### <div id="t9">9. HTML에서 달력 날짜가 일주일 단위로 채워지므로, 통합리스트를 7일 단위로 쪼개어 넘긴다.</div>
+>  CalendarController
+```java
+
+        List<DayDiaryDto>  d1 = new ArrayList<>(); // 한 주 단위로 쪼개서
+        List<DayDiaryDto>  d2 = new ArrayList<>();
+        List<DayDiaryDto>  d3 = new ArrayList<>();
+        List<DayDiaryDto>  d4 = new ArrayList<>();
+        List<DayDiaryDto>  d5 = new ArrayList<>(); 
+        List<DayDiaryDto>  d6 = new ArrayList<>();
+        
+        List<List<DayDiaryDto>> integratedList = new ArrayList<>();  // 리스트 안에 리스트로 담는다.
+        
+        for (int i = 0; i < dayDiaryDtoList.size(); i++) {
+            if(i < 7) {   d1.add(dayDiaryDtoList.get(i));   } 
+               integratedList.add(d1);
+            if( 6 < i && i< 14) {    d2.add(dayDiaryDtoList.get(i));    }
+                integratedList.add(d2);
+            if( 13 < i && i< 21) {    d3.add(dayDiaryDtoList.get(i));   }
+                integratedList.add(d3);
+            if( 20 < i && i< 28) {    d4.add(dayDiaryDtoList.get(i))    }
+                integratedList.add(d4);
+            if( 27 < i && i< 35) {    d5.add(dayDiaryDtoList.get(i));   }
+                integratedList.add(d5);
+            if(34 < i && i< 42) {    d6.add(dayDiaryDtoList.get(i));    }
+                integratedList.add(d6);
+         }  
+
+          return integratedList;  // 리스트안에 리스트로 1주 단위로 쪼개 담은 통합 리스트를 최종 리턴
+    }
+```
+<br><br>
+
+
+
+---------------------
+
+---------------------
+
 **💡 API 사용하지 않고, 직접 Calendar 그리기**<br>
    + ##### dList - 달력 테이블에 해당 월의 달력을 그려줄 day 리스트
     
