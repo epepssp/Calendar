@@ -142,58 +142,50 @@
 ```
 <br>
 
-##### <div id="t4">4. 통합리스트에 필요한 데이터들을 묶어 DayDiaryDto를 정의한다.</div>
+##### <div id="t4">4. 통합 리스트에 포함되어야 하는 데이터들을 묶어서 DayDiaryDto를 정의한다.</div>
 
-> DayDiaryDto
 ```java
-
-    @ToString
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
     public class DayDiaryDto {
-
-       private int day;              // 날짜
-       private Integer diaryId;      // diaryId
-       private List<Schedule> sList; // day에 등록된 일정 리스트 - 리스트안의 리스트 형식
-       private int today;            // today면 = 1, 아니면 = 0 
-
+        private int day;             
+        private Integer diaryId;      
+        private List<Schedule> sList;  // 리스트안의 리스트 형식  
+        private int today;             // 4 today면 = 1, 아니면 = 0 넣은 리스트
    }
 ```
 <br>
 
-
-##### <div id="t5">5. 한 날짜에 여러 개의 일정이 있을 수 있으므로, 리스트 안에 리스트로 Schedule List를 생성한다.</div>
- CalendarController
+##### <div id="t5">5. 한 날짜에 여러 개의 일정이 등록돼 있을 수 있으므로, 리스트 안에 리스트 형식으로 Schedule List를 생성한다.</div>
+###### 등록된 스케줄이 있는 날짜라면 해당 날짜의 스케줄 리스트를 담고, 등록된 스케쥴이 없는 날짜라면 null을 담는다.
 ```java
 
-        Set<Integer> daysHaveSchedule = new HashSet<>();  // daysHaveSchedule: (이번달에) 스케쥴이 있는 날짜
-        for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {
-                 daysHaveSchedule.add(m.getDay());  // 해당 월에 스케쥴이 있는 날짜들: 하루에 스케쥴 어려개 가능 -> HashSet<>()으로
-                                                     // 날짜: 1 2 3 4 5 6 7 8... : 스케쥴이 있는 날짜: 3 4 6 8 ...
+        Set<Integer> daysHaveSchedule = new HashSet<>();  // daysHaveSchedule: 해당 월의 스케쥴이 있는 날짜들
+
+        for (Schedule m :scheduleService.findByMonth(date.getMonthValue())) {   // 입력받은 연, 월에 해당하는 스케줄 리스트에서
+                 daysHaveSchedule.add(m.getDay());   // 해당 월의 스케쥴이 있는 날짜들을 찾는다. 
+                                                     // 하루에 스케쥴 어려개 가능하기 때문에 -> 즉, 날짜 중복 가능하기 때문에 -> HashSet<>()으로
         }
-        
+
+
+
         List<List<Schedule>> daysScheduleList = new ArrayList<>();   // List안에 List 
-        List<Schedule> eachOfDaySchedule = new ArrayList<>();       // 날짜별 스케쥴 리스트
+        List<Schedule> eachOfDaySchedule = new ArrayList<>();        // 날짜별 스케쥴 리스트
     
         for (Integer d : dList) {  // dList를 for문으로 돌려
-            if(daysHaveSchedule.contains(d)){   // 스케쥴이 있는 날짜인 경우
-                 eachOfDaySchedule = scheduleService.findByDayOfMonth(date.getMonthValue(),d);   // day 스케쥴 리스트
-                 daysScheduleList.add(eachOfDaySchedule);   // 날짜 안에 day 스케쥴 리스트 담기
+            if(daysHaveSchedule.contains(d)){   // 등록된 스케쥴이 있는 날짜인 경우
+                 eachOfDaySchedule = scheduleService.findByDayOfMonth(date.getMonthValue(),d);   // 해당 날짜의 스케쥴 리스트 만들어서
+                 daysScheduleList.add(eachOfDaySchedule);   // 날짜에 담는다
             }
-            else {  // 스케쥴이 없는 날짜인 경우
-                  daysScheduleList.add(null);   // null (스케쥴 없다는 의미)
-             }
-         } 
+            else {                              // 등록된 스케쥴이 없는 날짜인 경우
+                  daysScheduleList.add(null);   // null                         }
+       } 
 ```
 <br>
 
 ##### <div id="t6">6. 작성된 일기가 있다면 diaryId를, 없다면 0을 넣어 Diary List를 생성한다.</div>
->  CalendarController
+
 ```java
 
-         Set<Integer> daysHaveDiary= new HashSet<>(); 
+         List<Integer> daysHaveDiary= new ArrayList<>(); 
          for (Diary m : diaryService.findByMonth(date.getMonthValue())) {
                daysHaveDiary.add(m.getDay()); // 등록된 일기가 있는 날짜들
          }
@@ -210,24 +202,24 @@
 ```
 <br>
 
-##### <div id="t7">7. 오늘 날짜와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 넣어 Today List를 생성한다.</div> 
+##### <div id="t7">7. 오늘 날짜와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 담아 Today List를 생성한다.</div> 
 >  CalendarController
 ```java
 
-        List<Integer> to = new ArrayList<>();
+        List<Integer> todayList = new ArrayList<>();
         if(LocalDate.now().getMonthValue() == date.getMonthValue()) {
            for (Integer i : dList) {  // 월, 일 일치: 이게 오늘이잖아
               if(i == LocalDate.now().getDayOfMonth()) {
-                  to.add(1);  // Today라고 알려주기 위해 1
+                  todayList.add(1);  // Today라고 알려주기 위해 1
               } else {
-                  to.add(0);   //Today 아니면 0
+                  todayList.add(0);   //Today 아니면 0
               }
             }
          }
         
         if(LocalDate.now().getMonthValue() != date.getMonthValue()) {
             for (Integer i : dList) {
-                to.add(0);
+                todayList.add(0);
             }
         }
 
