@@ -84,40 +84,46 @@
 <br>
 
 ##### <div id="t2">2. Week enum을 정의하고 입력받은 요일 문자열과 일치하는 인덱스를 반환받는 방식으로 요일 문자열을 숫자로 변환한다.</div>
->  CalendarController
+###### &nbsp;&nbsp;◽ 요일 문자열을 숫자로 변환하면 요일을 문자열로 입력받아도 직관적으로 날짜를 배치할 수 있게 된다.
+###### &nbsp;&nbsp;◽ 변환된 인덱스 값 만큼 달력 첫 줄에 빈 셀을 추가하고 날짜를 삽입한다.
+
 ```java
 
-    int front = 0;
-    Week w = Week.valueOf(dayOfWeekS);  // 문자열 dayOfWeekS(요일)을 Week 열거형으로 변환
+    int index = 0;
+    Week w = Week.valueOf(dayOfWeekS);  // 요일 문자열을 Week enum의 열거형으로 변환
 
-    for(Week e: Week.values()) {   
-        if(e.equals(w)) {   
-           front = e.ordinal();    // enum에서 해당 요일 문자열과 일치하는 인덱스 값 받아옴 -> 숫자 값으로 변환 완료 
+    for(Week e: Week.values()) {       
+        if(e.equals(w)) {          
+           index = e.ordinal();        // 요일 문자열과 일치하는 인덱스 값을 받아온다
         }                            
      }
 
 ```
 <br>
 
-##### <div id="t3">3. 해당 월의 시작 요일과 마지막 요일을 고려해, 달력의 앞뒤 공백 칸에는 0을, 날짜가 표시될 칸에는 해당 날짜를 넣은 달력용 Day List(= dLsit)를 생성한다.</div>
-> CalendarController
+##### <div id="t3">3. 해당 월의 시작과 마지막 요일을 반영해, 빈 셀에는 0, 날짜 셀에는 해당 날짜를 넣은 달력용 Day List(= dList)를 생성한다.</div>
+###### &nbsp;&nbsp;◽ dList는 통합 리스트의 뼈대가 된다. dList 날짜를 기준으로 그 날짜에 해당하는 모든 정보를  포함될 정보가 
 ```java
 
-    // dLsit: HTML에 달력 그리기 위한 day리스트
-    // 통합 리스트의 뼈대가 됨 
-    // dList.length() = front + date.getMonth().maxLength() + back;
+     // dLsit: HTML에 달력 그리기 위한 day리스트
 
-    // 달력 마지막 줄: (앞 공백 + 날짜 갯수)를 7로 나눈 나머지 만큼 차있는 상태
-    int remainder = (front + date.getMonth().maxLength()) % 7 ;
+     // dList의 총 길이는 7의 배수여야 한다
+     // 달력 마지막 줄은 ((index + date.getMonth().maxLength())를 7로 나눈 나머지(remainder) 만큼 날짜 차 있을 것
+     int remainder = (index + date.getMonth().maxLength()) % 7 ;
 
-    // 달력 뒷 공백 = 7 - 나머지
-    int back = 7 - remainder;
+     // 7에서 날짜가 차 있는 칸을 빼면 나머지가 빈 셀이겠지
+     int back = 7 - remainder;
 
-        List<Integer> dList =new ArrayList<>();
+     // dList.length() = index + date.getMonth().maxLength() + back;
+     // index: 달력 첫 줄에 빈 셀이 몇 개인지
+     // back: 달력 마지막 줄에 빈 셀이 몇 개인지
+
+ 
+     List<Integer> dList =new ArrayList<>();
    
         if(front != 0) { 
-            for (int i = 0; i < front; i++) {
-                 dList.add(0);  // 앞 공백에 0 
+            for (int i = 0; i < index; i++) {
+                 dList.add(0);  // 달력 첫 줄의 빈 셀에 0 넣는다. 
               } 
         }
         
@@ -127,9 +133,11 @@
     
         if(remainder != 0) { 
            for (int i = 0; i < back; i++) {
-                dList.add(0);  // 뒷 공백에 0 
+                dList.add(0);  // 달력 마지막 줄의 빈 셀에도 0 넣는다. 
               }
         }
+
+        // dList 완성!
 
 ```
 <br>
