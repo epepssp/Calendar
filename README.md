@@ -449,13 +449,12 @@
 <div align="center"><img src="https://github.com/user-attachments/assets/59be6174-2df4-4ad5-9ad6-7fdfbabd341d" width="680" alt="마우스오버"></div><br><br>
   
 
-##### 15. 달력 이동: &nbsp;&nbsp;◽ [Front/Back 버튼 클릭하여 이동](#btn)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [date Input창에서 원하는 날짜 선택하여 이동](#input)
-
-
-<div  align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/7e285afc-afad-4e7f-8ab7-ca464d4538c6" width="680" alt="날짜선택이동2"></div>
+##### 15. 달력 이동
+###### &nbsp;◽&nbsp; [Front/Back 버튼 클릭하여 이동](#btn)
+###### &nbsp;◽&nbsp; [date Input창에서 원하는 날짜 선택하여 이동](#input)
+<div  align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/7e285afc-afad-4e7f-8ab7-ca464d4538c6" width="680" alt="날짜선택이동2"></div><br>
 
 ###### <div id="btn"><small>Front/Back 버튼 클릭하여 이동</small><div>
-
 > main.html
 ```html
 
@@ -483,7 +482,6 @@
                        (monthValue =${ dto.monthValue -11 }, year = ${ dto.year +1})}'|">
         <i class="material-icons">chevron_right</i></button>
      </span>
-
 
 ```
 <br>
