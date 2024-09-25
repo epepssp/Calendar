@@ -450,7 +450,7 @@
   
 
 ##### 15. 달력 이동
-<br><div  align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/7e285afc-afad-4e7f-8ab7-ca464d4538c6" width="680" alt="날짜선택이동2"></div><br>
+<div  align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/7e285afc-afad-4e7f-8ab7-ca464d4538c6" width="680" alt="날짜선택이동2"></div><br>
 
 ###### <div id="btn">&nbsp;◽&nbsp; Front/Back 버튼 클릭하여 이동</div>
 > main.html
