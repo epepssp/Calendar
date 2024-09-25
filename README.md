@@ -77,11 +77,9 @@
 ##### <div id="t1">1. 해당 월의 시작 요일을 찾는다.</div>
   ###### ◽ 해당 월의 첫 번째 날이 무슨 요일인지에 따라 달력이 시작되는 위치가 달라지기 때문이다. 
 
-```
-
+```java
     LocalDate date = LocalDate.of(year,monthValue, 1);   // 입력 받은 year, monthValue의 첫 번째 날을 생성한다
     String dayOfWeekS = date.getDayOfWeek().toString();  // 해당 월의 시작 요일을 찾는다
-
 ```
 <br>
 
