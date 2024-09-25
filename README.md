@@ -274,9 +274,9 @@
 
 ### <div id="num2">💡 달력 뷰</div>
 ##### <div id="v1">10. 달력의 날짜는 아래와 같은 순서로 채워진다. 따라서 일주일 단위 반복문을, 달력의 줄 수 만큼 작성한다.</div>
+###### &nbsp;◽&nbsp; 일주일 단위 반복문에는 [Day Modal](#modal) / [Diary Icon](#icon) / [Today](#v2) / [Day Schedule List](#v3)가 포함되어 있다. 
 <img width="350" alt="방" src="https://github.com/user-attachments/assets/de75e0ef-9d7b-4418-82d5-e7dcea5ba78e"><br>
 
-###### &nbsp;◽&nbsp; 일주일 단위 반복문에는 [Day Modal](#modal) / [Diary Icon](#icon) / [Today](#v2) / [Day Schedule List](#v3)가 포함되어 있다.    
 > main.html
 ```html
 
