@@ -444,7 +444,7 @@
 ##### <div id="icon">12. Diary Icon: 작성된 일기가 있는 날짜에 표시되는 아이콘</div>
 <div style="margin-left: 100px;"><img width="850" alt="다이어리아이콘" src="https://github.com/user-attachments/assets/aecd9e32-3d10-4bb9-926c-eda5afecbc74"></div>
 
-##### <div id="v2">13. <img width="60" alt="TODAY" src="https://github.com/user-attachments/assets/f83a69f6-566f-48b3-88e9-01dfbf90ea51">: 컬러풀 폰트와 블링크 효과로 오늘 날짜에 Today 표시</div>
+##### <div id="v2">13. <img width="60" alt="TODAY" src="https://github.com/user-attachments/assets/f83a69f6-566f-48b3-88e9-01dfbf90ea51">: Font Color & Blink Effect 사용해 오늘 날짜에 Today 표시</div>
 ##### <div id="v3">14. Day's Schedule List: Mouse-hover Effect(백그라운드 컬러, )</div>
 <div align="center"><img src="https://github.com/user-attachments/assets/59be6174-2df4-4ad5-9ad6-7fdfbabd341d" width="680" alt="마우스오버"></div><br><br>
   
