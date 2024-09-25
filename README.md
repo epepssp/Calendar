@@ -102,7 +102,7 @@
 <br>
 
 ##### <div id="t3">3. 해당 월의 시작과 마지막 요일을 반영해, 빈 셀에는 0, 날짜 셀에는 해당 날짜를 넣은 달력용 Day List(= dList)를 생성한다.</div>
-###### &nbsp;&nbsp;◽ dList는 통합 리스트의 뼈대가 된다. dList 날짜를 기준으로 그 날짜에 해당하는 모든 정보를  포함될 정보가 
+###### &nbsp;&nbsp;◽ dList는 통합 리스트의 뼈대가 된다.
 ```java
 
      // dLsit: HTML에 달력 그리기 위한 day리스트
@@ -142,7 +142,7 @@
 ```
 <br>
 
-##### <div id="t4">4. 통합 리스트에 포함되어야 하는 데이터들을 묶어서 DayDiaryDto를 정의한다.</div>
+##### <div id="t4">4. 통합 리스트에 포함시킬 데이터 4개를 묶어 DayDiaryDto를 정의한다.</div>
 
 ```java
     public class DayDiaryDto {
@@ -155,7 +155,7 @@
 <br>
 
 ##### <div id="t5">5. 한 날짜에 여러 개의 일정이 등록돼 있을 수 있으므로, 리스트 안에 리스트 형식으로 Schedule List를 생성한다.</div>
-###### 등록된 스케줄이 있는 날짜라면 해당 날짜의 스케줄 리스트를 담고, 등록된 스케쥴이 없는 날짜라면 null을 담는다.
+###### 등록된 스케줄이 있으면 날짜에 해당 날짜의 스케줄 리스트를, 등록된 스케쥴이 없으면 null을 담는다.
 ```java
 
         Set<Integer> daysHaveSchedule = new HashSet<>();  // daysHaveSchedule: 해당 월의 스케쥴이 있는 날짜들
@@ -202,7 +202,7 @@
 ```
 <br>
 
-##### <div id="t7">7. 오늘 날짜와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 담아 Today List를 생성한다.</div> 
+##### <div id="t7">7. Today와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 담아 Today List를 생성한다.</div> 
 >  CalendarController
 ```java
 
@@ -226,25 +226,24 @@
 ```
 <br>
 
-##### <div id="t8">8. DayDiaryDto 타입으로 리스트를 생성한다.</div>
-###### dList, daysScheduleList, diaryList, todayList를 통합하여 하나의 리스트를 
+##### <div id="t8">8. DayDiaryDto 타입 통합 리스트를 생성한다.</div>
+###### 앞서 생성한 dList, daysScheduleList, diaryList, todayList를 하나의 리스트에 통합한여 담는다. 
 
 ```java
-
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();   // DayDiaryDto: 다이어리 프로그램으로 데이에 담아 전달하려는 모든 정보 들어있는 dto
         for (int i = 0; i < dList.size(); i++) {
            dayDiaryDtoList.add(DayDiaryDto.builder().day(dList.get(i)).diaryId(diaryList.get(i))
                         .sList(daysScheduleList.get(i)).today(to.get(i)).dayOfWeek(dayOfWeek.get(i)).build());
         }
-
 ```
 <br>
 
-##### <div id="t9">9. HTML에서 달력 날짜가 일주일 단위로 채워지므로, 통합리스트를 7일 단위로 쪼개어 넘긴다.</div>
->  CalendarController
+##### <div id="t9">9. HTML에서 달력의 날짜는 일주일 단위로 채워지기 때문에, 통합리스트를 7일 단위로 쪼개어 넘긴다.</div>
+###### 일주일 단위로 반복문을 작성하기 수월하게 전체 리스트를 일주일씩 자른 후, 각각의 리스트를 리스트 안의 리스트 형태로 담아 전달한다.
+
 ```java
 
-        List<DayDiaryDto>  d1 = new ArrayList<>(); // 한 주 단위로 쪼개서
+        List<DayDiaryDto>  d1 = new ArrayList<>(); // 한 주 단위로 쪼갠 리스트
         List<DayDiaryDto>  d2 = new ArrayList<>();
         List<DayDiaryDto>  d3 = new ArrayList<>();
         List<DayDiaryDto>  d4 = new ArrayList<>();
