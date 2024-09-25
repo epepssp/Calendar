@@ -64,7 +64,9 @@
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > Modal에서 원하는 날짜 선택 > 오늘 날짜 기준 D-day 값 계산하여 보여줌 > D-day 설정하거나 or 다른 날짜 재선택 가능
 ##### 25. Notice Board: 오늘 날짜 기준D-day 리스트 보여줌
 
+ _________
 
+ 
 <br><br>
 
 ## 구현 기능 소개
