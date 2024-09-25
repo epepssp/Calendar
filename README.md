@@ -584,12 +584,42 @@
 ### 💡 일기 (Diary)
 ##### 18. 일기 작성
 ###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동
+```
+    function dateInfo(){   // 내 일기장 클릭시 diary create로 이동
+        const day = document.querySelector('#day').value;
+        const year = document.querySelector('#year').value;
+        const monthValue = document.querySelector('#monthValue').value;
+    
+        axios.get('/diary/create', {
+                  params: {   year: year,
+                              monthValue: monthValue,
+                              day:day                  }})
+             .then(response => {
+                  window.location.href =
+      '/diary/create?year=' + encodeURIComponent(year) + '&monthValue=' + encodeURIComponent(monthValue) + '&day=' + encodeURIComponent(day);
+           }).catch(error => {
+                  console.log(err);
+        });   
+   }
+
+```
 ###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
+```  <div class="box" th:day="${ data.d1[i].day }" onclick="createDiary(this.getAttribute(\'day\'));" th:text="${ data.d1[i].day }"></div>
+```
 <br>
 
 ##### 19. 작성 완료
 ###### &nbsp;◽&nbsp; 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭시 작성된 일기로 이동
+```  <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
+        <img class="diaryIcon" src="/icons/heart.svg">
+     </a>  
+```
+
 ###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭시 작성된 일기로 이동
+```  <div class="box">
+         <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ data.d1[i].diaryId })}"></a>
+     </div>
+```
 <br>
 
 ##### 20. 정렬 (Sort)
