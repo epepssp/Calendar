@@ -203,7 +203,7 @@
 <br>
 
 ##### <div id="t7">7. Today와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 담아 Today List를 생성한다.</div> 
->  CalendarController
+
 ```java
 
         List<Integer> todayList = new ArrayList<>();
@@ -227,7 +227,7 @@
 <br>
 
 ##### <div id="t8">8. DayDiaryDto 타입 통합 리스트를 생성한다.</div>
-###### &nbsp;◽&nbsp; 앞서 생성한 dList, daysScheduleList, diaryList, todayList를 하나의 리스트에 통합한여 담는다. 
+###### &nbsp;◽&nbsp; 앞서 생성한 dList, daysScheduleList, diaryList, todayList를 하나의 리스트에 담는다. 
 
 ```java
         List<DayDiaryDto> dayDiaryDtoList = new ArrayList<>();   // DayDiaryDto: 다이어리 프로그램으로 데이에 담아 전달하려는 모든 정보 들어있는 dto
@@ -239,7 +239,7 @@
 <br>
 
 ##### <div id="t9">9. HTML에서 달력의 날짜는 일주일 단위로 채워지기 때문에, 통합리스트를 7일 단위로 쪼개어 넘긴다.</div>
-###### &nbsp;◽&nbsp; 일주일 단위로 반복문을 작성하기 수월하게 전체 리스트를 일주일씩 자른 후, 각각의 리스트를 리스트 안의 리스트 형태로 담아 전달한다.
+###### &nbsp;◽&nbsp; 일주일 단위로 반복문 작성하기 수월하도록 전체 리스트를 일주일씩 자른 후, 각각의 리스트를 리스트 안의 리스트 형태로 담아 전달한다.
 
 ```java
 
