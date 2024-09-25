@@ -22,32 +22,50 @@
 - HTML/CSS/Java Script
 <br>  
 
-## 기능 소개
-- **API 사용하지 않고, 창의적이고 자유로운 방식으로 캘린더 구현**
-   - T O D A Y: Color + Blink Effect 
-   - 캘린더 이동
-     - Front / Back 버튼: Month 기준 -1, +1 씩 이동   
-     - Date 타입 인풋창: 원하는 날짜 선택하여 즉시 이동
-   - Day Modal
-     - 해당 날짜의 일정 추가, D-DAY설정, 일기 쓰기
-     - 오늘의 일정 리스트
-     - Front / Back 버튼: Day 기준 -1, +1 씩 이동
-     - 마우스 hover-Effect: 긴 스케쥴 내용 전체 확인 가능
-+ 일정 추가
-   - **Enter Key 입력**
-+ D-DAY 설정
-   - 날짜 차이 계산 반환
-   - Notice Board 영역에 Today 기준으로 D-DAY 리스트 표시
-+ 일기
-   - Diary Page 따로 존재
-   - Calendar Page: 원하는 날짜 클릭 / Diary Page: 미니 캘린더의 색칠 안 된 날짜(작성된 일기가 없는 날짜) 클릭하여 일기 작성 가능
-   - **이미지 업로드**
-   - **Weather 선택**
-   - **Emoji(이모티콘)**
-   - **Sort(정렬)**: 미니캘린더(액자식) or 리스트 형식으로 정렬 방식 선택 가능
-   - 일기 작성시 Calendar에 다이어리 아이콘 표시됨 -> 클릭시 일기 상세페이지 이동
-   - 미니캘린더의 보라색 날짜(작성된 일기 있는 날짜) or 리스트 형식의 일기 제목 클릭시 일기 상세페이지 이동  
+## 목차
+#### 💎[ 통합 리스트](#num1)
+###### 0. 사용자로부터 [연, 월을 입력받는다.](#t0)
+###### 1. [해당 월의 시작 요일](#t1)을 찾는다.
+###### 2. Week enum을 정의하고 입력받은 요일 문자열과 일치하는 인덱스를 반환받는 방식으로 [요일 문자열을 숫자로 변환](#t2)한다.
+###### 3. 해당 월의 시작 요일과 마지막 요일을 고려해, 달력의 앞뒤 공백 칸에는 0을, 날짜가 표시될 칸에는 해당 날짜를 넣은 [달력용 Day List(= dList)를 생성](#t3)한다.
+###### 4. 통합리스트에 필요한 데이터들을 묶어 [DayDiaryDto를 정의](#t4)한다.
+###### 5. 한 날짜에 여러 개의 일정이 있을 수 있으므로, 리스트 안에 리스트로 [Schedule List를 생성](#t5)한다.
+###### 6. 작성된 일기가 있다면 diaryId를, 없다면 0을 넣어 [Diary List를 생성](#t6)한다. 
+###### 7. 오늘 날짜와 일치하는 날짜에는 1을, 일치하지 않는 날짜에는 0을 넣어 [Today List를 생성](#t7)한다. 
+###### 8. [DayDiaryDto 타입 리스트(= 통합 리스트)를 생성](#t8)한다. 
+###### 9. HTML에서 달력 날짜가 일주일 단위로 채워지므로, [통합 리스트를 7일 단위로 쪼개어 넘긴다.](#t9)
 <br>
+
+#### 💎[ 달력 뷰](#num2)
+###### 10. 달력 날짜가 채워지는 순서? [1주일 단위로 반복문 작성한다.](#v1)
+###### 11. [Day Modal](#modal): ◽ 날짜를 클릭하면 뜨는 모달<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ 일정 추가 / 일기 작성 / D-day 설정 기능<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ Front/Back 버튼 클릭하여 날짜 이동
+###### 12. [Diary Icon](#icon): 작성된 일기가 있는 날짜에 표시되며, Diary Icon을 클릭하면 해당 일기의 detail page로 이동한다.
+###### 13. [Today](#v2): Font Color & Blink Effect
+###### 14. [Day's Schedule List](#v3): Mouse-hover Effect
+###### 15. 달력 이동:  &nbsp;&nbsp;◽ [Front/Back 버튼 클릭하여 이동](#btn)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [date Input창에서 원하는 날짜 선택하여 이동](#input)
+###### 16. Notice Board: 오늘 날짜 기준 D-day 리스트를 보여주는 영역
+<br>
+
+#### 💎 일정 (Schedule)
+###### 17. 일정 추가: [Day Modal](#modal) 사이드바 "일정 추가" 클릭 > [모달 하단에 입력창(Input창) 생성됨](#show) > 내용 입력 후, 버튼 클릭 또는 [엔터키로 입력](#show)
+<br>
+
+#### 💎 일기 (Diary)
+###### 18. 일기 작성: &nbsp;◽ [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
+###### 19. 작성 완료: &nbsp;◽ 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭 시, 작성된 일기로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭 시, 작성된 일기로 이동
+###### 20. 정렬 (Sort): &nbsp;◽ [미니 캘린더](#mini) 형식<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [리스트](#list) 형식
+###### 21. [오늘의 날씨 (Weather)](#weather)
+###### 22. [이미지 첨부](#image)
+###### 23. [이모지 (Emoji)](#emoji) 
+<br>
+
+#### 💎 디데이 (D-day)
+###### 24. 디데이 설정:&nbsp; ◽ [Day Modal](#modal) 사이드바 "D-DAY ♥" 클릭 > D-day Modal 뜸<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ Notice Board 하단 "D-Day추가" 버튼 클릭 > D-day Modal 뜸 
+###### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > Modal에서 원하는 날짜 선택 > 오늘 날짜 기준 D-day 값 계산하여 보여줌 > D-day 설정하거나 or 다른 날짜 재선택 가능
+###### 25. Notice Board: 오늘 날짜 기준D-day 리스트 보여줌
+
+
+<br><br>
 
 ## 주요 구현 기능
 **💡 API 사용하지 않고, 직접 Calendar 그리기**<br>
