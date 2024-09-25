@@ -1060,11 +1060,11 @@ function showMiniList(data){
 
 ### 💡 디데이 (D-day)
 ###### 24. 디데이 설정
-###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 > D-day Modal
-###### &nbsp;◽&nbsp; Notice Board 하단 "D-Day추가" 클릭 > D-day Modal 
 <div align="center"><img src="https://github.com/user-attachments/assets/12d65edd-1744-4ab5-aee8-d942f0a63050" width="680" alt="디데이22"></div><br>
 
-###### D-day Modal
+###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 > D-day Modal 뜸
+###### &nbsp;◽&nbsp; Notice Board 하단 "D-Day추가" 클릭 > D-day Modal 뜸
+###### &nbsp;◽&nbsp; D-day Modal: 원하는 날짜 선택하여 D-day로 설정 할 수 있다. 
 > main.html
 ```html
      <!-- DDay 모달 -->
@@ -1127,7 +1127,7 @@ function showMiniList(data){
           subDiv.innerHTML = str;
       }
 
-      function newDday(){ 
+      function newDday(){   // 디데이 추가 함수
          const untilDate = document.querySelector('#untilDate').value;
          const name = document.querySelector('#name').value;
      
