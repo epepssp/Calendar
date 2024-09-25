@@ -1042,7 +1042,7 @@ function showMiniList(data){
      </div><!-- Sidebar 끝 -->     
 
 ```
-###### &nbsp;◽&nbsp; 이모지 클릭시 해당 이모지 data-emoji.value가 text area에 첨부되도록 하는 내용을 담아 이모지 클릭 이벤트 리스너 처리
+###### &nbsp;◽&nbsp; 이모지 클릭시 해당 이모지 data-emoji.value가 text area에 첨부되도록 하는 이모지 클릭 이벤트 리스너 처리
 > diary.js
 ```javaScript
 
