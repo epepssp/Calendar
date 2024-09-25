@@ -482,7 +482,6 @@
      </span>
 
 ```
-<br>
 
 ###### <div id="input">&nbsp;◽&nbsp; date Input창에서 원하는 날짜 선택하여 이동</div>
 
@@ -518,7 +517,8 @@
 ```
 <br>
 
-##### 16. Notice Board: 우측 하단에 표시되며 오늘 날짜 기준으로 D-day 리스트를 보여준다.
+##### 16. Notice Board
+###### &nbsp;◽&nbsp; 우측 하단에 위치. 오늘 날짜 기준 D-day 리스트를 보여주는 게시판
 <div align="center"><img width="680" alt="노티스보드" src="https://github.com/user-attachments/assets/4966a39a-8d75-499f-9650-14d2cede8df1"></div>
 <br><br>
 
