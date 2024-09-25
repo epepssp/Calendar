@@ -1059,3 +1059,108 @@ function showMiniList(data){
     
 ```
 <br><br>
+
+### 💡 디데이 (D-day)
+###### 24. 디데이 설정
+###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 > D-day Modal 
+###### &nbsp;◽&nbsp; Notice Board 하단 "D-Day추가" 클릭 > D-day Modal 
+###### &nbsp;◽&nbsp; D-day Modal에서 날짜 선택하면, 오늘 날짜 기준 D-day 계산해서 보여준다 > D-day 설정(#ddayadd)하거나 or 다른 날짜 재선택 가능
+###### &nbsp;◽&nbsp; Notice Board: D-day 리스트 보여주는 게시판
+<div align="center"><img src="https://github.com/user-attachments/assets/12d65edd-1744-4ab5-aee8-d942f0a63050" width="680" alt="디데이22"></div><br>
+
+###### D-day Modal
+> main.html
+```html
+     <!-- DDay 모달 -->
+     <div id="dDayModal" class="w3-modal"> 
+        <span onclick="document.getElementById('dDayModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br>
+        <div class="mx-3 my-3"> <!-- 모달 컨텐츠 -->
+           <div class="mb-3">
+              <div id="todayDiv"></div> <!-- 오늘부터 OO까지? date input창에서 날짜 선택 -->
+              <input class="form-control" type="date" style="display: inline-block;" id="untilDate"><span>까지?</span>
+              <small><span class="rounded border" onclick="subtract(event);">선택</span></small> <!-- D-day 값 계산 함수 -->
+           </div>
+
+           <!-- D-day 값(날짜 차이) 게산해서 보여주는 영역 -->
+           <div id="subDiv" class="border-top border-bottom mt-3 mb-2"></div> 
+
+           <div class="mb-3"> <!-- 디데이 이름 -->
+              <small>새로운 D-DAY로 추가하시겠어요?</small>
+              <span>D-DAY'S NAME<input type="text" id="name" style="display: inline-block;"></span>
+           </div>
+           <small><span onclick="newDday();" class="rounded border p-1 mt-1">D-DAY추가</span></small> <!-- 디데이 추가 버튼 -->
+         </div><!-- 모달 컨텐츠 끝-->
+     </div><!-- DDay모달 끝 -->
+```
+
+###### D-day 계산: ChronoUnit.DAYS.between(선택한 날짜,오늘 날짜);
+> calendar.js
+```javaScript
+
+    function subtract(event) { // d-day 계산 함수
+
+        // date input창에서 선택한 날찌 
+        const untilDate = document.querySelector('#untilDate').value;
+        // 오늘 날짜
+        const today = new Date(); 
+        const year= today.getFullYear();
+        const monthValue = today.getMonth() + 1;
+        const day= today.getDate();
+
+        const data ={  untilDate:untilDate,
+                       year:year,
+                       monthValue:monthValue,
+                       day:day  }
+
+        axios.post('/dday/subtract', data)
+             .then(response => {
+                 showSubtract(response.data);  
+           }).catch(err => { console.log(err) });
+     }
+
+     function showSubtract(subtract) {  // 날짜 차이 계산 결과 모달에 보여주는 함수
+         const subDiv = document.querySelector('#subDiv');
+         str = '';
+  
+         if(subtract < 0){  // 음수일 때
+            str ='<small><span>기준일로부터</span></small><h3> D ' + subtract + '</h3>';
+         }
+         if(subtract > 0){  // 양수일 때 부호
+            str ='<small><span>기준일로부터</span></small><h3> D +' + subtract + '</h3>';
+         }
+          subDiv.innerHTML = str;
+      }
+
+      function newDday(){ 
+         const untilDate = document.querySelector('#untilDate').value;
+         const name = document.querySelector('#name').value;
+     
+            const data = {
+                untilDate: untilDate,  name: name
+            }
+            axios.post('/dday/add', data)
+                 .then(response => {
+                        modalClose();
+                        location.reload();  // 페이지 새로고침 -> 방금 설정한 디데이 우측 하단에 보이도록
+                        alert('D-DAY 등록되었습니다!');
+            }).catch(err => { console.log(err) });
+    } 
+
+```
+
+> DDayRestController
+```java
+    @PostMapping("/dday/subtract")
+    public ResponseEntity<Integer> dDaySubtract(@RequestBody DDay entity){
+        LocalDate utDate = entity.getUntilDate();  // 선택한 날짜
+        LocalDate frDate = LocalDate.of(entity.getYear(),entity.getMonthValue(),entity.getDay()); // 오늘 날짜
+
+        // long 타입 -> int 타입으로 바꾼 subtract 값 리턴
+        long daysSubtract = ChronoUnit.DAYS.between(utDate,frDate);
+        int subtract = (int) daysSubtract;       
+        
+        return ResponseEntity.ok(subtract);
+    }
+```
+
+
