@@ -315,16 +315,17 @@
 ```
 <br>
 
-##### <div id="modal">11. Day Modal: ◽ [달력의 날짜를 클릭하면 뜬다.](#m1)</div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [Day Modal 사이드바: 일정 추가 / 일기 작성 / D-day 설정](#m2)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [Front/Back 버튼 클릭 > Day Modal에서 날짜 이동](#m3) 
+##### <div id="modal">11. Day Modal: 달력을 월(月) 단위가 아니라 일(日) 단위로 보여주는 모달</div>
+<div align="center"><img src="https://github.com/user-attachments/assets/2f9dc8d0-5ac9-4c43-b639-c70fdbc7676c" width="680" alt="데이모달"></div><br>
 
-<div align="center"><img src="https://github.com/user-attachments/assets/2f9dc8d0-5ac9-4c43-b639-c70fdbc7676c" width="680" alt="데이모달"></div>
+###### <div id="m1">&nbsp;◽&nbsp; 달력에서 날짜 클릭하면 Day Modal 뜸</div>
 
-###### <div id="m1">달력의 날짜를 클릭하면 Day Modal 뜸</div>
 > main.html
 ```html
-     <!-- 1. Day 클릭시 해당 날짜 받아와서 Day Modal창 띄움 -->
+     <!-- 날짜 클릭시 해당 날짜 받아와서 Day Modal 띄움 -->
      <div class="col-2" th:day="${d.day}" onclick="dayPop(this.getAttribute('day'));" id="d" th:text="${ d.day }"></div>
 ````
+
 > calendar.js
 ```javaScript
 
@@ -359,7 +360,7 @@
 ```
 <br>
 
-###### <div id="m2">Day Modal 사이드바: D-day 설정 / 일정 추가 / 일기 작성 기능</div>
+###### <div id="m2">&nbsp;◽&nbsp; Day Modal 사이드바에서 일정 추가 / 일기 작성 / D-day 설정 가능</div> 
 > main.html
 ```html
 
@@ -376,7 +377,7 @@
 ```
 <br>
 
-###### <div id="m3">Front/Back 버튼 클릭 > Day Modal에서 날짜 이동 가능</div>
+###### <div id="m3">&nbsp;◽&nbsp; Front/Back 버튼 클릭 > Day Modal의 날짜 이동</div>
 
 > main.html
 ```html
