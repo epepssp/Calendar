@@ -522,7 +522,505 @@
 <div align="center"><img width="680" alt="노티스보드" src="https://github.com/user-attachments/assets/4966a39a-8d75-499f-9650-14d2cede8df1"></div>
 <br><br>
 
+### 💡 일정 (Schedule)
+##### 17. 일정 추가
+###### &nbsp;◽&nbsp; Day Modal 사이드바 "일정 추가" 클릭 > 모달 하단에 입력창(Input창) 생성됨> 내용 입력 후, 버튼 클릭 또는 엔터키로 입력
+<div align="center"><img src="https://github.com/user-attachments/assets/c8746b81-7cd5-4fb8-ab2c-9932d45aaae6" width="680" alt="일정추가2"></div><br><br>
+
+> calendar.js
+```javaScript
+
+  function showInput() {  // 사이드바에서 일정 추가 클릭시, 모달 하단에 일정 추가 Input창 나타남
+
+       const inputDiv = document.querySelector('#inputDiv');
+      let str = '<input style="border:none;” autofocus="autofocus" id="addP" type="text" /><span id=addBtn><small>추가</small></span>';
+      inputDiv.innerHTML = str;
 
 
----------------------
+        // 스케줄 추가 방법1: addBtn
+        const addBtn = document.querySelector('#addBtn');
+        addBtn.addEventListener('click', send); 
+      
+        // 스케줄 추가 방법2: 엔터키 입력
+        var addScheduleInput = document.getElementById('addP');
+        addScheduleInput.addEventListener('keyup', function enterSend(event) {
+            let addScheduleInputValue = addScheduleInput.value;
 
+           if (event.keyCode === null) {
+                event.preventDefault();
+           }
+           if ((event.keyCode === 13) && ($.trim(addScheduleInputValue) != '')) {
+                send();
+           }
+       });
+
+   };
+```
+
+> calendar.js
+```javaScript
+  function send() {   // 일정 추가  함수
+      const content = document.querySelector('#addP').value;
+      const year = document.querySelector('#year').value;
+      const monthValue = document.querySelector('#monthValue').value;
+      const day = document.querySelector('#day').value;
+      const fullDate = document.querySelector('#fullDate').value;
+
+      const data = {
+          year: year, monthValue: monthValue,
+          day: day, content: content, fullDate: fullDate
+      } 
+      axios.post('/add/schedule', data)
+           .then(response => {
+               str = '';   
+               inputDiv.innerHTML = str;  // 인풋창 사라지게
+               showScheduleOfDay();  
+               location.reload();   // 페이지 새로고침
+           }).catch(err => { console.log(err) });
+   }
+```  
+<br><br>
+
+### 💡 일기 (Diary)
+##### 18. 일기 작성
+###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동
+###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
+<br>
+
+##### 19. 작성 완료
+###### &nbsp;◽&nbsp; 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭시 작성된 일기로 이동
+###### &nbsp;◽&nbsp; [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭시 작성된 일기로 이동
+<br>
+
+##### 20. 정렬 (Sort)
+###### &nbsp;◽&nbsp; 일기 목록은 2가지 방식으로 정렬할 수 있다.
+###### &nbsp;◽&nbsp; 디폴트는 [미니 캘린더](#mini) 형식이며, 여기서 정렬 버튼을 누르면 [리스트](#list) 형식으로, 다시 버튼을 누르면 [미니 캘린더](#mini) 형식으로 정렬된다.
+<div align="center" style="margin-left: 100px; "><img src="https://github.com/user-attachments/assets/22f37425-678c-4132-8bda-5bf9a3ab6fb4" width="680" alt="정렬버튼"></div><br><br>
+<div align="center"><img width="750" alt="정렬" src="https://github.com/user-attachments/assets/354c7646-c065-4a54-9c1c-187db353721c"></div><br><br>
+
+###### <div id="mini">&nbsp;◽&nbsp; 미니 캘린더 형식
+
+> Diary.js
+```javaScript
+
+    calendarList();  // 다이어리 페이지 이동시 미니리스트 불러오는 함수 실행됨
+
+    function calendarList(){
+       const year = document.querySelector('#year').value;
+       const monthValue = document.querySelector('#monthValue').value;
+    
+       const data ={ year:year, monthValue:monthValue }
+       axios.post('/calendar/mini', data)
+            .then(response => {
+                 showMini(response.data);
+            })
+            .catch(err => { console.log(err) });
+     }
+
+
+     // 미니 캘린더 정렬
+     function showMini(data){    
+          const mini = document.querySelector('#mini');
+
+          let str1='';      // 미니 캘린더 첫째줄 시작
+          str1 +='<div class="row line" style="border-top: 1px solid gray;">';
+          for (let i = 0; i < 7; i++) {
+             if(data.d1[i].diaryId != 0) {
+                 str1 +=`<div class="box" style="background-color:#eaeafb;"><a style="text-decoration: none;" href="/diary/detail?diaryId=${data.d1[i].diaryId }">`
+                      +'<small>'+ data.d1[i].day+'</small></a></div>';
+             if(data.d1[i].diaryId == 0 && data.d1[i].day != 0) {
+                 str1 += `<div class="box" day="${data.d1[i].day}" onclick="createDiary(this.getAttribute(\'day\'));">`
+                      +'<small>'+ data.d1[i].day+'</small></div>';
+             }
+          }
+          str1 +='</div>';   // 미니 캘린더 첫째줄 끝
+
+
+          // 같은 방식으로 달력 줄 수 만큼 반복(str2, str3, ..)
+          mini.innerHTML = str1 + str2 + str3 + str4 + str5;
+     }
+
+
+     function createDiary(day){  // 다이어리 create 페이지로 미니 캘린더에서 클릭한 날짜 보내줌
+         const year = document.querySelector('#year').value;
+         const monthValue = document.querySelector('#monthValue').value;
+    
+         axios.get('/diary/create', {
+                  params: { year: year, monthValue: monthValue, day:day }
+            }).then(response => {
+                 window.location.href = '/diary/create?year=' + encodeURIComponent(year) + '&monthValue=' + encodeURIComponent(monthValue) + '&day=' + encodeURIComponent(day);
+            }).catch(error => { console.log(err); });
+    
+      }
+
+```
+
+###### <div id="list">&nbsp;◽&nbsp; 리스트 형식</div>
+
+> diary.js
+```javaScript
+
+// 리스트형 정렬
+function showMiniList(data){
+
+    const listDiv = document.querySelector('#listDiv');
+    let str='';
+    
+    str +='<div style="border-top: 1px solid gray; margin-left: 10px; width: 266px; border-bottom: 1px solid gray;"><div style="border-top: 1px solid #DCDCDC;" >';
+    
+    for(let x of data){
+        str +='<div style="border-bottom: 1px solid #DCDCDC;" class="w3-cell-row p-1">'
+             +'<div class="w3-container w3-cell"><div style="color:#A9A9A9; font-size: 9px;">'+x.year+'.'+x.monthValue+'.'+x.day+' 일기</div>'
+             +`<a style="text-decoration: none;" href="/diary/detail?diaryId=${ x.diaryId }">`
+             +'<span style="color:#FF6347;">⦁</span> '+x.title+'</a></div>'
+             +'<div class="w3-container w3-cell" style="width:38px;">'
+             +'<div class="image-container"><img class="rounded" width="35px;" height="42px;" src="/api/view/'+x.uuid + '_' + x.fileName +'" /><span class="caption">'+x.totalAttachments+'</span></div></div></div>';
+    }
+    
+    str +='</div></div>';
+    
+    listDiv.innerHTML=str;
+    
+}
+```
+
+###### &nbsp;&nbsp; ◽ 정렬 버튼(SortBtn) 이벤트 리스너 등록
+
+> create.html
+```html
+    <div class="w3-cell-row"><!-- 정렬 버튼 -->
+      <div style="width: 40px;" class="w3-container w3-cell" id="sortBtn"><i id="sorti"></i></div>
+    </div>
+
+    <div id="mini"></div><!-- 미니 캘린더 형식 보여줄 영역 -->
+    <div id="listDiv"></div><!-- 리스트 형식 보여줄 영역 --> 
+```
+
+> diary.js
+```javaScript
+
+   let sort = 1;
+
+   const mini = document.getElementById("mini");
+   const listDiv = document.getElementById("listDiv");
+   const sorti = document.getElementById("sorti");
+
+   mini.style.display = "block";
+   listDiv.style.display = "none";
+
+   sorti.classList.add("far", "fa-list-alt");
+
+   function sortTypeChange() {
+      if (sort === 1) {
+          mini.style.display = "none";
+          listDiv.style.display = "block";
+          sorti.classList.remove("far", "fa-list-alt");
+          sorti.innerHTML = '<i class="material-icons" style="font-size:19px;">grid_on</i>';
+          sort = 2; // 1일 경우 2로 변경
+      } else {
+          mini.style.display = "block";
+          listDiv.style.display = "none";
+          sorti.innerHTML = "";
+          sorti.classList.add("far", "fa-list-alt");
+          sort = 1; // 2일 경우 1로 변경
+      }
+   }
+
+   // 정렬 버튼 클릭 이벤트 리스너 등록
+   const sortBtn = document.getElementById("sortBtn");
+   sortBtn.addEventListener("click", sortTypeChange);
+
+```
+<br>
+
+##### <div id="weather">21. 오늘의 날씨 (Weather)</div>
+###### 일기를 작성할 때, 오늘의 날씨를 선택할 수 있다. 날씨는 한 번에 하나만 선택 가능하며 중복 선택은 불가능하다.
+###### 따라서 어떤 날씨가 선택돼 있는 상태라면 다른 날씨가 클릭되지 않으며(= 선택되지 않으며), 
+###### 선택된 날씨를 다시 클릭하여 선택을 해제한 뒤에 다시 다른 날씨를 선택 할 수 있다.
+<div align="center"><img src="https://github.com/user-attachments/assets/e179f670-1f64-4772-ad2e-c68c4aa79e9e" width="600" alt="날씨클로즈업"></div>
+
+> create.html
+```html
+     <div class="mb-4 mt-4" style="display: inline-block;"> <!-- 날씨 아이콘 추가 -->
+         <input id="weather" type="hidden"><span style="font-family: 'Alegreya Sans SC'; ">How's the Weather?</span>
+         <span><svg id="svg1" xmlns="..." fill="#A9A9A9" class="bi bi-brightness-high mb-1"><path d=”..."/></svg></span> 
+         <span><svg id="svg2" xmlns="... fill="#A9A9A9" class="bi bi-cloud-sun mb-2"> <path d=”..."/></svg></span>
+         <span><svg id="svg3" xmlns="..." fill="#A9A9A9" class="bi bi-clouds mb-1"><path d=”..."/></svg></span>
+         <span><svg id="svg4" xmlns="..." fill="#A9A9A9" class="bi bi-cloud-rain-heavy"><path d=”..."/></svg></span>
+         <span><svg id="svg5" xmlns="..." fill="#A9A9A9"  class="bi bi-cloud-sleet"><path d=”..."/></svg></span>
+      </div>
+```
+
+> diary.js
+```javaScript
+
+   let weather = null; // 초기에는 값이 없는 상태
+
+   function svgClick(n) {
+      if (weather === null) {  
+           weather = n; // 변수 weather에 새로운 값 저장
+           updateWeather(n);
+      } else if (weather === n) {
+           weather = null; // 저장된 값을 취소하기 위해 변수를 null로 설정
+           updateWeather(null);
+      } else {
+           isClickable = false; // 클릭 비활성화  
+      }
+   }
+
+   function handleClick(btn, n) {
+      let isClickable = true; // 클릭 가능한 상황인지 True, False
+  
+      if (weather !== null && weather !== n) {
+          isClickable = false; // 클릭 비활성화
+      }
+      if (isClickable) { // 클릭 가능한 경우에만 동작 수행
+           svgClick(n); 
+           btn.classList.toggle("invert");
+      }
+   }
+
+   function updateWeather(n){
+       const weather = document.querySelector('#weather');
+       weather.value = n;
+   }
+
+   // 버튼 클릭 이벤트 리스너 등록
+   const btn1 = document.getElementById("svg1");
+   const btn2 = document.getElementById("svg2");
+   const btn3 = document.getElementById("svg3");
+   const btn4 = document.getElementById("svg4");
+   const btn5 = document.getElementById("svg5");
+
+   btn1.addEventListener("click", function(){  handleClick(btn1, 1);  });
+   btn2.addEventListener("click", function(){  handleClick(btn2, 2);  });
+   btn3.addEventListener("click", function(){  handleClick(btn3, 3);  });
+   btn4.addEventListener("click", function(){  handleClick(btn4, 4);  });
+   btn5.addEventListener("click", function(){  handleClick(btn5, 5);  });
+
+```
+<br>
+
+##### <div id="image">22. 이미지 파일 첨부</div>
+###### 일기를 작성할 때, 사진을 첨부할 수 있다.
+###### 드래그하여 한 번에 여러장의 사진을 선택하여 첨부할 수 있다. 
+###### 글 작성 완료 전까지는 몇번이고 추가로 사진을 첨부 할 수 있으며, 첨부하기로 선택된 사진 목록에서 특정 항목을 제거하는 것도 가능하다.
+###### 작성 완료된 글에서 Image Slide 형식으로 좌우 버튼을 클릭하여 사진을 한 장씩 넘겨가며 볼 수 있다.
+<div align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/1f73aeef-6bb6-448c-afac-4a6911527903" width="620" height="400" alt="사진"></div><br>
+
+###### 사진 첨부 버튼 / File Modal
+> create.html
+```html
+     <div onclick="document.getElementById('fileModal').style.display='block'"> <!-- 사진 첨부 버튼 -->
+        <img src="/icons/images.svg">사진첨부
+     </div>
+
+     <!-- 첨부한 사진 파일 리스트 보여주는 영역 -->
+     <!-- 사진 첨부 버튼 누르면 실시간으로 추가된 사진 리스트 보여질 영역 -->
+     <!-- 사진 추가 후 사진 첨부 버튼으로 이어서 추가 가능. 삭제(remove)도 가능 -->
+     <div class="col"> 
+        <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
+        <div id="uploads"></div> <!-- saveTemporarily 리스트 -->
+     </div>
+
+     <!-- file modal -->
+     <div id="fileModal" class="w3-modal">
+        <div class="w3-modal-content" style="width: 500px; height: 200px;">
+        <span onclick="document.getElementById('fileModal').style.display='none'" class="w3-button w3-display-topright">&times;</span><br>
+           <div class="w3-container m-3" align="right"><!-- 모달 컨텐츠 전체 -->
+             <div class="row mt-2 mb-4">
+                <input type="file" name="files"  class="form-control" multiple />
+             </div>
+             <div align="center" id="modalUploadBtn" class="m-2 ale">upload</div>
+           </div> 
+        </div>
+     </div>
+```
+
+###### File Modal의 modalUploadBtn 이벤트 리스너 처리
+  ###### btnDelete 이벤트 리스너 처리 포함
+> diary.js
+```javaScript
+
+   // 모달의 업로드 버튼 클릭 이벤트 처리
+   document.querySelector('#modalUploadBtn').addEventListener('click', e => {
+      const formData = new FormData();
+      const fileInput = document.querySelector('input[name="files"]');
+    
+      for (let file of fileInput.files) {
+            formData.append('files', file);
+      }
+        uploadFiles(formData);
+    });
+    
+    function uploadFiles(formData) {
+       axios.post('/upload', formData)
+            .then(getUploadedThumbnails)
+            .catch(err => { console.log(err) })
+            .then(document.getElementById('fileModal').style.display = 'none');
+    }
+    
+    function getUploadedThumbnails(response){
+       if (response.status == 200) {
+          response.data.forEach(x => {
+                // 이미지 파일이 아닌 경우, 디폴트 썸네일 이미지를 사용하도록.
+                let img = '';
+                if (x.image) {
+                    img = `<img src="/api/view/${x.link}" data-src="${x.uuid + '_' + x.fileName}" />`;
+                } else {
+                    img = `<img src="/images/file_128.png" data-src="${x.uuid + '_' + x.fileName}" />`;
+                }
+                   
+       const htmlStr = `
+         <div class="card my-2">
+           <div class="card-header d-flex justify-content-center">
+              ${x.fileName}
+              <button class="btnDelete btn-close" aria-label="Close" data-uuid="${x.uuid}" data-fname="${x.fileName}"></button>
+           </div>
+          <div class="card-body">
+             ${img}
+          </div>
+        </div>`;
+                
+         uploadResults.innerHTML += htmlStr;
+    });   
+
+    // btnDelete 이벤트 리스너
+    // 선택 항목 삭제(remove) 
+    document.querySelectorAll('.btnDelete').forEach(btn => {
+         btn.addEventListener('click', removeFileFromServer);
+    });
+
+
+    const uploads = document.querySelector('#uploads');
+    const files = uploadResults.querySelectorAll('img');
+       
+       let str = '';
+       files.forEach(x => {
+             const imgLink = x.getAttribute('data-src');
+             str += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
+       });
+       uploads.innerHTML = str;
+    }
+    
+   function removeFileFromServer(event) {
+        event.preventDefault();
+  
+        const btn = event.target;
+        const uuid = btn.getAttribute('data-uuid');
+        const fname = btn.getAttribute('data-fname');
+        const fileName = uuid + '_' + fname;
+        
+        axios.delete('/remove/' + fileName)
+            .then(resp => { btn.closest('.card').remove() })
+            .catch(err => { console.log(err) })
+            .then(function () {});
+        
+    }
+```
+
+###### diaryCreateBtn 이벤트 리스너 처리 - 사진 파일 첨부 관련된 코드만 
+> diary.js
+```javaScript
+
+   // 새 일기 등록 버튼 이벤트 리스너  
+   diaryCreateBtn.addEventListener('click', e => {
+
+      const uploads = document.querySelector('#uploads');
+      const files = uploadResults.querySelectorAll('img');'
+
+      let htmlStr = '';
+      files.forEach(x => {
+          const imgLink = x.getAttribute('data-src');
+          htmlStr += `<input type="hidden" name="fileNames" value="${imgLink}" />`;
+      });
+      uploads.innerHTML = htmlStr;
+  
+      const elements = uploads.querySelectorAll('input[name="fileNames"]');
+      const fileNames = Array.from(elements).map(input => input.value);
+
+      const data = {
+          fileNames: fileNames
+      }
+
+      axios.post('/add/diary', data)
+           .then(response => {
+               alert('저장 완료!');
+               location.reload();
+          }).catch(err => { console.log(err) });
+
+    });
+```
+###### Image Slide
+> detail.html
+```html
+
+  <div class="mb-4 w3-center" style="width:890px;  border:1px solid #DCDCDC;" >
+    <div class="w-50 container"> <!-- image slide -->
+       <div id="carouselExampleDark" class="carousel carousel-dark slide">
+       
+          <div class="carousel-inner">
+             <div class="carousel-item active">
+                <img id="img" th:src="${ '/api/view/'+firstImg.uuid+'_'+firstImg.fileName }" class="mx-auto d-block w-30" style="width:220px; height: 270px; object-fit: cover;"> 
+             </div> 
+             <div class="carousel-item" th:each=" imgList : ${ imgList } ">
+                <img id="img" th:src="${ '/api/view/'+imgList.uuid+'_'+imgList.fileName }" class="mx-auto d-block w-30" style="width:220px; height: 270px; object-fit: cover;"> 
+             </div>
+          </div>
+
+        <!-- image slide 버튼 -->
+         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+         </button>
+         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+         </button>
+         
+       </div>
+    </div>
+ </div>    
+```
+<br>
+
+##### <div id="emoji">23. 이모지 (Emoji)</div>
+  ###### 일기를 작성할 때, 다양한 이모지를 첨부할 수 있다.
+  ###### 원하는 이모지를 담아 Emoji Sidebar를 만든다. 
+  ###### 이모지 클릭시 해당 이모지의 data-emoji.value가 text area에 첨부되도록 이모지 클릭 이벤트 리스너 처리를 한다.
+<div align="center" style="margin-left: 100px;"><img src="https://github.com/user-attachments/assets/b3cc7ff7-7056-4bcc-87a0-f18947e7ce0b" width="680" alt="이모지써보자"></div>
+
+> create.html
+```html
+     
+     <div class="w3-sidebar" style="position: absolute;" id="mySidebar"> <!-- Emoji Sidebar -->
+        <div id="emoji-list" class="card"> <!-- Sidebar content -->
+
+          <div class="w3-cell-row"> <!-- 한줄에 5개씩, 4번 반복: 이모지 총 20개 넣기 -->
+             <div class="w3-container emoji" data-emoji="😁"><i class="... smile-beam"></i></div>
+             <div class="w3-container emoji" data-emoji="😉"><i class="... smile-wink"></i></div>
+             <div class="w3-container emoji" data-emoji="😊"><i class="... laugh"></i></div>
+             <div class="w3-container emoji" data-emoji="😄"><i class="... laugh-beam"></i></div>
+             <div class="w3-container emoji" data-emoji="😆"><i class="... laugh-squint"></i></div>
+           </div>
+
+        </div><!-- content 끝 -->
+     </div><!-- Sidebar 끝 -->     
+
+```
+> diary.js
+```javaScript
+
+    //이모티콘
+    const emojiList = document.querySelectorAll('.emoji');
+    const textarea = document.getElementById('diaryContent');
+    
+    emojiList.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+         const selectedEmoji = emoji.getAttribute('data-emoji');
+         textarea.value += selectedEmoji;
+      });
+    });
+    
+```
+<br><br>
