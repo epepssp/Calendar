@@ -835,15 +835,16 @@ function showMiniList(data){
 <br>
 
 ##### <div id="image">22. 이미지 파일 첨부</div>
-###### 일기를 작성할 때, 사진을 첨부할 수 있다.
-###### 드래그하여 한 번에 여러장의 사진을 선택하여 첨부할 수 있다. 
-###### 글 작성 완료 전까지는 몇번이고 추가로 사진을 첨부 할 수 있으며, 첨부하기로 선택된 사진 목록에서 특정 항목을 제거하는 것도 가능하다.
-###### 작성 완료된 글에서 Image Slide 형식으로 좌우 버튼을 클릭하여 사진을 한 장씩 넘겨가며 볼 수 있다.
+###### &nbsp;◽&nbsp; 드래그하여 한 번에 여러장의 사진을 첨부할 수 있다. 
+###### &nbsp;◽&nbsp; 글 작성이 끝나기 전에는 몇번이고 추가로 사진을 첨부 할 수 있으며, 첨부 목록에서 특정 사진을 선택 제거하는 것도 가능하다.
+###### &nbsp;◽&nbsp; 작성된 일기에서는 좌우 버튼을 클릭하여 한 장씩 넘겨가며 Image Slide 형식으로 사진을 볼 수 있다.
 <div align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/1f73aeef-6bb6-448c-afac-4a6911527903" width="620" height="400" alt="사진"></div><br>
 
-###### 사진 첨부 버튼 / File Modal
+###### 사진 첨부 버튼 클릭시 File Modal 
 > create.html
 ```html
+
+     <!-- diary create foam 일부 -->
      <div onclick="document.getElementById('fileModal').style.display='block'"> <!-- 사진 첨부 버튼 -->
         <img src="/icons/images.svg">사진첨부
      </div>
@@ -855,6 +856,7 @@ function showMiniList(data){
         <div id="uploadResults" class="container-fluid d-flex" style="flex-wrap: wrap;"></div>
         <div id="uploads"></div> <!-- saveTemporarily 리스트 -->
      </div>
+
 
      <!-- file modal -->
      <div id="fileModal" class="w3-modal">
@@ -868,10 +870,9 @@ function showMiniList(data){
            </div> 
         </div>
      </div>
-```
 
-###### File Modal의 modalUploadBtn 이벤트 리스너 처리
-  ###### btnDelete 이벤트 리스너 처리 포함
+```
+###### modalUploadBtn & btnDelete 이벤트 리스너 처리 
 > diary.js
 ```javaScript
 
@@ -951,8 +952,7 @@ function showMiniList(data){
         
     }
 ```
-
-###### diaryCreateBtn 이벤트 리스너 처리 - 사진 파일 첨부 관련된 코드만 
+###### diaryCreateBtn 이벤트 리스너에서 사진 첨부에 관련된 내용만 살펴보기
 > diary.js
 ```javaScript
 
@@ -984,6 +984,7 @@ function showMiniList(data){
 
     });
 ```
+
 ###### Image Slide
 > detail.html
 ```html
