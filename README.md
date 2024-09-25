@@ -1087,9 +1087,8 @@ function showMiniList(data){
          </div><!-- 모달 컨텐츠 끝-->
      </div><!-- DDay모달 끝 -->
 ```
-###### &nbsp;◽&nbsp; D-day Modal에서 날짜를 선택하면
-###### &nbsp;◽&nbsp; D-day를 계산(ChronoUnit.DAYS.between(선택한 날짜,오늘 날짜);)하여 Modal에 보여준다.
-###### &nbsp;◽&nbsp; 그 날짜로 새로운 D-day를 설정(#ddayadd)하거나 or 다른 날짜 재선택 가능하다.
+###### &nbsp;◽&nbsp; D-day Modal에서 날짜를 선택하면, D-day 계산 결과를 리턴
+###### &nbsp;◽&nbsp; 그 날짜로 새로운 D-day를 설정(#ddayadd)하거나 or 다른 날짜 재선택 할 수 있다.
 > calendar.js
 ```javaScript
 
