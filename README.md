@@ -1061,7 +1061,8 @@ function showMiniList(data){
 ### 💡 디데이 (D-day)
 <div align="center"><img src="https://github.com/user-attachments/assets/12d65edd-1744-4ab5-aee8-d942f0a63050" width="680" alt="디데이22"></div><br>
 
-##### 24. [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 / Notice Board 하단 "D-Day추가" 클릭 > D-day Modal 뜸 
+##### 24. [Day Modal](#modal) 사이드바에서 "D-DAY ♥" 클릭 / Notice Board 하단 "D-Day추가" 클릭 
+###### &nbsp;◽&nbsp; D-day Modal창 열림
 > main.html
 ```html
      <!-- DDay 모달 -->
