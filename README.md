@@ -51,8 +51,8 @@
 <br>
 
 ### 💎 일기 (Diary)
-##### 18. 일기 작성: &nbsp;◽ [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
-##### 19. 작성 완료: &nbsp;◽ 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭 시, 작성된 일기로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭 시, 작성된 일기로 이동
+##### 18. [일기 작성](#create): &nbsp;◽ [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 > create.html로 이동
+##### 19. [작성 완료](#detail): &nbsp;◽ 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭 시, 작성된 일기로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭 시, 작성된 일기로 이동
 ##### 20. 정렬 (Sort): &nbsp;◽ [미니 캘린더](#mini) 형식<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [리스트](#list) 형식
 ##### 21. [오늘의 날씨 (Weather)](#weather)
 ##### 22. [이미지 첨부](#image)
@@ -582,7 +582,7 @@
 <br><br>
 
 ### 💡 일기 (Diary)
-##### 18. 일기 작성
+##### <div id="create">18. 일기 작성</div>
 ###### &nbsp;◽&nbsp; [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출 > create.html로 이동
 ```
     function dateInfo(){   // 내 일기장 클릭시 diary create로 이동
@@ -609,7 +609,7 @@
 ```
 <br>
 
-##### 19. 작성 완료
+##### <div id="detail">19. 작성 완료</div>
 ###### &nbsp;◽&nbsp; 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭시 작성된 일기로 이동
 ```
      <a th:href="@{ /diary/detail?diaryId={diaryId} (diaryId = ${ d.diaryId })}">
@@ -626,7 +626,7 @@
 <br>
 
 ##### 20. 정렬 (Sort)
-###### &nbsp;◽&nbsp; 일기 목록은 2가지 방식으로 정렬할 수 있다.
+###### &nbsp;◽&nbsp; 일기 목록을 2가지 방식으로 정렬할 수 있다.
 ###### &nbsp;◽&nbsp; 디폴트는 [미니 캘린더](#mini) 형식이며, 여기서 정렬 버튼을 누르면 [리스트](#list) 형식으로, 다시 버튼을 누르면 [미니 캘린더](#mini) 형식으로 정렬된다.
 <div align="center" style="margin-left: 100px; "><img src="https://github.com/user-attachments/assets/22f37425-678c-4132-8bda-5bf9a3ab6fb4" width="680" alt="정렬버튼"></div><br><br>
 <div align="center"><img width="750" alt="정렬" src="https://github.com/user-attachments/assets/354c7646-c065-4a54-9c1c-187db353721c"></div><br><br>
