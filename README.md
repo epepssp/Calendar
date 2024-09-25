@@ -770,7 +770,7 @@ function showMiniList(data){
 ###### &nbsp;◽&nbsp; 일기를 작성할 때, 오늘의 날씨를 선택할 수 있다. 날씨는 한 번에 하나만 선택 가능하며 중복 선택은 불가능하다.
 ###### &nbsp;◽&nbsp; 따라서 어떤 날씨가 선택돼 있는 상태라면 다른 날씨가 클릭되지 않으며(= 선택되지 않으며), 
 ###### &nbsp;&nbsp;&nbsp; 선택된 날씨를 다시 클릭하여 선택을 해제한 뒤에 다시 다른 날씨를 선택 할 수 있다.
-<div align="center"><img src="https://github.com/user-attachments/assets/e179f670-1f64-4772-ad2e-c68c4aa79e9e" width="600" alt="날씨클로즈업"></div>
+<br><div align="center"><img src="https://github.com/user-attachments/assets/e179f670-1f64-4772-ad2e-c68c4aa79e9e" width="600" alt="날씨클로즈업"></div>
 
 > create.html
 ```html
