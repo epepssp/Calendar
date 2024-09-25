@@ -1019,12 +1019,11 @@ function showMiniList(data){
 <br>
 
 ##### <div id="emoji">23. 이모지 (Emoji)</div>
-  ###### 일기를 작성할 때, 다양한 이모지를 첨부할 수 있다.
-  ###### 원하는 이모지를 담아 Emoji Sidebar를 만든다. 
-  ###### 이모지 클릭시 해당 이모지의 data-emoji.value가 text area에 첨부되도록 이모지 클릭 이벤트 리스너 처리를 한다.
+###### &nbsp;◽&nbsp; 일기를 작성할 때, 다양한 이모지를 첨부할 수 있다.
 <div align="center" style="margin-left: 100px;"><img src="https://github.com/user-attachments/assets/b3cc7ff7-7056-4bcc-87a0-f18947e7ce0b" width="680" alt="이모지써보자"></div>
 
-> create.html
+###### &nbsp;◽&nbsp; Emoji Sidebar에 data-emoji 형식으로 이모지 추가 
+> create.htm
 ```html
      
      <div class="w3-sidebar" style="position: absolute;" id="mySidebar"> <!-- Emoji Sidebar -->
@@ -1037,11 +1036,13 @@ function showMiniList(data){
              <div class="w3-container emoji" data-emoji="😄"><i class="... laugh-beam"></i></div>
              <div class="w3-container emoji" data-emoji="😆"><i class="... laugh-squint"></i></div>
            </div>
+           <!-- 같은 형식으로 반복 작성하여 여러개의 이모지 넣는다. -->
 
         </div><!-- content 끝 -->
      </div><!-- Sidebar 끝 -->     
 
 ```
+###### &nbsp;◽&nbsp; 이모지 클릭시 해당 이모지 data-emoji.value가 text area에 첨부되도록 하는 내용을 담아 이모지 클릭 이벤트 리스너 처리
 > diary.js
 ```javaScript
 
