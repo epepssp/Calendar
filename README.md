@@ -43,7 +43,7 @@
 ##### 13. [Today](#v2): Font Color & Blink Effect
 ##### 14. [Day's Schedule List](#v3): Mouse-hover Effect
 ##### 15. 달력 이동:  &nbsp;&nbsp;◽ [Front/Back 버튼 클릭하여 이동](#btn)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [date Input창에서 원하는 날짜 선택하여 이동](#input)
-##### 16. Notice Board: 오늘 날짜 기준 D-day 리스트를 보여주는 영역
+##### 16. [Notice Board](#notice): 오늘 날짜 기준 D-day 리스트를 보여주는 영역
 <br>
 
 ### 💎 일정 (Schedule)
@@ -517,7 +517,7 @@
 ```
 <br>
 
-##### 16. Notice Board
+##### <div id="notice">16. Notice Board</div>
 ###### &nbsp;◽&nbsp; 우측 하단에 위치. 오늘 날짜 기준 D-day 리스트를 보여주는 게시판
 <div align="center"><img width="680" alt="노티스보드" src="https://github.com/user-attachments/assets/4966a39a-8d75-499f-9650-14d2cede8df1"></div>
 <br><br>
