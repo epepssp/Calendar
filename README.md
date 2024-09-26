@@ -19,7 +19,7 @@
 - Java </br>
 - SQL </br>
 - Spring Boot </br>
-- HTML/CSS/Java Script
+- HTML / CSS / Java Script / Axios / JQuery
 <br>  
 
 ## 목차
