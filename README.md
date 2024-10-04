@@ -834,7 +834,7 @@ function showMiniList(data){
 
 ##### <div id="image">22. 이미지 파일 첨부</div>
 ###### &nbsp;◽&nbsp; 드래그하여 한 번에 여러장의 사진을 첨부할 수 있다. 
-###### &nbsp;◽&nbsp; 글 작성이 끝나기 전에는 몇번이고 추가로 사진을 첨부 할 수 있으며, 첨부 목록에서 특정 사진을 선택 제거하는 것도 가능하다.
+###### &nbsp;◽&nbsp; 글 작성이 끝나기 전에는 몇번이고 추가로 사진을 첨부 할 수 있으며, 첨부 목록에서 특정 사진을 선택하여 제거하는 것도 가능하다.
 ###### &nbsp;◽&nbsp; 작성된 일기에서는 좌우 버튼을 클릭하여 한 장씩 넘겨가며 Image Slide 형식으로 사진을 볼 수 있다.
 <div align="center"><img src="https://github.com/epepssp/tomydays/assets/118948099/1f73aeef-6bb6-448c-afac-4a6911527903" width="620" height="400" alt="사진"></div><br>
 
