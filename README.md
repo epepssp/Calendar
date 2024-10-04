@@ -38,7 +38,7 @@
 
 #### 💎 달력 뷰 구현
 ##### 10. 달력 날짜가 채워지는 순서? [1주일 단위로 반복문 작성한다.](#v1)
-##### 11. [Day Modal](#modal): ◽ [날짜를 클릭하면 뜨는 모달](#m1)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [일정 추가 / 일기 작성 / D-day 설정 기능](#m2)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [Front/Back 버튼 클릭하여 날짜 이동](#m3)
+##### 11. [Day Modal](#modal): ◽ [날짜를 클릭하면 뜨는 모달](#m1)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [일정 추가 / 일기 작성 / D-day 설정 기능](#m2)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [Front/Back 버튼 클릭하여 모달상에서 날짜 이동](#m3)
 ##### 12. [Diary Icon](#icon): 작성된 일기가 있는 날짜에 표시되며, Diary Icon을 클릭하면 해당 일기의 detail page로 이동한다.
 ##### 13. [Today](#v2): Font Color & Blink Effect
 ##### 14. [Day's Schedule List](#v3): Mouse-hover Effect
