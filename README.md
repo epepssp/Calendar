@@ -53,7 +53,7 @@
 #### 💎 일기 (Diary)
 ##### 18. [일기 작성](#create): &nbsp;◽ [Day Modal](#modal) 사이드바 "내 일기장" 클릭 > onclick="dateInfo()" 호출<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에서 작성된 일기가 없는 날짜(흰색) 클릭 > onclick="createDiary(this.getAttribute(day))" 호출 
 ##### 19. [작성 완료](#detail): &nbsp;◽ 해당 날짜에 [Diary Icon](#icon) 추가 됨 > [Diary Icon](#icon) 클릭 시, 작성된 일기로 이동<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [미니 캘린더](#mini)에 보라색으로 표시 됨 > 보라색 날짜 클릭 시, 작성된 일기로 이동
-##### 20. ⭐정렬 (Sort): &nbsp;◽ [미니 캘린더](#mini) 형식<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [리스트](#list) 형식
+##### 20. ⭐정렬 (Sort): &nbsp;◽ [미니 캘린더](#mini) 형식<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ◽ [리스트](#list) 형식
 ##### 21. [⭐오늘의 날씨](#weather)
 ##### 22. [⭐이미지 첨부](#image)
 ##### 23. [⭐이모지 (Emoji)](#emoji) 
